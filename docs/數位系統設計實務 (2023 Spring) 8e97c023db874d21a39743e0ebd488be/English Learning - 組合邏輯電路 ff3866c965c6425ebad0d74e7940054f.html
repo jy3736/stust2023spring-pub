@@ -1,0 +1,687 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>English Learning - 組合邏輯電路</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-translucentGray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style><link rel="stylesheet" href="dark-theme.css"><link rel="stylesheet"  target="_blank" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.0/styles/github-dark-dimmed.min.css"><script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.0/highlight.min.js"></script></head><body><article id="ff3866c9-65c6-425e-bad0-d74e7940054f" class="page sans"><header><img class="page-cover-image" src="English%20Learning%20-%20%E7%B5%84%E5%90%88%E9%82%8F%E8%BC%AF%E9%9B%BB%E8%B7%AF%20ff3866c965c6425ebad0d74e7940054f/5%201.png" style="object-position:center 91.91%"/><div class="page-header-icon page-header-icon-with-cover"><img class="icon" src="%E8%AA%B2%E7%A8%8B%E7%B0%A1%E4%BB%8B%20-%20%E6%95%B8%E4%BD%8D%E7%B3%BB%E7%B5%B1%E8%A8%AD%E8%A8%88%E5%AF%A6%E5%8B%99%20(2023%20Spring)%2099b0e4aae697421099048b7e70025a47/yang01.png"/></div><h1 class="page-title">English Learning - 組合邏輯電路</h1><link rel="stylesheet" href="dark-theme.css"><link rel="stylesheet"  target="_blank" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.0/styles/github-dark-dimmed.min.css"><script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.0/highlight.min.js"></script></header><div class="page-body"><h1 id="59d20382-05ab-4f1d-a4d2-f90a7d8843a9" class="">Combinational Logic Circuits</h1><div><iframe src="https://player.soundon.fm/embed/?podcast=d5f7b15f-de14-4424-aad1-07b8f3128116&episode=860eda87-5381-478e-a74c-af84009fc115" id="soundon"></iframe></div><div id="4c812b48-0eca-49dc-80aa-3dff30cc64cd" class="column-list"><div id="4316b684-a141-4bc8-b41f-815706980987" style="width:75%" class="column"><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="8d4682a2-6e4c-4740-a1fb-bcb014646a42"><div style="font-size:1.5em"><span class="icon">💻</span></div><div style="width:100%">Combinational logic circuits are digital circuits that perform logical operations on one or more input signals to produce a single output signal. These circuits are called &quot;combinational&quot; because their output depends only on the current values of the input signals and not on any previous inputs or internal memory; the output of a combinational logic circuit changes instantly as the inputs change. Examples of such circuits include adders, decoders, multiplexers, and comparators, and they are used to perform various functions, such as arithmetic operations, data storage and retrieval, encoding and decoding.</div></figure></div><div id="940fd670-25a2-4573-b8a8-50407b53975e" style="width:25%" class="column"><figure id="f51183c4-cf24-4b26-8d90-619795f8513e" class="image"><a href="English%20Learning%20-%20%E7%B5%84%E5%90%88%E9%82%8F%E8%BC%AF%E9%9B%BB%E8%B7%AF%20ff3866c965c6425ebad0d74e7940054f/3.png"><img style="width:800px" src="English%20Learning%20-%20%E7%B5%84%E5%90%88%E9%82%8F%E8%BC%AF%E9%9B%BB%E8%B7%AF%20ff3866c965c6425ebad0d74e7940054f/3.png"/></a></figure><p id="fbca3d13-8d14-4c4f-883b-2c5eae8a6c86" class="">
+</p></div></div><h2 id="4c6ea2c5-5179-40fc-b22c-e2bff05f08ea" class="block-color-yellow_background">Reading Comprehension</h2><div><iframe src="https://player.soundon.fm/embed/?podcast=d5f7b15f-de14-4424-aad1-07b8f3128116&episode=9dcc12a2-97e7-4867-8cd8-4a526c9b0a6f" id="soundon"></iframe></div><div id="5af7b42d-a84a-419e-b22f-868e22e806ba" class="column-list"><div id="67a023d9-b1fe-4842-a0d7-efe0559575ac" style="width:25%" class="column"><figure id="82148c73-1c76-4c56-a06b-b24ea6416675" class="image"><a href="English%20Learning%20-%20%E7%B5%84%E5%90%88%E9%82%8F%E8%BC%AF%E9%9B%BB%E8%B7%AF%20ff3866c965c6425ebad0d74e7940054f/5.png"><img style="width:240px" src="English%20Learning%20-%20%E7%B5%84%E5%90%88%E9%82%8F%E8%BC%AF%E9%9B%BB%E8%B7%AF%20ff3866c965c6425ebad0d74e7940054f/5.png"/></a></figure></div><div id="93144dad-b41e-41f5-8a73-284f3da8ceaf" style="width:75%" class="column"><p id="cdf413f9-abf8-4eba-a437-a4ea52069eb8" class=""><strong>Combinational logic circuits</strong> are an important component of digital systems, used in everything from cell phones and computers to automobiles and medical devices. These circuits perform logical operations on a set of inputs to produce a single output, and they are designed using truth tables, Boolean equations, and hardware description languages (HDLs).</p></div></div><p id="719e4856-1042-4302-a74e-742df92363e5" class="">A <strong>truth table</strong> is a way to explain the connection between the inputs and outputs of a logic circuit. It&#x27;s a list of values that show what happens when different combinations of inputs are used. The inputs and outputs are usually labeled with <strong>Boolean</strong> words, like <strong>AND</strong>, <strong>OR</strong>, and <strong>NOT</strong>. By looking at the table, designers can find the output for any input combination. This helps them build effective logic circuits.</p><p id="6e0ed887-5cc5-4d0b-b3ca-d2bafd68a6ec" class="">Boolean equations are useful for describing the way combinational logic circuits work. We can use mathematical symbols like &#x27;AND&#x27;, &#x27;OR&#x27;, &#x27;NAND&#x27;, &#x27;NOR&#x27; and &#x27;XOR&#x27; to represent operations, inputs and outputs. This helps us predict the circuit&#x27;s output, optimize it and troubleshoot issues. Boolean equations also help us analyze the circuit&#x27;s behaviour, so we can see what the output is for any combination of inputs. And finally, Boolean equations can help us reduce the complexity of a circuit, so we can find redundancies, optimize performance and use fewer components.</p><p id="56327591-2e85-4f19-b7ed-2c5b20a3cffe" class="">Hardware description languages (HDLs), such as Verilog, enable designers to quickly and effectively describe the behavior of a combinational logic circuit using a high-level programming language, which greatly simplifies the design process. HDLs make it easier for designers to simulate and verify the circuit&#x27;s functionality prior to construction, allowing them to quickly identify any potential problems or errors. This heightened level of accuracy can potentially save time and money in the long run, as any issues can be addressed before the construction of the circuit begins. Moreover, HDLs can also be used to document the design process, meaning that engineers can refer back to the code in order to make any necessary changes or updates at a later date.</p><p id="4d7e66ba-fb7d-4a5a-9c69-c01e5cc268df" class="">There are many different design methods and implementations for combinational logic circuits, each with its own strengths and weaknesses. For example, the 7400 or 5400 series of digital logic integrated circuits provide a simple and inexpensive way to implement basic logic functions, while Programmable Logic Arrays (PLAs) and Complex Programmable Logic Devices (CPLDs) offer more flexibility and programmability. Field Programmable Gate Arrays (FPGAs) are a more complex solution that can be programmed to implement a wide range of digital functions, including combinational logic circuits. Finally, full-custom builds ICs offer the greatest performance and efficiency, but they are also the most complex and expensive to design and build.</p><p id="2aa2c9cc-e54d-46cf-a15c-07a9d243b500" class="">Understanding their design and implementation is an important part of learning about digital electronics. Whether you are interested in pursuing a career in electronics or simply want to learn more about the technology that surrounds you, studying combinational logic circuits is a great place to start.</p><h2 id="af24138d-c159-418f-8c3e-223bd7ac7d0a" class="block-color-yellow_background">Dialogue Practice</h2><div><iframe src="https://player.soundon.fm/embed/?podcast=d5f7b15f-de14-4424-aad1-07b8f3128116&episode=8be86b87-a9e3-4afe-a0ea-b0b1a410ca9a" id="soundon"></iframe></div><div id="ea2e267f-5005-4f28-958d-1b9b5c499e90" class="column-list"><div id="7d9e68d5-e37a-41b7-be63-567246b09e0e" style="width:75%" class="column"><p id="3f3c54f5-c4f3-45b2-a00d-41b38acaa14a" class="">(Emily) Hi Henry, have you heard about combinational logic circuits?
+(Henry) No, what are they?
+(Emily) They are an important part of digital systems, used in everything from cell phones to medical devices. They perform logical operations on inputs to produce a single output.
+(Henry) Interesting, how are they designed?
+</p></div><div id="ce288737-c899-4a3e-b239-deee317cfcce" style="width:24.999999999999993%" class="column"><figure id="bd5efa92-6d79-409b-a8d6-ff5eefedcbd3" class="image"><a href="English%20Learning%20-%20%E7%B5%84%E5%90%88%E9%82%8F%E8%BC%AF%E9%9B%BB%E8%B7%AF%20ff3866c965c6425ebad0d74e7940054f/54.png"><img style="width:800px" src="English%20Learning%20-%20%E7%B5%84%E5%90%88%E9%82%8F%E8%BC%AF%E9%9B%BB%E8%B7%AF%20ff3866c965c6425ebad0d74e7940054f/54.png"/></a></figure></div></div><p id="401aa17c-b5ee-4dcd-8718-f6d6df6ed7e6" class="">(Emily) They are designed using truth tables, Boolean equations, and hardware description languages. A truth table lists all possible input combinations and the corresponding output.</p><p id="695ff6af-4697-43f6-8df6-f54994490f9e" class="">(Henry) That sounds simple. What are Boolean equations?
+(Emily) Boolean equations describe the function of the circuit using mathematical symbols to represent operations and the relationship between inputs and outputs. It makes it easy to see how changes to inputs affect the output.
+(Henry) And what are hardware description languages?
+(Emily) HDLs like Verilog allow designers to describe the behavior of a circuit using a high-level programming language. This makes it easy to design, simulate, and verify the function before building it.
+(Henry) Wow, so there are different design methods for these circuits?
+(Emily) Yes, there are different implementations with their own strengths and weaknesses. For example, 74xx/54xx ICs are simple and inexpensive, PLAs and CPLDs offer flexibility and programmability, FPGAs can implement a wide range of functions, and full-custom builds offer the greatest performance and efficiency.
+(Henry) That&#x27;s helpful to know. Why is it important to learn about these circuits?
+(Emily) Understanding their design and implementation is important for learning about digital electronics. Whether you want to pursue a career in electronics or just learn about the technology around you, studying combinational logic circuits is a great starting point.</p><h2 id="2e3e1ad1-1298-49e7-9983-18dafc050ad1" class="block-color-yellow_background">Formative Assessment</h2><p id="415f84fa-1a01-4e1b-8274-2304333da16b" class="">
+</p><p id="a6e06e25-d87c-4d53-a363-7b3139b01196" class="">
+</p><p id="d017ed95-3ade-4a7f-a2c7-d9319c4d8a0f" class="">
+</p><figure id="a61dcb64-73d6-42c0-8aba-97033a5cf138" class="image"><a href="%E8%AA%B2%E7%A8%8B%E7%B0%A1%E4%BB%8B%20-%20%E6%95%B8%E4%BD%8D%E7%B3%BB%E7%B5%B1%E8%A8%AD%E8%A8%88%E5%AF%A6%E5%8B%99%20(2023%20Spring)%2099b0e4aae697421099048b7e70025a47/end1.png"><img style="width:4538px" src="%E8%AA%B2%E7%A8%8B%E7%B0%A1%E4%BB%8B%20-%20%E6%95%B8%E4%BD%8D%E7%B3%BB%E7%B5%B1%E8%A8%AD%E8%A8%88%E5%AF%A6%E5%8B%99%20(2023%20Spring)%2099b0e4aae697421099048b7e70025a47/end1.png"/></a></figure><p id="f56272e4-5203-4c07-a0df-e404b0718530" class="">
+</p></div></article>
+<script>hljs.highlightAll();</script>
+</body></html>

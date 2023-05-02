@@ -1,0 +1,818 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Verilog 行為層次模組設計 1</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-translucentGray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style><link rel="stylesheet" href="dark-theme.css"><link rel="stylesheet"  target="_blank" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.0/styles/github-dark-dimmed.min.css"><script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.0/highlight.min.js"></script></head><body><article id="d64e0b0c-1d61-49e2-be4e-c8033fd6192e" class="page sans"><header><img class="page-cover-image" src="%E7%B5%84%E5%90%88%E9%82%8F%E8%BC%AF%E9%9B%BB%E8%B7%AF%20-%20%E5%A4%9A%E5%B7%A5%E5%99%A8%E8%88%87%E9%81%8B%E7%AE%97%E9%9B%BB%E8%B7%AF%207437810149fd4e59b7fe435c1f16baaf/9.png" style="object-position:center 50%"/><div class="page-header-icon page-header-icon-with-cover"><img class="icon" src="%E8%AA%B2%E7%A8%8B%E7%B0%A1%E4%BB%8B%20-%20%E6%95%B8%E4%BD%8D%E7%B3%BB%E7%B5%B1%E8%A8%AD%E8%A8%88%E5%AF%A6%E5%8B%99%20(2023%20Spring)%2099b0e4aae697421099048b7e70025a47/yang01.png"/></div><h1 class="page-title">Verilog 行為層次模組設計 1</h1><link rel="stylesheet" href="dark-theme.css"><link rel="stylesheet"  target="_blank" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.0/styles/github-dark-dimmed.min.css"><script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.0/highlight.min.js"></script></header><div class="page-body"><h1 id="02b6bd54-f85b-4575-8a4e-781952f24f90" class="">Behavioral Modeling in Verilog 1</h1><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="50c5e742-cc79-49e1-be5d-dbc0b2919995"><div style="font-size:1.5em"><span class="icon">💻</span></div><div style="width:100%">Behavioral modeling in Verilog is a way of describing the functionality and behavior of digital systems using a high-level language. Verilog is one of the most popular languages for designing and simulating digital circuits, such as microprocessors, memory units, and logic gates.<p id="596f3071-48e9-4dcf-84bf-84596695da64" class="">In behavioral modeling, you can use constructs such as variables, assignments, operators, expressions, conditional statements, loops, and functions to specify how the system should work. You do not need to worry about the details of the hardware implementation, such as the number of wires, gates, or registers. You can focus on the logic and algorithm of the system.</p><p id="e18992db-21f7-4dac-9eb1-4cd4546f1449" class="">Behavioral modeling in Verilog is useful for high-level design and verification of digital systems. It allows you to express complex functionality and behavior in a concise and readable way. It also enables you to test and debug your system using simulation tools before implementing it in hardware.</p></div></figure><h2 id="79e9ce9a-93fb-4e73-bddc-46b79a784a3b" class="block-color-yellow_background">This Week&#x27;s Circuit Design Adventure</h2><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="4410be31-3da7-4939-9779-55c0763922b6"><div style="font-size:1.5em"><img class="icon" src="Verilog%20%E8%A1%8C%E7%82%BA%E5%B1%A4%E6%AC%A1%E6%A8%A1%E7%B5%84%E8%A8%AD%E8%A8%88%201%20d64e0b0c1d6149e2be4ec8033fd6192e/800x800.png"/></div><div style="width:100%">In the next few weeks, we will learn the fundamentals of procedure-based Verilog designs. We will be using three simple HDLBits exercises in class to show how to use always statements to specify combinational logics, which is similar to the continuous assignments we learned before midterm. Additionally, we will briefly explore the use of always blocks for clock-based designs, and the use of if statements to create mux-like behavior inside the procedure blocks. By the end of these exercises, you will have a better understanding of how to use Verilog to design digital circuits. Don&#x27;t be afraid to ask questions and seek help if needed.</div></figure><h2 id="7026f4ef-e119-424a-ad26-cbb3f7d1a592" class="block-color-yellow_background">參考資料 (References)</h2><figure id="125d2e5c-b114-4c4d-9429-1aa0a5f06c57"><a  target="_blank" href="https://hdlbits.01xz.net/wiki/Main_Page" class="bookmark source"><div class="bookmark-info"><div class="bookmark-text"><div class="bookmark-title">HDLBits</div><div class="bookmark-description">HDLBits is a collection of small circuit design exercises for practicing digital hardware design using Verilog Hardware Description Language (HDL). Earlier problems follow a tutorial style, while later problems will increasingly challenge your circuit design skills. Each problem requires you to design a small circuit in Verilog.</div></div><div class="bookmark-href">https://hdlbits.01xz.net/wiki/Main_Page</div></div><img src="https://hdlbits.01xz.net/mw/images/0/06/Logo_v.png" class="bookmark-image"/></a></figure><figure id="19d4f4e7-8eab-424c-9181-c29b8c979d5e"><a  target="_blank" href="https://technobyte.org/behavioral-modeling-verilog/" class="bookmark source"><div class="bookmark-info"><div class="bookmark-text"><div class="bookmark-title"></div></div><div class="bookmark-href">https://technobyte.org/behavioral-modeling-verilog/</div></div></a></figure><h2 id="49f5a126-3db1-444e-9ccb-9922f875d2dd" class="block-color-yellow_background">課程內容 (Course Content)</h2><h3 id="036f2c38-ca05-400d-9e00-f05101fb9170" class="block-color-yellow">Procedural Verilog Blocks</h3><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="62ed9d85-daac-4ea3-9cfa-5c80e8b8f44d"><div style="font-size:1.5em"><span class="icon">💻</span></div><div style="width:100%">When you make hardware, there are two types of always blocks that you can use. The first one is called &quot;combinational.&quot; This block is like an &quot;assign&quot; statement, which means you can write it in a different way. The second one is called &quot;clocked.&quot; This block uses a clock signal to work. When you write code inside a procedural block, it&#x27;s different from code that is outside. Procedural blocks have more options for writing code, like &quot;if-then&quot; and &quot;case.&quot; But they can also cause errors that are hard to understand.
+<ul id="bc144a0a-b2df-4738-8a17-d0a1b05f4618" class="bulleted-list"><li style="list-style-type:disc">Combinational:<p id="bc05c449-0d33-4fb9-984e-512a120b4935" class=""><code>always @(*)</code></p></li></ul><ul id="d5023466-81c7-4404-8137-912e16684f03" class="bulleted-list"><li style="list-style-type:disc">Clocked:<p id="8af685fb-9e38-499e-bcc5-5da4d25e8439" class=""><code>always @(posedge clk)</code></p></li></ul></div></figure><h3 id="c9bb94da-2891-4251-90ca-3ebde24ad246" class="block-color-gray_background">【課堂練習 1】<a  target="_blank" href="https://hdlbits.01xz.net/wiki/Alwaysblock1">Alwaysblock1 - HDLBits (01xz.net)</a></h3><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="6c334021-5b1a-429a-abf9-a70543396ff4"><div style="font-size:1.5em"><img class="icon" src="%E9%82%8F%E8%BC%AF%E6%96%B9%E7%A8%8B%E5%BC%8F%E8%88%87%E5%9F%BA%E6%9C%AC%E9%96%98%200e43700d65fb44238787a5b0a993cf6c/yang02.png"/></div><div style="width:100%">There are two ways to create an AND gate using Verilog code. The first way is by using an <code>assign</code> statement. This statement assigns the output to the result of the AND operation on the inputs. The second way is by using a combinational <code>always</code> block. This block sets the output whenever any of the inputs change. To practice making an AND gate using both methods, you can use two tools: HDLBits and Xilinx Vivado. HDLBits is a website where you can write and test Verilog code in your browser. Xilinx Vivado is a software that enables you to design and simulate logic circuits on your computer. When working on the Vivado project, remember to rename the AND module to <code>and2</code>.</div></figure><h3 id="26ba4f01-0edf-43ff-ae4d-958b70f6a547" class="">Example Solution (HDLBits)</h3><figure id="b3910b1e-db20-45c2-831b-f973663a829d" class="image"><a href="Verilog%20%E8%A1%8C%E7%82%BA%E5%B1%A4%E6%AC%A1%E6%A8%A1%E7%B5%84%E8%A8%AD%E8%A8%88%201%20d64e0b0c1d6149e2be4ec8033fd6192e/Untitled.png"><img style="width:432px" src="Verilog%20%E8%A1%8C%E7%82%BA%E5%B1%A4%E6%AC%A1%E6%A8%A1%E7%B5%84%E8%A8%AD%E8%A8%88%201%20d64e0b0c1d6149e2be4ec8033fd6192e/Untitled.png"/></a></figure><h3 id="7341b471-4c10-4ad6-b2d0-49b246b92e2c" class="">Verilog Simulation Waveform</h3><figure id="ee3ad2b3-56d9-446d-b3a4-b6e70051e83f" class="image"><a href="Verilog%20%E8%A1%8C%E7%82%BA%E5%B1%A4%E6%AC%A1%E6%A8%A1%E7%B5%84%E8%A8%AD%E8%A8%88%201%20d64e0b0c1d6149e2be4ec8033fd6192e/Untitled%201.png"><img style="width:2116px" src="Verilog%20%E8%A1%8C%E7%82%BA%E5%B1%A4%E6%AC%A1%E6%A8%A1%E7%B5%84%E8%A8%AD%E8%A8%88%201%20d64e0b0c1d6149e2be4ec8033fd6192e/Untitled%201.png"/></a></figure><h3 id="93499a12-30f6-4260-a2cf-e252c89510dc" class="">Example Solution (Xilinx Vivado)</h3><figure id="f1a18faa-9ae6-4415-9ee3-fb3a3718c9f0" class="image"><a href="Verilog%20%E8%A1%8C%E7%82%BA%E5%B1%A4%E6%AC%A1%E6%A8%A1%E7%B5%84%E8%A8%AD%E8%A8%88%201%20d64e0b0c1d6149e2be4ec8033fd6192e/Untitled%202.png"><img style="width:528px" src="Verilog%20%E8%A1%8C%E7%82%BA%E5%B1%A4%E6%AC%A1%E6%A8%A1%E7%B5%84%E8%A8%AD%E8%A8%88%201%20d64e0b0c1d6149e2be4ec8033fd6192e/Untitled%202.png"/></a></figure><h3 id="adc4c6ed-d4d4-46d8-96f4-60138e1fbf04" class="">RTL Schematic (Xilinx Vivado)</h3><figure id="c2073c63-de91-40e3-a51b-0a553cb48691" class="image"><a href="Verilog%20%E8%A1%8C%E7%82%BA%E5%B1%A4%E6%AC%A1%E6%A8%A1%E7%B5%84%E8%A8%AD%E8%A8%88%201%20d64e0b0c1d6149e2be4ec8033fd6192e/Untitled%203.png"><img style="width:2787px" src="Verilog%20%E8%A1%8C%E7%82%BA%E5%B1%A4%E6%AC%A1%E6%A8%A1%E7%B5%84%E8%A8%AD%E8%A8%88%201%20d64e0b0c1d6149e2be4ec8033fd6192e/Untitled%203.png"/></a></figure><h3 id="428c0c8d-327a-4242-9b41-6a9196e55538" class="">Example Testbench (Xilinx Vivado)</h3><pre id="55b594e3-9461-4c9a-a2fb-a0f83f0de2e4" class="code"><code>`timescale 1ns / 1ps
+
+module and2_tb;
+    // Declare inputs and outputs
+    reg a, b;
+    wire out_assign;
+    reg out_alwaysblock;
+    reg fail;
+
+    // Instantiate the and2 module
+    myand2 dut (
+        .a(a),
+        .b(b),
+        .out_assign(out_assign),
+        .out_alwaysblock(out_alwaysblock)
+    );
+
+    // Apply random test vectors
+    initial begin
+        {a,b,fail} = 0;
+        #10;
+        repeat (10) begin
+            // Generate random inputs
+            a = $random;
+            b = $random;
+            fail = 0;
+
+            // Evaluate outputs
+            #10;
+            fail = (out_assign !== (a &amp; b) || out_alwaysblock !== (a &amp; b));
+            #10;
+        end
+
+        $finish;
+    end
+
+endmodule</code></pre><h3 id="6c1ffda2-bfa7-42a9-b69c-32d9569206a9" class="block-color-yellow">Continuous vs. Procedural Assignments</h3><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="37b6075b-e147-4741-abf6-114a870a92fd"><div style="font-size:1.5em"><span class="icon">💻</span></div><div style="width:100%">There are three types of assignments in Verilog:<ol type="1" id="4857e9a0-c63e-4e63-8bac-123e12da3da6" class="numbered-list" start="1"><li><code>Continuous assignments</code> (example: &quot;assign x = y;&quot;) can only be used outside of a procedure (&quot;always block&quot;).</li></ol><ol type="1" id="6c975e14-bd0f-435d-a2ad-9941b334f765" class="numbered-list" start="2"><li><code>Procedural blocking assignment</code> (example: &quot;x = y;&quot;) can only be used inside a procedure.</li></ol><ol type="1" id="5ca4fdcb-27c1-414c-84f0-c0ff6196fabf" class="numbered-list" start="3"><li><code>Procedural non-blocking assignment</code> (example: &quot;x &lt;= y;&quot;) can only be used inside a procedure.</li></ol><p id="a8a756e3-4840-4da4-997e-e48fea6dfb93" class="">When working with combinational logic, use blocking assignments. When working with clocked logic, use non-blocking assignments. It&#x27;s not crucial to fully understand why this is the case for hardware design, but it&#x27;s important to follow this rule to avoid hard-to-find errors that can be different in simulation and synthesized hardware.</p></div></figure><h3 id="b43eaea5-5edc-4ba5-9b26-7f0471989517" class="block-color-yellow">Blocking vs. Non-blocking Assignments</h3><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="edde12da-a194-4ecf-a339-f5757323df26"><div style="font-size:1.5em"><span class="icon">💻</span></div><div style="width:100%">In Verilog, there are two ways to assign a value to a variable: <code>blocking</code> and <code>non-blocking</code> assignments.<p id="19104e8e-9809-436a-b2b6-dc7bd585d66b" class="">Blocking assignments use the &quot;=&quot; sign and means that the assignment on the left side of the &quot;=&quot; is executed immediately and will hold the value on the right side until the next line of code is executed. Think of it like a traffic light: when the light turns red, the cars stop immediately and wait until the light turns green to move again.</p><p id="95276562-73ee-4730-9f3e-390dc6d13793" class="">On the other hand, non-blocking assignments use the &quot;&lt;=&quot; sign and means that the assignment on the right side of the &quot;&lt;=&quot; is executed first, and its value will be held until the next clock cycle, even if there are other assignments in between. Think of it like ordering food at a fast-food restaurant: when you place your order, you don&#x27;t expect to get your food immediately. Instead, you expect to wait until it&#x27;s ready, even if other people order after you.</p><p id="3e8abbe2-1af0-4e4d-90fb-7f45af27da8e" class="">So, when working with combinational logic, which means that the output depends only on the current input values, use blocking assignments. But when working with clocked logic, which means that the output depends on the current input values and the previous output values, use non-blocking assignments.</p></div></figure><h3 id="3013f5ef-759b-43c9-85a7-572fd99ce6ac" class="block-color-gray_background">【課堂練習 2】<a  target="_blank" href="https://hdlbits.01xz.net/wiki/Alwaysblock2">Alwaysblock2 - HDLBits (01xz.net)</a></h3><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="b9f0d323-7bcb-4e61-aa41-15287c3a6fad"><div style="font-size:1.5em"><img class="icon" src="%E9%82%8F%E8%BC%AF%E6%96%B9%E7%A8%8B%E5%BC%8F%E8%88%87%E5%9F%BA%E6%9C%AC%E9%96%98%200e43700d65fb44238787a5b0a993cf6c/yang02.png"/></div><div style="width:100%">Make an XOR gate using three methods: an <code>assign statement</code>, a <code>combinational always block</code>, and a <code>clocked always block</code>. The clocked always block is different because it has a flip-flop that delays the output. You need to use HDLBits and Xilinx Vivado tools to complete the practice. When using Vivado, change the name of the XOR module to <code>xor2</code>.</div></figure><h3 id="ba0bc4bb-3a49-4dfa-a498-ea2802729ad6" class="">Example Solution (HDLBits)</h3><figure id="20b9c8ce-ecd4-4740-8035-be5301a2fa9a" class="image"><a href="Verilog%20%E8%A1%8C%E7%82%BA%E5%B1%A4%E6%AC%A1%E6%A8%A1%E7%B5%84%E8%A8%AD%E8%A8%88%201%20d64e0b0c1d6149e2be4ec8033fd6192e/Untitled%204.png"><img style="width:384px" src="Verilog%20%E8%A1%8C%E7%82%BA%E5%B1%A4%E6%AC%A1%E6%A8%A1%E7%B5%84%E8%A8%AD%E8%A8%88%201%20d64e0b0c1d6149e2be4ec8033fd6192e/Untitled%204.png"/></a></figure><h3 id="34bede5d-e799-4772-a222-79df573dc53f" class="">Verilog Simulation Waveform</h3><figure id="8fafd8bb-c5a1-4a8d-9ab2-d89b3a99aa89" class="image"><a href="Verilog%20%E8%A1%8C%E7%82%BA%E5%B1%A4%E6%AC%A1%E6%A8%A1%E7%B5%84%E8%A8%AD%E8%A8%88%201%20d64e0b0c1d6149e2be4ec8033fd6192e/Untitled%205.png"><img style="width:2153px" src="Verilog%20%E8%A1%8C%E7%82%BA%E5%B1%A4%E6%AC%A1%E6%A8%A1%E7%B5%84%E8%A8%AD%E8%A8%88%201%20d64e0b0c1d6149e2be4ec8033fd6192e/Untitled%205.png"/></a></figure><h3 id="411ffd7c-1b50-470d-b2c6-6a00ab14511d" class="">Example Solution (Xilinx Vivado)</h3><figure id="6796ef08-5816-4017-91d2-256ff9576968" class="image"><a href="Verilog%20%E8%A1%8C%E7%82%BA%E5%B1%A4%E6%AC%A1%E6%A8%A1%E7%B5%84%E8%A8%AD%E8%A8%88%201%20d64e0b0c1d6149e2be4ec8033fd6192e/Untitled%206.png"><img style="width:432px" src="Verilog%20%E8%A1%8C%E7%82%BA%E5%B1%A4%E6%AC%A1%E6%A8%A1%E7%B5%84%E8%A8%AD%E8%A8%88%201%20d64e0b0c1d6149e2be4ec8033fd6192e/Untitled%206.png"/></a></figure><h3 id="510cdba8-d3f0-4cad-b34d-1c251329667a" class="">RTL Schematic (Xilinx Vivado)</h3><figure id="b7213871-4ac2-478f-80cf-f31adf061f4f" class="image"><a href="Verilog%20%E8%A1%8C%E7%82%BA%E5%B1%A4%E6%AC%A1%E6%A8%A1%E7%B5%84%E8%A8%AD%E8%A8%88%201%20d64e0b0c1d6149e2be4ec8033fd6192e/Untitled%207.png"><img style="width:2119px" src="Verilog%20%E8%A1%8C%E7%82%BA%E5%B1%A4%E6%AC%A1%E6%A8%A1%E7%B5%84%E8%A8%AD%E8%A8%88%201%20d64e0b0c1d6149e2be4ec8033fd6192e/Untitled%207.png"/></a></figure><h3 id="b340a57b-6fcf-474e-9905-f597ef35d8e5" class="">Example Testbench (Xilinx Vivado)</h3><pre id="64c8aea5-b14b-4393-b76e-899fe4bb42cb" class="code"><code>`timescale 1ns / 1ps
+
+module xor2_tb;
+
+    // Inputs
+    reg clk;
+    reg a;
+    reg b;
+    
+    // Outputs
+    wire out_assign;
+    wire out_always_comb;
+    wire out_always_ff;
+    reg fail1,fail2,fail3;
+    
+    // Instantiate the Unit Under Test (UUT)
+    xor2 uut (
+        .clk(clk),
+        .a(a),
+        .b(b),
+        .out_assign(out_assign),
+        .out_always_comb(out_always_comb),
+        .out_always_ff(out_always_ff)
+    );
+    
+    always #5 clk = !clk;
+       
+    integer seed = 14567;
+       
+    initial begin
+        // Initialize inputs
+        clk = 0;
+        a = 0;
+        b = 0;
+        {fail1,fail2,fail3} = 0;
+        #10;
+        
+        repeat (10) begin
+            // Generate random inputs
+            {a,b} = {$random(seed)};
+            {fail1,fail2,fail3} = 0;
+            #5;
+            
+            // Verify outputs
+            fail1 = ((a ^ b) !== out_assign);
+            fail2 = ((a ^ b) !== out_always_comb);
+            
+            #5; // Delay to ensure out_always_ff has updated on the posedge of clk         
+            fail3 = ((a ^ b) !== out_always_ff);
+        end
+        
+        $finish;
+    end
+
+endmodule</code></pre><figure id="22d3a005-815b-4284-ac57-3078a25064a3" class="image"><a href="Verilog%20%E8%A1%8C%E7%82%BA%E5%B1%A4%E6%AC%A1%E6%A8%A1%E7%B5%84%E8%A8%AD%E8%A8%88%201%20d64e0b0c1d6149e2be4ec8033fd6192e/Untitled%208.png"><img style="width:2567px" src="Verilog%20%E8%A1%8C%E7%82%BA%E5%B1%A4%E6%AC%A1%E6%A8%A1%E7%B5%84%E8%A8%AD%E8%A8%88%201%20d64e0b0c1d6149e2be4ec8033fd6192e/Untitled%208.png"/></a></figure><p id="aa284e27-dc51-4609-b4c2-c416f013610e" class="">
+</p><h3 id="890cf5f6-3c15-4ff6-a7bd-edae750efa63" class="block-color-yellow">if Statement</h3><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="84d10892-d151-4dac-9da7-18d3e4583814"><div style="font-size:1.5em"><span class="icon">🖥️</span></div><div style="width:100%">The if statement in Verilog typically creates a 2-to-1 multiplexer, which selects one input if the condition is true and the other input if the condition is false. <p id="116d904a-e303-4aa9-b71e-1864a99c8758" class="">For instance, the code block will continuously evaluate the condition and update the output accordingly. </p><pre id="5f0454de-c237-4c80-9993-835965687c2c" class="code"><code>always @(*) begin
+    if (condition) begin
+        out = x;
+    end else begin
+        out = y;
+    end
+end</code></pre><p id="fa754cbc-5a86-4360-a211-933a0b23168b" class="">An alternative method to achieve the same result is by using a conditional operator with continuous assignment, such as </p><pre id="626dc984-5da5-4e95-802b-b4a2147dfe92" class="code"><code>assign out = (condition) ? x : y;</code></pre><p id="08fd69e9-fea6-4a96-a42e-23576a214840" class="">However, when using the procedural if statement, one must be cautious not to make mistakes. The circuit can only be considered combinational if the output &quot;out&quot; is always assigned a value. In other words, all possible paths of the code should assign a value to &quot;out.&quot; Otherwise, the circuit may exhibit unpredictable behavior, such as latches or glitches.</p></div></figure><h3 id="1ccc23f2-1b12-4bc1-acc6-dc0afa21478f" class="">【課堂練習 3】<a  target="_blank" href="https://hdlbits.01xz.net/wiki/Always_if">Always if - HDLBits (01xz.net)</a></h3><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="bde14d36-af45-47cb-a1c6-812a27f86422"><div style="font-size:1.5em"><img class="icon" src="%E9%82%8F%E8%BC%AF%E6%96%B9%E7%A8%8B%E5%BC%8F%E8%88%87%E5%9F%BA%E6%9C%AC%E9%96%98%200e43700d65fb44238787a5b0a993cf6c/yang02.png"/></div><div style="width:100%">Create a device that can choose between two inputs, a and b. If both <code>sel_b1</code> and <code>sel_b2</code> are <code>true</code>, choose <code>b</code>, otherwise choose <code>a</code>. Repeat the process twice, first using assign statements, and then using a procedural if statement. You will need to use two software tools called HDLBits and Xilinx Vivado to complete the exercise. Remember to change the name of the module to <code>mux2</code> when using Vivado.</div></figure><h3 id="bc72b1de-ad20-48e8-81f9-25093dcf9f36" class="">Example Solution (HDLBits)</h3><figure id="474a2ac9-7396-4078-ada5-4bcadccc9584" class="image"><a href="Verilog%20%E8%A1%8C%E7%82%BA%E5%B1%A4%E6%AC%A1%E6%A8%A1%E7%B5%84%E8%A8%AD%E8%A8%88%201%20d64e0b0c1d6149e2be4ec8033fd6192e/Untitled%209.png"><img style="width:432px" src="Verilog%20%E8%A1%8C%E7%82%BA%E5%B1%A4%E6%AC%A1%E6%A8%A1%E7%B5%84%E8%A8%AD%E8%A8%88%201%20d64e0b0c1d6149e2be4ec8033fd6192e/Untitled%209.png"/></a></figure><h3 id="91e64c6f-b76e-4883-bf26-d3e4066e12f4" class="">Verilog Simulation Waveform</h3><figure id="96ea36c9-1510-43a4-a5f8-dbd212a95bdf" class="image"><a href="Verilog%20%E8%A1%8C%E7%82%BA%E5%B1%A4%E6%AC%A1%E6%A8%A1%E7%B5%84%E8%A8%AD%E8%A8%88%201%20d64e0b0c1d6149e2be4ec8033fd6192e/Untitled%2010.png"><img style="width:1171px" src="Verilog%20%E8%A1%8C%E7%82%BA%E5%B1%A4%E6%AC%A1%E6%A8%A1%E7%B5%84%E8%A8%AD%E8%A8%88%201%20d64e0b0c1d6149e2be4ec8033fd6192e/Untitled%2010.png"/></a></figure><h3 id="3ad4b5fd-4157-4b00-a387-77afa4d9922e" class="">Example Solution (Xilinx Vivado)</h3><figure id="815d4b21-0f3b-47f9-9ae0-c02334a7b452" class="image"><a href="Verilog%20%E8%A1%8C%E7%82%BA%E5%B1%A4%E6%AC%A1%E6%A8%A1%E7%B5%84%E8%A8%AD%E8%A8%88%201%20d64e0b0c1d6149e2be4ec8033fd6192e/Untitled%2011.png"><img style="width:432px" src="Verilog%20%E8%A1%8C%E7%82%BA%E5%B1%A4%E6%AC%A1%E6%A8%A1%E7%B5%84%E8%A8%AD%E8%A8%88%201%20d64e0b0c1d6149e2be4ec8033fd6192e/Untitled%2011.png"/></a></figure><h3 id="16cf2259-6bcf-4e71-93dd-3b6565d62d4a" class="">RTL Schematic (Xilinx Vivado)</h3><figure id="50ce1095-95c8-42b4-b51e-d8f205207b5c" class="image"><a href="Verilog%20%E8%A1%8C%E7%82%BA%E5%B1%A4%E6%AC%A1%E6%A8%A1%E7%B5%84%E8%A8%AD%E8%A8%88%201%20d64e0b0c1d6149e2be4ec8033fd6192e/Untitled%2012.png"><img style="width:2178px" src="Verilog%20%E8%A1%8C%E7%82%BA%E5%B1%A4%E6%AC%A1%E6%A8%A1%E7%B5%84%E8%A8%AD%E8%A8%88%201%20d64e0b0c1d6149e2be4ec8033fd6192e/Untitled%2012.png"/></a></figure><h3 id="d2cdabee-3275-4724-be0d-98afa333ffea" class="">Example Testbench (Xilinx Vivado)</h3><pre id="62bcdadc-8476-4200-ab4a-769b322a4b52" class="code"><code>`timescale 1ns / 1ps
+
+module mux2_tb;
+
+    // Inputs
+    reg a, b, sel_b1, sel_b2;
+    reg fail;
+    
+    // Outputs
+    wire out_assign;
+    wire out_always;
+    
+    // Instantiate the mux2 module
+    mux2 dut(
+        .a(a),
+        .b(b),
+        .sel_b1(sel_b1),
+        .sel_b2(sel_b2),
+        .out_assign(out_assign),
+        .out_always(out_always)
+    );
+    
+    // Initialize the inputs
+    initial begin
+        {a, b, sel_b1, sel_b2,fail} = 0;
+        #10;
+        repeat(10) begin
+            // Randomize inputs
+            {a, b, sel_b1, sel_b2} = {$random};
+            fail = 0;
+                       
+            // Wait for 1 time unit
+            #5;
+            
+            // Verify the outputs
+            if (sel_b1 &amp;&amp; sel_b2) begin
+                fail = (b != out_assign || b != out_always);
+            end
+            else begin
+                fail = (a != out_assign || a != out_always);
+            end
+            #5;
+        end
+        
+        $finish;
+    end
+    
+endmodule</code></pre><h2 id="81a63557-ddbd-48df-a4aa-b61de4f85cde" class="block-color-yellow_background">課堂作業</h2><h3 id="f0b84046-34a9-4657-82f3-fcd0c5d25ad7" class="block-color-gray_background">【作業 1】Complete All Class Practices</h3><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="2a199072-8698-4f85-9428-dc0b32d51969"><div style="font-size:1.5em"><img class="icon" src="%E9%82%8F%E8%BC%AF%E6%96%B9%E7%A8%8B%E5%BC%8F%E8%88%87%E5%9F%BA%E6%9C%AC%E9%96%98%200e43700d65fb44238787a5b0a993cf6c/yang-g-tr.png"/></div><div style="width:100%">This week&#x27;s class exercises are more challenging, so it is essential to take the time to carefully review each step and ensure that you understand all the concepts involved. It is important not to rush through the tasks and take the time to grasp the knowledge and skills being taught. By doing so, you can effectively apply what you learn in future projects or assignments. So, take your time, ask questions, and seek help if needed to fully comprehend the practices.</div></figure><p id="2f3084ab-fc42-4d0f-9869-23dfe078cab1" class="">
+</p><figure id="9012172a-0271-48cb-a11a-1bbcb805d849" class="image"><a href="%E8%AA%B2%E7%A8%8B%E7%B0%A1%E4%BB%8B%20-%20%E6%95%B8%E4%BD%8D%E7%B3%BB%E7%B5%B1%E8%A8%AD%E8%A8%88%E5%AF%A6%E5%8B%99%20(2023%20Spring)%2099b0e4aae697421099048b7e70025a47/end1.png"><img style="width:4538px" src="%E8%AA%B2%E7%A8%8B%E7%B0%A1%E4%BB%8B%20-%20%E6%95%B8%E4%BD%8D%E7%B3%BB%E7%B5%B1%E8%A8%AD%E8%A8%88%E5%AF%A6%E5%8B%99%20(2023%20Spring)%2099b0e4aae697421099048b7e70025a47/end1.png"/></a></figure><p id="b562c285-66fb-4857-91e6-a41499cc90a7" class="">
+</p></div></article>
+<script>hljs.highlightAll();</script>
+</body></html>

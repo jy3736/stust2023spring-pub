@@ -1,0 +1,877 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Verilog Testbench and FPGA Design Flow</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-translucentGray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style><link rel="stylesheet" href="dark-theme.css"><link rel="stylesheet"  target="_blank" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.0/styles/github-dark-dimmed.min.css"><script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.0/highlight.min.js"></script></head><body><article id="afa9d830-0f33-492f-86b1-c13e24eb15f1" class="page sans"><header><img class="page-cover-image" src="https://images.unsplash.com/photo-1515630278258-407f66498911?ixlib=rb-4.0.3&amp;q=85&amp;fm=jpg&amp;crop=entropy&amp;cs=srgb" style="object-position:center 50%"/><div class="page-header-icon page-header-icon-with-cover"><img class="icon" src="%E8%AA%B2%E7%A8%8B%E7%B0%A1%E4%BB%8B%20-%20%E6%95%B8%E4%BD%8D%E7%B3%BB%E7%B5%B1%E8%A8%AD%E8%A8%88%E5%AF%A6%E5%8B%99%20(2023%20Spring)%2099b0e4aae697421099048b7e70025a47/yang01.png"/></div><h1 class="page-title">Verilog Testbench and FPGA Design Flow</h1><link rel="stylesheet" href="dark-theme.css"><link rel="stylesheet"  target="_blank" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.0/styles/github-dark-dimmed.min.css"><script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.0/highlight.min.js"></script></header><div class="page-body"><p id="9b917a67-ac5c-4ba1-8d2a-42a89e637af9" class="">This week&#x27;s goal is to learn the basics of Xilinx Vivado FPGA/PSoC design tool by working on the midterm exam problem sets. You will use Verilog to create and simulate your design, and write a testbench to verify its functionality. You will also learn how to use Vivado and Zedboard to implement your design on a real FPGA device. The design flow will cover the steps from Verilog code to bitstream generation.</p><h2 id="3feda767-1eeb-43e8-8690-bcab315ef41d" class="block-color-yellow_background">Problem 1: Simple Structural-level Verilog Design </h2><p id="0bc7c349-6e09-43f1-8ce6-cc30e6b1b141" class="">Use the <code>mod_a</code> module to create a Verilog top-level module according to the RTL schematic. Your top-level module <code>top_module</code> should be identical to the one described in the problem statement below. The testbench will automatically verify your design, so make sure you do not change it.</p><h3 id="b7175893-4ad6-4800-8771-e3c654ceae91" class="block-color-yellow"><code>mod_a</code> Module</h3><pre id="05900def-6659-4618-9de2-f53a19c15c9c" class="code"><code>module mod_a(
+    input a,
+    input b,
+    output x
+    );
+    
+    assign x = {a,b};
+    
+endmodule</code></pre><h3 id="ab588fd6-0f69-407c-80fe-e51ee672656e" class="block-color-yellow"><code>top_moudle</code> Module Declaration</h3><figure id="5ffa9f16-0434-4107-a819-e7dc6be17671" class="image"><a href="Verilog%20Testbench%20and%20FPGA%20Design%20Flow%20afa9d8300f33492f86b1c13e24eb15f1/Untitled.png"><img style="width:576px" src="Verilog%20Testbench%20and%20FPGA%20Design%20Flow%20afa9d8300f33492f86b1c13e24eb15f1/Untitled.png"/></a></figure><h3 id="577c35c7-8772-4243-afe0-6901e0a9f6ea" class="block-color-yellow"><code>top_moudle_tb</code> Testbench</h3><pre id="6f02c970-c469-401c-a5bb-11db5bea3d5c" class="code"><code>`timescale 1ns / 1ps
+
+module top_module_tb;
+
+    reg x, y;
+    reg failed;
+    wire isok;
+    
+    top_module U1(.in1(x), .in2(y), .out(isok));
+       
+    initial begin
+        {x,y} = 2&#x27;b00;
+        failed = 0;
+        #100;
+        
+        repeat(10) begin
+            {x,y} = {$random};
+            #100;
+            if ((x==y &amp;&amp; isok!=1) || (x!=y &amp;&amp; isok!=0)) begin
+                $display(&quot;Assertion Failed!&quot;);
+                failed = 1;
+            end
+        end
+        if (failed==0)
+            $display(&quot;Congratulations! Your design has passed all tests.&quot;);
+        #100;
+        $finish;
+        
+    end
+    
+endmodule</code></pre><h3 id="045cd8cf-2757-4406-98d0-8558df1e647b" class="block-color-yellow"><code>top_moudle</code> RTL Schematic </h3><figure id="53381cdf-a831-4582-b9a3-9f365f8b34ab" class="image"><a href="%E6%9C%9F%E4%B8%AD%E6%B8%AC%E9%A9%97%20(Midterm%20Exam)%201602382d1fb54a5e91e6a7181fcd14b4/Untitled.png"><img style="width:672px" src="%E6%9C%9F%E4%B8%AD%E6%B8%AC%E9%A9%97%20(Midterm%20Exam)%201602382d1fb54a5e91e6a7181fcd14b4/Untitled.png"/></a></figure><h2 id="41b79543-608f-435d-8fdd-f2c2cf657181" class="block-color-yellow_background">Problem 2: Structural-level 4-bit Adder</h2><p id="73df24c8-59c6-4432-9dd6-29e8c2fc2b41" class="">You need to design a 4-bit adder (<code>adder4</code>) using the <code>fadd</code> module. The <code>fadd</code> module can add two bits and a carry bit. Look at the picture to see how to connect the <code>fadd</code> modules, and write a structural-level Verilog design based on it. Your code should have the same name and inputs as the one in the question. Do not change the testbench code. It will check if your code works.</p><h3 id="f0f88fcc-e750-4e7b-a1f2-f4bf4125bc8e" class="block-color-yellow"><code>fadd</code> Module</h3><pre id="3794695e-bc24-4f1b-be3a-955c329e3369" class="code"><code>module fadd(
+    input a,
+    input b,
+    input ci,
+    output s,
+    output co
+    );
+    
+    assign {co,s} = a + b + ci;
+    
+endmodule</code></pre><h3 id="6a86cbee-8198-4d72-a2b0-84e720845d2d" class="block-color-yellow"><code>addr4</code> Module Declaration</h3><figure id="3ce9553e-5e29-429d-bedc-538c954a4df1" class="image"><a href="Verilog%20Testbench%20and%20FPGA%20Design%20Flow%20afa9d8300f33492f86b1c13e24eb15f1/Untitled%201.png"><img style="width:1779px" src="Verilog%20Testbench%20and%20FPGA%20Design%20Flow%20afa9d8300f33492f86b1c13e24eb15f1/Untitled%201.png"/></a></figure><h3 id="da0eb8cb-70c1-4186-a89f-b6cf1bc3d282" class="block-color-yellow"><code>addr4_tb</code> Testbench</h3><pre id="12b919d2-e0e2-451a-922d-44d46a083aed" class="code"><code>`timescale 1ns / 1ps
+
+module adder4_tb;
+
+    reg [3:0] a, b;
+    reg ci;
+    wire [3:0] s;
+    wire co;
+    
+    adder4 U0 (.a(a),.b(b),.ci(ci),.s(s),.co(co));
+    
+    // Random stimulus generation
+    initial begin        
+        repeat(10) begin // repeat 10 times
+            #10; // wait for 10ns
+            
+            // Generate random input values
+            a = {$random};
+            b = {$random};
+            ci = {$random} &amp; 1; // randomize carry-in bit
+            
+            #10; // wait for 10ns
+            
+            // Check the output
+            if (s !== a + b + ci || co !== (a + b + ci &gt; 15)) begin
+                $display(&quot;Test case failed! a=%d, b=%d, ci=%d, s=%d, co=%d&quot;, a, b, ci, s, co);
+                $finish;
+            end
+        end
+        
+        $display(&quot;All test rounds passed!&quot;);
+        $finish;
+    end
+
+endmodule</code></pre><h3 id="2022e69b-1875-452f-ad06-716f6537ac4a" class="block-color-yellow"><code>addr4</code> RTL Schematic </h3><figure id="5ccbd125-1636-45c6-9fb8-d5db60050c7c" class="image"><a href="%E6%9C%9F%E4%B8%AD%E6%B8%AC%E9%A9%97%20(Midterm%20Exam)%201602382d1fb54a5e91e6a7181fcd14b4/Untitled%201.png"><img style="width:3250px" src="%E6%9C%9F%E4%B8%AD%E6%B8%AC%E9%A9%97%20(Midterm%20Exam)%201602382d1fb54a5e91e6a7181fcd14b4/Untitled%201.png"/></a></figure><h2 id="97878915-b359-472c-b754-96a3536cb90d" class="block-color-yellow_background">Problem 3: Structural-level 4-to-1 Multiplexer (MUX)</h2><p id="f98d6e1a-6f42-465d-b7d0-3e8c40588bf0" class="">You have to create a device called a 4-to-1 multiplexer (<code>mux4</code>) by using another module called the <code>mux2</code>, which can only handle 2 inputs. Look at the picture to figure out how to connect multiple <code>mux2</code> modules together, and write a Verilog design using this setup. Make sure the name and inputs in your code match those in the original question. Do not modify the testbench code, as it is used to check if your design is correct.</p><h3 id="12b69aef-f20f-4c51-92e0-830a7ef07e02" class="block-color-yellow"><code>mux2</code> Module</h3><pre id="ef44ea43-04f3-4715-856f-3085fdfcc6f5" class="code"><code>module mux2(
+    input a,
+    input b,
+    input s,
+    output x
+    );
+    
+    assign x = (s)?b:a;
+    
+endmodule</code></pre><h3 id="db01d875-ef67-4f11-9116-04915d7b05ea" class="block-color-yellow"><code>mux4</code> Module Declaration</h3><figure id="a4d30481-1c81-4250-be22-064b6029a618" class="image"><a href="Xilinx%20Vivado%20-%20Post-map%20Simulation%202d05cf96e422479da1593fbac1b5be57/Untitled.png"><img style="width:1429px" src="Xilinx%20Vivado%20-%20Post-map%20Simulation%202d05cf96e422479da1593fbac1b5be57/Untitled.png"/></a></figure><h3 id="0d69ff45-aba2-4ee3-bb2c-ed2ceccfa699" class="block-color-yellow"><code>mux4_tb</code> Testbench</h3><pre id="00377f0e-9307-4776-8a0a-d8630a43b939" class="code"><code>`timescale 1ns / 1ps
+
+`timescale 1ns / 1ps
+
+module mux4_tb;
+
+    
+    reg [3:0] d;
+    reg [1:0] s;
+    
+    wire out;
+    reg fail;
+   
+    mux4 uut (
+        .d(d),
+        .s(s),
+        .out(out)
+    );
+
+    initial begin
+        
+        d = 4&#x27;b0000;
+        s = 2&#x27;b00;       
+        fail = 0;
+        #10;
+
+        repeat (10) begin       
+            d = {$random};
+            s = {$random};
+            fail = 0;
+            #5;
+            
+            if (s == 2&#x27;b00) begin
+                if (out != d[0]) fail = 1;
+            end else if (s == 2&#x27;b01) begin
+                if (out != d[1]) fail = 1;
+            end else if (s == 2&#x27;b10) begin
+                if (out != d[2]) fail = 1;
+            end else if (s == 2&#x27;b11) begin
+                if (out != d[3]) fail = 1;
+            end
+            #5;
+        end
+      
+        $finish;
+    end
+
+endmodule</code></pre><h3 id="0ee56826-010c-42bd-9636-99c85d86b608" class="block-color-yellow"><code>mux4</code> RTL Schematic </h3><figure id="e1f6cfbf-1b83-418d-8cdd-d0914f235c16" class="image"><a href="Xilinx%20Vivado%20-%20Post-map%20Simulation%202d05cf96e422479da1593fbac1b5be57/Untitled%201.png"><img style="width:3201px" src="Xilinx%20Vivado%20-%20Post-map%20Simulation%202d05cf96e422479da1593fbac1b5be57/Untitled%201.png"/></a></figure><h2 id="ff63a7a3-b181-4344-983e-de41ed5edf5c" class="block-color-yellow_background">Problem 4: Structural-level 2-bit Binary Comparator</h2><p id="adb2cb7b-9b99-41fd-886a-5a455a6138e3" class="">You need to design a Verilog module (<code>cmp2</code>) that can compare two 2-bit numbers. You can use a smaller module (<code>cmp1</code>) that can compare two 1-bit numbers. Look at the picture to see how to connect two 1-bit comparators with some <code>AND</code> and <code>OR</code> gates. Write a Verilog code that follows this picture, and use the same name and inputs as the question. Do not change the testbench code because it will test your code.</p><h3 id="5a180d66-170a-4703-a11d-7b01fdb83595" class="block-color-yellow"><code>cmp1</code> Module</h3><pre id="98ade46e-f010-4061-a2ae-12c65f96b18b" class="code"><code>module cmp1(
+    input a,
+    input b,
+    output lt,
+    output eq,
+    output gt
+    );
+    
+    assign lt = a &lt; b;
+    assign eq = a == b;
+    assign gt = a &gt; b;
+    
+endmodule</code></pre><h3 id="29bb5da2-8849-4975-aef7-ca648821a6ac" class="block-color-yellow"><code>cmp2</code> Module Declaration</h3><figure id="254cf993-ca17-4e92-b0dc-52e11c817a4a" class="image"><a href="Xilinx%20Vivado%20-%20Post-map%20Simulation%202d05cf96e422479da1593fbac1b5be57/Untitled%202.png"><img style="width:1674px" src="Xilinx%20Vivado%20-%20Post-map%20Simulation%202d05cf96e422479da1593fbac1b5be57/Untitled%202.png"/></a></figure><h3 id="8cf74293-53f7-4086-ae35-0e28abeca93b" class="block-color-yellow"><code>cmp2_tb</code> Testbench</h3><pre id="b9ab997d-01a4-45b1-b4c4-f3cc4977fa98" class="code"><code>`timescale 1ns / 1ps
+
+module cmp2_tb;
+    
+    reg [1:0] a;
+    reg [1:0] b;
+    
+    wire lt;
+    wire eq;
+    wire gt;
+    reg fail;
+        
+    cmp2 dut(
+        .a(a),
+        .b(b),
+        .lt(lt),
+        .eq(eq),
+        .gt(gt)
+        );
+        
+    
+    initial begin
+        {a,b,fail} = 0;
+        #10
+        
+        repeat (10) begin
+            a = {$random};
+            b = {$random};
+            fail = 0;
+            #5;
+            if (a &lt; b) begin
+                fail = ~(lt==1 &amp;&amp; eq==0 &amp;&amp; gt==0);
+            end else if (a == b) begin
+                fail = ~(lt==0 &amp;&amp; eq==1 &amp;&amp; gt==0);
+            end else begin
+                fail = ~(lt==0 &amp;&amp; eq==0 &amp;&amp; gt==1);
+            end
+            
+            #5;
+        end
+        
+        $display(&quot;Testbench finished&quot;);
+        $finish;
+    end
+    
+endmodule</code></pre><h3 id="8d5f074a-b04a-4ded-81fd-88bb83324933" class="block-color-yellow"><code>cmp2</code> RTL Schematic </h3><figure id="4f5c3582-6464-4632-aeb8-742d1d6a4d97" class="image"><a href="Xilinx%20Vivado%20-%20Post-map%20Simulation%202d05cf96e422479da1593fbac1b5be57/Untitled%203.png"><img style="width:2978px" src="Xilinx%20Vivado%20-%20Post-map%20Simulation%202d05cf96e422479da1593fbac1b5be57/Untitled%203.png"/></a></figure><h2 id="117a851f-2090-4896-ba60-5a2a5839df56" class="block-color-yellow_background">Problem 5: Designing an 1-bit ALU Module</h2><p id="8abc71f3-93a4-48b0-b7c8-a189e4b54369" class="">Write a Verilog module for an Arithmetic Logic Unit (ALU) that can perform eight different operations based on the input opcode <code><strong>op</strong></code>. The module should have two input operands <code><strong>a</strong></code> and <code><strong>b</strong></code> and a 3-bit input <code><strong>op</strong></code> that represents the operation to be performed. The output <code><strong>out</strong></code> should be the result of the selected operation. The possible operations and their corresponding opcodes are as follows:</p><table id="dfec9790-0e03-4e12-8b12-3096d6bbb38d" class="simple-table"><tbody><tr id="07a8f4ae-a6f8-46f6-8d3e-e69b55f2a41a"><td id="WGSq" class=""><strong>Opcode</strong></td><td id="pudr" class=""><strong>Operation</strong></td></tr><tr id="e8a1f4be-9c7b-4d22-9165-d3d7891ebf4d"><td id="WGSq" class="">000</td><td id="pudr" class="">Bitwise AND (<code><strong>a &amp; b</strong></code>)</td></tr><tr id="6dbffb5e-201c-444f-a9c4-b7615a0c6ccb"><td id="WGSq" class="">001</td><td id="pudr" class="">Bitwise OR (<code><strong>a | b</strong></code>)</td></tr><tr id="d57f912d-dc7a-4984-8708-c398fc6f44ff"><td id="WGSq" class="">010</td><td id="pudr" class="">Bitwise XOR (<code><strong>a ^ b</strong></code>)</td></tr><tr id="27cc6694-b6a9-4caf-ba04-018764e5d22f"><td id="WGSq" class="">011</td><td id="pudr" class="">Addition (<code><strong>a + b</strong></code>)</td></tr><tr id="519c8ee7-5afd-4a71-adf9-71410831e06e"><td id="WGSq" class="">100</td><td id="pudr" class="">Subtraction (<code><strong>a - b</strong></code>)</td></tr><tr id="1ec435c9-a5c4-4fcb-aca7-e33ff2f0ff42"><td id="WGSq" class="">101</td><td id="pudr" class="">Less than (<code><strong>a &lt; b</strong></code>)</td></tr><tr id="807e491e-1c1a-430b-a583-1b2525899b15"><td id="WGSq" class="">110</td><td id="pudr" class="">Equality (<code><strong>a == b</strong></code>)</td></tr><tr id="a1a48994-651c-4a7b-8b36-a0a0f194252c"><td id="WGSq" class="">111</td><td id="pudr" class="">Greater than (<code><strong>a &gt; b</strong></code>)</td></tr></tbody></table><p id="8b551ce4-694b-4819-b930-7f462f746614" class="">The Verilog module should be named <code><strong>alu1</strong></code> and should have the following port declarations:</p><pre id="5de1868c-0978-4ea6-b0d2-7b6e605a7e44" class="code code-wrap"><code>module alu1(
+    input a,
+    input b,
+    input [2:0] op,
+    output out
+		);
+
+		// write your code here
+
+endmodule</code></pre><p id="2bc9aa47-aaa3-4766-8788-4b92f7579b08" class="">The <code><strong>out</strong></code> output port should be assigned the result of the selected operation using a conditional operator. If the opcode <code><strong>op</strong></code> is not recognized, the output should be set to 0.</p><h3 id="bead5ba2-bfc2-455e-909b-0e64985261e1" class="block-color-yellow"><code>cmp2</code> Module Declaration</h3><figure id="835f2f33-86fe-4420-b2c8-43764a683e9a" class="image"><a href="Xilinx%20Vivado%20-%20Post-map%20Simulation%202d05cf96e422479da1593fbac1b5be57/Untitled%204.png"><img style="width:384px" src="Xilinx%20Vivado%20-%20Post-map%20Simulation%202d05cf96e422479da1593fbac1b5be57/Untitled%204.png"/></a></figure><h3 id="621049d2-8c5d-4717-ac3d-c7aee279f135" class="block-color-yellow">Automated Testing of 1-bit ALU using Verilog Testbench</h3><figure id="1b4ba9a9-c0ab-44f0-b76d-fb69fa04099d" class="image"><a href="Xilinx%20Vivado%20-%20Post-map%20Simulation%202d05cf96e422479da1593fbac1b5be57/Untitled%205.png"><img style="width:528px" src="Xilinx%20Vivado%20-%20Post-map%20Simulation%202d05cf96e422479da1593fbac1b5be57/Untitled%205.png"/></a></figure><p id="84b0c892-7171-459c-869f-a14e26fc748f" class="">
+</p><figure id="c3880744-05f5-4408-881c-a8dfed33a886" class="image"><a href="%E8%AA%B2%E7%A8%8B%E7%B0%A1%E4%BB%8B%20-%20%E6%95%B8%E4%BD%8D%E7%B3%BB%E7%B5%B1%E8%A8%AD%E8%A8%88%E5%AF%A6%E5%8B%99%20(2023%20Spring)%2099b0e4aae697421099048b7e70025a47/end1.png"><img style="width:4538px" src="%E8%AA%B2%E7%A8%8B%E7%B0%A1%E4%BB%8B%20-%20%E6%95%B8%E4%BD%8D%E7%B3%BB%E7%B5%B1%E8%A8%AD%E8%A8%88%E5%AF%A6%E5%8B%99%20(2023%20Spring)%2099b0e4aae697421099048b7e70025a47/end1.png"/></a></figure><p id="7114eafd-f43e-485b-a345-dff3300639b8" class="">
+</p></div></article>
+<script>hljs.highlightAll();</script>
+</body></html>

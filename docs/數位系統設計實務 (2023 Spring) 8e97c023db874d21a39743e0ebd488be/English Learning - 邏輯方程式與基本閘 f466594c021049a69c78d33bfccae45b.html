@@ -1,0 +1,733 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>English Learning - 邏輯方程式與基本閘</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-translucentGray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style><link rel="stylesheet" href="dark-theme.css"><link rel="stylesheet"  target="_blank" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.0/styles/github-dark-dimmed.min.css"><script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.0/highlight.min.js"></script></head><body><article id="f466594c-0210-49a6-9c78-d33bfccae45b" class="page sans"><header><img class="page-cover-image" src="https://images.unsplash.com/photo-1541829070764-84a7d30dd3f3?ixlib=rb-4.0.3&amp;q=80&amp;fm=jpg&amp;crop=entropy&amp;cs=tinysrgb" style="object-position:center 57.010000000000005%"/><div class="page-header-icon page-header-icon-with-cover"><img class="icon" src="%E8%AA%B2%E7%A8%8B%E7%B0%A1%E4%BB%8B%20-%20%E6%95%B8%E4%BD%8D%E7%B3%BB%E7%B5%B1%E8%A8%AD%E8%A8%88%E5%AF%A6%E5%8B%99%20(2023%20Spring)%2099b0e4aae697421099048b7e70025a47/yang01.png"/></div><h1 class="page-title">English Learning - 邏輯方程式與基本閘</h1><link rel="stylesheet" href="dark-theme.css"><link rel="stylesheet"  target="_blank" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.0/styles/github-dark-dimmed.min.css"><script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.0/highlight.min.js"></script></header><div class="page-body"><h1 id="ae4ab1cd-bdbe-4ad8-b5fb-00247be5c3f6" class="">Introduction to Logical Equations and Basic Gates</h1><p id="c1ccbbe1-50c8-4763-a697-8b3fd7214874" class="">Logical equations are used to describe the behavior of digital circuits. They are composed of logic gates, which are the basic building blocks of digital circuits. There are several types of logic gates, including AND, OR, NOT, NAND, NOR, and XOR. Each gate has its own unique set of inputs and outputs, and the combination of these gates can be used to create complex circuits. Understanding the behavior of these gates is essential for designing digital circuits.</p><h2 id="9e9e13c7-cd9f-4c28-9915-ac666b12ada8" class="block-color-yellow_background">Reading Comprehension</h2><figure id="bd58b054-3ecd-4027-9e6f-86ba578caa22"><a  target="_blank" href="https://youtu.be/ojbAK-0UwcI" class="bookmark source"><div class="bookmark-info"><div class="bookmark-text"><div class="bookmark-title">Logic Equation and Basic Gates (Reading Compreheension)</div><div class="bookmark-description">English for Digital Systems Design</div></div><div class="bookmark-href"><img src="https://www.google.com/favicon.ico" class="icon bookmark-icon"/>https://youtu.be/ojbAK-0UwcI</div></div><img src="https://i.ytimg.com/vi/ojbAK-0UwcI/hqdefault.jpg" class="bookmark-image"/></a></figure><div><iframe src="https://player.soundon.fm/embed/?podcast=d5f7b15f-de14-4424-aad1-07b8f3128116&episode=3a427878-2e5a-41b4-9850-647bfb1675ef" id="soundon"></iframe></div><p id="c2498afd-5045-4115-95dd-72ade4b08d36" class="">
+</p><p id="db867d97-5953-47bb-b114-f1abc4687e1a" class="">Digital logic circuits are at the core of modern computing and communication systems. These circuits are constructed using basic gates, which are the building blocks of more complex circuits. The fundamental gates of digital logic circuits include AND, OR, NOT (inverter), NAND, NOR, XOR (Exclusive OR), and XNOR (Exclusive NOR) gates.</p><p id="c9673d22-3f97-4528-ba3d-69127fda9bc8" class="">The NOT (inverter) gate is the most basic and primary gate, as it has a single input and a single output, and its function is to invert the input signal. By combining NOT gates with other gates, any digital function can be created.</p><p id="d1b89fa6-f93f-4fa7-9201-4f9683a30c39" class="">However, the NAND gate is often considered the most fundamental gate, as it has the property of being universal. This means that any logical function can be implemented using only NAND gates. The NAND gate is a combination of an AND gate followed by a NOT gate, and its output is a logical &quot;0&quot; only if both inputs are logical &quot;1&quot;.</p><p id="3bdb2ae9-fb9a-4c28-882d-e1ccd3785093" class="">These fundamental gates are the building blocks of more complex digital circuits. They can be combined in various ways to perform a wide range of functions. For instance, AND and OR gates are used for basic logic operations, while NAND and NOR gates are used to simplify circuit design. XOR and XNOR gates are used for error detection and correction in communication systems.</p><p id="cdb12ea6-bc82-48ce-bc66-0e2367212674" class="">In conclusion, the fundamental gates of digital logic circuits are essential for modern computing and communication systems. They are the building blocks of more complex circuits, and can be combined in various ways to perform a wide range of functions. Understanding the properties and behavior of these gates is essential for anyone interested in designing and implementing digital circuits.</p><h2 id="4643d359-9ad2-49d8-91b5-47a8846b2138" class="block-color-yellow_background">Dialogue Practice</h2><figure id="b918997c-b67b-441f-9ecb-4e03c23b5c59"><a  target="_blank" href="https://youtu.be/aE-dQppqdfA" class="bookmark source"><div class="bookmark-info"><div class="bookmark-text"><div class="bookmark-title">Logic Equations and Basic Gates (Dialgoue Practice)</div><div class="bookmark-description">English for Digital Systems Design</div></div><div class="bookmark-href"><img src="https://www.google.com/favicon.ico" class="icon bookmark-icon"/>https://youtu.be/aE-dQppqdfA</div></div><img src="https://i.ytimg.com/vi/aE-dQppqdfA/hqdefault.jpg" class="bookmark-image"/></a></figure><div><iframe src="https://player.soundon.fm/embed/?podcast=d5f7b15f-de14-4424-aad1-07b8f3128116&episode=43210564-95d3-4b99-82a6-8863ca5c1ce4" id="soundon"></iframe></div><p id="eacbc30b-d76f-48de-b86e-85c18c690a15" class="">
+</p><p id="2326990f-5499-4cc3-972a-6b3a90a3bae2" class="">Carla: Hey Henry, what&#x27;s up?</p><p id="1b32d836-3e48-448c-aa25-e7e772ba8599" class="">Henry: Not much, just studying for a test on digital circuits. What about you?</p><p id="0d49416e-b0fb-431a-a044-f18b5fe461b8" class="">Carla: Same here. I&#x27;m trying to understand the different types of basic gates.</p><p id="4734b468-0947-4e37-b79e-73f86c61bdde" class="">Henry: Yeah, the fundamental gates of digital logic circuits are really important. They&#x27;re the building blocks of more complex circuits.</p><p id="9a24af31-a972-4892-97cf-ad14915c5ecb" class="">Carla: Right, I remember reading about AND, OR, NOT, NAND, NOR, XOR, and XNOR gates.</p><p id="b50f8429-2b0b-4964-840f-12069b496cbe" class="">Henry: That&#x27;s correct. And among these gates, the NOT gate is considered to be the most basic and primary.</p><p id="2a933dc3-1a1f-4f23-ad80-4218c54cd664" class="">Carla: Really? Why is that?</p><p id="c0672b3f-1ace-4d3b-b4b8-fc546e8a2821" class="">Henry: Well, the NOT gate has a single input and a single output, and its function is to invert the input signal. By using NOT gates in combination with other gates, it is possible to create any digital function.</p><p id="da0cf7f3-f1ce-412a-b351-918ae3ba9764" class="">Carla: That&#x27;s interesting. And I remember reading that the NAND gate is considered to be the most fundamental gate.</p><p id="c3051fa9-2747-478d-938e-7251daff878a" class="">Henry: Yes, that&#x27;s right. The NAND gate is a combination of an AND gate followed by a NOT gate, and it can be used to implement any digital function.</p><p id="63fe72da-d2bb-410d-97ea-e0f047538623" class="">Carla: That&#x27;s amazing. I never knew that NAND gates could be so powerful.</p><p id="d0385ab7-6337-4cc3-acd9-1b6c635ae853" class="">Henry: Definitely. These fundamental gates are the building blocks of more complex digital circuits, and they can be combined in various ways to perform a wide range of functions.</p><p id="c329d381-112d-43b4-9d47-dd72122950f3" class="">Carla: That&#x27;s so cool. I&#x27;m definitely going to remember that for my test.</p><p id="0efc3ac9-9673-4b81-b8e6-c6ef761f766f" class="">Henry: Me too. Understanding the properties and behavior of these gates is essential for anyone interested in the design and implementation of digital circuits.</p><p id="5d526aea-0e31-4aff-b98b-3293604107a8" class="">Carla: Definitely. Well, let&#x27;s get back to studying then. Good luck on the test!</p><p id="7c597c61-0f5e-48b0-9508-05e105509df9" class="">Henry: Thanks, you too!</p><h2 id="683f688d-788f-4a01-9051-865c21161466" class="block-color-yellow_background">Formative Assessment</h2><h3 id="b1894cf7-0b90-40d6-8419-a9c9b9eabd4a" class="block-color-yellow">True/Faslse Question:</h3><ol type="1" id="4b94393d-c477-4b1f-9d13-4da83cc74456" class="numbered-list" start="1"><li>The NAND gate is the most basic and primary gate in digital logic circuits.
+T/F: True</li></ol><ol type="1" id="d71564b6-32a3-4ba7-a7b2-7de611573c2d" class="numbered-list" start="2"><li>The NOT gate is a combination of an AND gate followed by a NOT gate.
+T/F: False</li></ol><ol type="1" id="3dff1a98-53e6-46a2-a473-6e8dcc56ab55" class="numbered-list" start="3"><li>The NOT gate has a single input and a single output.
+T/F: True</li></ol><ol type="1" id="2b646eee-fab7-4520-a50a-d92ab0a90f9a" class="numbered-list" start="4"><li>The NOT gate inverts the input signal.
+T/F: True</li></ol><ol type="1" id="25a174e0-af68-47d7-b4cf-ed2c14355599" class="numbered-list" start="5"><li>By using NOT gates in combination with other gates, it is possible to create any digital function.
+T/F: True</li></ol><ol type="1" id="b75a95a4-5a25-44e0-8277-9cff4874dd8d" class="numbered-list" start="6"><li>The NAND gate can only be used to implement specific digital functions.
+T/F: False</li></ol><ol type="1" id="9c4e09bf-97a8-4b54-b9ca-d6686c70f39f" class="numbered-list" start="7"><li>The fundamental gates of digital logic circuits are not important.
+T/F: False</li></ol><ol type="1" id="4e1d55c5-0b31-44a9-aa65-940fa74dbd38" class="numbered-list" start="8"><li>The AND, OR, NOT, NAND, NOR, XOR, and XNOR gates are the only basic gates in digital logic circuits.
+T/F: False</li></ol><ol type="1" id="29fd8cbb-fb0a-4e0a-ad57-a602eafdf5f1" class="numbered-list" start="9"><li>Understanding the properties and behavior of fundamental gates is not essential for anyone interested in the design and implementation of digital circuits.
+T/F: False</li></ol><ol type="1" id="6b341865-449b-42bb-a3b9-6d8f40785ee2" class="numbered-list" start="10"><li>The NAND gate is considered to be the most powerful gate.
+T/F: True</li></ol><p id="782fdb52-7b7a-4c92-9f8f-b262b129ecf3" class="">
+</p><h3 id="085bacfb-aaf5-4ac7-8a9b-c729d0ce2593" class="block-color-yellow">Multiple-choice questions:</h3><figure id="0a298c84-e0a3-4d03-b199-11f62ec605a6" class="image"><a href="data:image/svg+xml,%3csvg%20xmlns=%27http://www.w3.org/2000/svg%27%20version=%271.1%27%20width=%2730%27%20height=%2730%27/%3e"><img src="data:image/svg+xml,%3csvg%20xmlns=%27http://www.w3.org/2000/svg%27%20version=%271.1%27%20width=%2730%27%20height=%2730%27/%3e"/></a></figure><ol type="1" id="54e02184-99cc-4d31-aba5-e57bf25c04b6" class="numbered-list" start="1"><li>What is the function of the NOT gate?
+A. To invert the input signal
+B. To perform the AND operation
+C. To perform the OR operation
+D. To perform the XOR operation
+Answer: A</li></ol><ol type="1" id="097ef249-4fd4-4ba4-860f-e029b9af647e" class="numbered-list" start="2"><li>What is the most basic and primary gate in digital logic circuits?
+A. NOT gate
+B. AND gate
+C. OR gate
+D. NAND gate
+Answer: D</li></ol><ol type="1" id="de719292-43a5-4cce-a6c1-639d26563cc2" class="numbered-list" start="3"><li>Can NAND gates be used to implement any digital function?
+A. Yes
+B. No
+Answer: A</li></ol><ol type="1" id="d29e1110-ae9e-4e38-815c-25eff25c18f4" class="numbered-list" start="4"><li>What is the combination of an AND gate followed by a NOT gate?
+A. NOT gate
+B. NAND gate
+C. NOR gate
+D. XNOR gate
+Answer: B</li></ol><ol type="1" id="16bdcef8-dee1-400d-b0ee-9c9e33c0d2f3" class="numbered-list" start="5"><li>What is the number of inputs for a NOT gate?
+A. One
+B. Two
+C. Three
+D. Four
+Answer: A</li></ol><ol type="1" id="c11077de-1c2f-406b-a425-d52ab5a0b2a1" class="numbered-list" start="6"><li>What is the number of outputs for a NOT gate?
+A. One
+B. Two
+C. Three
+D. Four
+Answer: A</li></ol><ol type="1" id="1eb85f1f-c527-4ca9-b760-4f32fad17919" class="numbered-list" start="7"><li>What are the building blocks of more complex digital circuits?
+A. AND gates
+B. OR gates
+C. NOT gates
+D. Fundamental gates
+Answer: D</li></ol><ol type="1" id="3193d09d-27c4-411f-8389-e642f6f96e7b" class="numbered-list" start="8"><li>What is considered to be the most powerful gate?
+A. NOT gate
+B. AND gate
+C. NAND gate
+D. XOR gate
+Answer: C</li></ol><ol type="1" id="496d0802-3082-4d2b-b42b-f92fe520b580" class="numbered-list" start="9"><li>Is understanding the properties and behavior of fundamental gates essential for anyone interested in the design and implementation of digital circuits?
+A. Yes
+B. No
+Answer: A</li></ol><ol type="1" id="31b5ad28-724b-4b15-9711-c39fb2a38525" class="numbered-list" start="10"><li>What are the fundamental gates of digital logic circuits?
+A. AND, OR, NOT
+B. AND, OR, NOT, NAND, NOR, XOR, and XNOR
+C. NOT, NAND, NOR
+D. XOR, XNOR
+Answer: B</li></ol><p id="ea68e952-e259-472a-9e35-d013b679cb3e" class="">
+</p><p id="cc60db36-ae6c-47bf-9223-f9cbf66cb176" class="">
+</p><figure id="768f721d-e2b0-4633-9a09-43ffc651f051" class="image"><a href="%E8%AA%B2%E7%A8%8B%E7%B0%A1%E4%BB%8B%20-%20%E6%95%B8%E4%BD%8D%E7%B3%BB%E7%B5%B1%E8%A8%AD%E8%A8%88%E5%AF%A6%E5%8B%99%20(2023%20Spring)%2099b0e4aae697421099048b7e70025a47/end1.png"><img style="width:4538px" src="%E8%AA%B2%E7%A8%8B%E7%B0%A1%E4%BB%8B%20-%20%E6%95%B8%E4%BD%8D%E7%B3%BB%E7%B5%B1%E8%A8%AD%E8%A8%88%E5%AF%A6%E5%8B%99%20(2023%20Spring)%2099b0e4aae697421099048b7e70025a47/end1.png"/></a></figure><p id="73fe37de-c3a0-422f-8150-3f9c114fe23b" class="">
+</p></div></article>
+<script>hljs.highlightAll();</script>
+</body></html>

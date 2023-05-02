@@ -1,0 +1,696 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>課程簡介 - 數位系統設計實務 (2023 Spring)</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-translucentGray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style><link rel="stylesheet" href="dark-theme.css"><link rel="stylesheet"  target="_blank" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.0/styles/github-dark-dimmed.min.css"><script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.0/highlight.min.js"></script></head><body><article id="99b0e4aa-e697-4210-9904-8b7e70025a47" class="page sans"><header><img class="page-cover-image" src="https://images.unsplash.com/photo-1541829070764-84a7d30dd3f3?ixlib=rb-4.0.3&amp;q=80&amp;fm=jpg&amp;crop=entropy&amp;cs=tinysrgb" style="object-position:center 57.010000000000005%"/><div class="page-header-icon page-header-icon-with-cover"><img class="icon" src="%E8%AA%B2%E7%A8%8B%E7%B0%A1%E4%BB%8B%20-%20%E6%95%B8%E4%BD%8D%E7%B3%BB%E7%B5%B1%E8%A8%AD%E8%A8%88%E5%AF%A6%E5%8B%99%20(2023%20Spring)%2099b0e4aae697421099048b7e70025a47/yang01.png"/></div><h1 class="page-title">課程簡介 - 數位系統設計實務 (2023 Spring)</h1><link rel="stylesheet" href="dark-theme.css"><link rel="stylesheet"  target="_blank" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.0/styles/github-dark-dimmed.min.css"><script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.0/highlight.min.js"></script></header><div class="page-body"><h3 id="e47655cb-2656-4e0f-a2e6-2e871704ec68" class="block-color-yellow_background">課程說明</h3><p id="66a261a0-2977-4bcf-8e11-b056294ce4be" class="">「數位系統設計實務」是一門以可程式化邏輯閘陣列 (FPGA) 為平台的數位系統設計課程，將涵蓋以下主題：<div class="indented"><ol type="1" id="f5090638-74cc-493b-a02f-7ac8b0538d10" class="numbered-list" start="1"><li>基礎邏輯元件：了解數位系統的基礎構建邏輯閘(Logic gates)，以及它們在 FPGA 中的實現。</li></ol><ol type="1" id="3fdebcd1-d3f8-4b06-b09e-9496419c5473" class="numbered-list" start="2"><li>組合邏輯(Combinaltional logics)：設計和實現具有組合邏輯的數位系統，包括使用多工器 (mux)、編碼器、和解碼器。</li></ol><ol type="1" id="b329e215-cf68-47aa-96a5-9d0d5c79639e" class="numbered-list" start="3"><li>算術運算元件(Computational components)：設計和實現算數元件，例如加法器、減法器和乘法器。</li></ol><ol type="1" id="45340371-eac2-440b-ac1d-de26e962db2e" class="numbered-list" start="4"><li>記憶體元件(Memory components)：了解和使用鎖存器、翻轉邏輯和寄存器在數位系統設計中。</li></ol><ol type="1" id="0dec69db-c1c2-461f-a74b-88d28766e69f" class="numbered-list" start="5"><li>序向邏輯(Sequential logics)和有限狀態機 (FSM)：使用 FPGA 設計和實現序向邏輯系統。</li></ol><ol type="1" id="fcd6cb72-871e-4628-8995-1c7147760a65" class="numbered-list" start="6"><li>期末微型專題(Final project)：課程將以微型專題作為課程學習總結，學生將實現一個 4 位元資料寬度的小型串列外設介面 (SPI) 元件。</li></ol></div></p><p id="43f57245-69b0-4bd9-8a85-8c40f1ab884b" class="">課程將提供實際操作、設計、及測試體驗，讓學生利用 FPGA 學習數位系統設計的實用技能。</p><figure id="94353570-e0aa-4ad4-8ced-86c3c9a70d52" class="image"><a href="data:image/svg+xml,%3csvg%20xmlns=%27http://www.w3.org/2000/svg%27%20version=%271.1%27%20width=%2730%27%20height=%2730%27/%3e"><img src="data:image/svg+xml,%3csvg%20xmlns=%27http://www.w3.org/2000/svg%27%20version=%271.1%27%20width=%2730%27%20height=%2730%27/%3e"/></a></figure><h3 id="55545f4c-2383-4334-afc8-859db08696af" class="block-color-yellow_background">Course Description</h3><p id="f6a77550-f933-4977-83ea-d451579f26a1" class="">&quot;Practical Digital Systems Design” is a course that covers the fundamentals of digital systems design, with a focus on the use of Field Programmable Gate Arrays (FPGAs) as a platform for implementation. The course will cover the following topics:</p><ol type="1" id="7286aee0-fff2-43ac-8bd9-68fc7a186959" class="numbered-list" start="1"><li>Basic Logic Gates: Understanding the basic building blocks of digital systems and their implementation in FPGA.</li></ol><ol type="1" id="66b39e22-fcc4-45a2-8010-920f52818b6e" class="numbered-list" start="2"><li>Combinational logics: Design and implementation of digital systems with combinational logic, including the use of multiplexers (mux), encoders, and decoders.</li></ol><ol type="1" id="67a321d4-b0c5-4cb8-a144-73d15745acdb" class="numbered-list" start="3"><li>Computational components: Design and implementation of arithmetic components such as adders, subtractors, and multipliers.</li></ol><ol type="1" id="6265eb23-6e27-4c87-a5de-96e381c4f49b" class="numbered-list" start="4"><li>Memory components: Understanding and using latches, flip-flops, and registers in digital systems design.</li></ol><ol type="1" id="b3a368a5-b100-48ad-92fb-6b716177714e" class="numbered-list" start="5"><li>Sequential logics and Finite State Machines (FSMs): Design and implementation of sequential systems with FPGAs.</li></ol><ol type="1" id="f7d9d662-5ace-4e6f-a247-d87836cc7784" class="numbered-list" start="6"><li>Final project: The course will conclude with a final project in which students will implement a tiny Serial Peripheral Interface (SPI) component with 4-bit data width.</li></ol><p id="f683e0cc-73e7-410f-a41d-867a0df5f38d" class="">The course will offer hands-on experience with industry-standard design tools, enabling students to acquire practical skills in digital systems design and testing using FPGAs.</p><h3 id="c722591c-0e7f-4a1d-8b49-02666f24c5fd" class="block-color-yellow_background">上課規範 / 評分規則</h3><ul id="3c47e4dd-c80b-4b5b-ba67-e0ae184b5b38" class="bulleted-list"><li style="list-style-type:disc">第一堂課鐘響 <strong><mark class="highlight-red">20分鐘後</mark></strong>，不定時使用 Zuvio 線上快速簽到(點名)。<ul id="18e52047-4318-4e73-aced-85e977a7b138" class="bulleted-list"><li style="list-style-type:circle">缺曠只會影響你的出缺席紀錄，<mark class="highlight-red"><strong>與學習成績並無直接關聯</strong></mark>。</li></ul><ul id="3d2f5450-7b26-4639-a277-b6183d099bd7" class="bulleted-list"><li style="list-style-type:circle">幫他人「代簽」、「遠距簽名」視為嚴重「違背誠信」，<mark class="highlight-red"><strong>扣【學期總成績】5分。</strong></mark></li></ul></li></ul><ul id="853371e5-b90b-4c74-bc1d-d6d2adee3146" class="bulleted-list"><li style="list-style-type:disc"><strong><mark class="highlight-yellow">上課期間「干擾」0容忍!</mark></strong><ul id="0f2f3229-c188-4b71-af04-ef5cb90ed60c" class="bulleted-list"><li style="list-style-type:circle">課堂上嚴禁做其他「與本課程無關」之事務，例如：寫作業、看影片、上網閒逛、...等等。</li></ul><ul id="3657ddcf-b6a7-4777-b13e-c4d7a24ff0b2" class="bulleted-list"><li style="list-style-type:circle"><mark class="highlight-red"><strong>罰則：第一次「口頭警告」，再犯每次「扣平時【總成績】5分」。</strong></mark></li></ul></li></ul><ul id="faf0f587-222e-4058-902d-18140546967c" class="bulleted-list"><li style="list-style-type:disc">評分規則<ul id="8bdab4bb-7ebc-4f0d-8044-b9938e347175" class="bulleted-list"><li style="list-style-type:circle"><strong><mark class="highlight-red">平時成績 (40%)</mark></strong> - 課堂練習、回家作業、 課堂形成性評量 (Zuvio)。</li></ul><ul id="eca2618c-4705-4387-98d5-41f7227b6fab" class="bulleted-list"><li style="list-style-type:circle"><strong><mark class="highlight-red">期中成績 (20%)</mark></strong> - 上機實作考試 。 </li></ul><ul id="686ca569-45c5-4265-b443-51e652374a15" class="bulleted-list"><li style="list-style-type:circle"><strong><mark class="highlight-red">期末成績 (40%)</mark></strong> - 期末微型專題/上機實作考試 。 (<strong><mark class="highlight-orange">多元評量，擇一完成</mark></strong>)</li></ul></li></ul><h3 id="2fc765fb-7530-477b-9050-463b7df35679" class="block-color-yellow_background">各週課程進度 (授課期間會彈性調整)</h3><table id="632d4769-8aea-46a3-bd4c-9b89c6e326ac" class="simple-table"><tbody><tr id="2eabcc53-7621-49b6-b322-46227517361e"><td id="SCmO" class="">週次</td><td id="qwKo" class="" style="width:321.6449890136719px">課程主題</td><td id="EXxv" class="" style="width:579px">內容說明</td></tr><tr id="18cc7d1a-1334-43b3-a792-0825d59e6dc1"><td id="SCmO" class="">1</td><td id="qwKo" class="" style="width:321.6449890136719px">課程簡介</td><td id="EXxv" class="" style="width:579px">§  課程內容/授課方式說明
+§  基礎背景知識形成性評量
+§  近代數位系統設計概述</td></tr><tr id="5bf7616c-755f-4ede-8883-46ffb61c382f"><td id="SCmO" class="">2</td><td id="qwKo" class="" style="width:321.6449890136719px">數位系統和FPGA介紹</td><td id="EXxv" class="" style="width:579px">§  數位系統和FPGA技術概述
+§  開發工具Xilinx Vivado Suite</td></tr><tr id="baf41381-854b-4242-bc94-5a08850eca56"><td id="SCmO" class="">3</td><td id="qwKo" class="" style="width:321.6449890136719px">基礎邏輯元件 
+(Primary Gates)</td><td id="EXxv" class="" style="width:579px">§  了解數位系統的基本元件
+§  在FPGA中實現AND，OR，NOT，XOR
+§  布林代數和組合電路簡化與實現</td></tr><tr id="0ca16817-c6c1-44ea-89e4-77ff0b790423"><td id="SCmO" class="">4 ~ 5</td><td id="qwKo" class="" style="width:321.6449890136719px">組合邏輯
+(Combinational Logics)</td><td id="EXxv" class="" style="width:579px">§  使用多工器（MUX）、編碼器、和解碼器設計組合邏輯電路
+§  在FPGA中實現組合邏輯電路
+§  測試(Testing)組合邏輯電路</td></tr><tr id="ad2bdab3-be64-4bdb-a31d-725290468b61"><td id="SCmO" class="">6 ~ 8</td><td id="qwKo" class="" style="width:321.6449890136719px">算術元件
+(Arithmetic Components)</td><td id="EXxv" class="" style="width:579px">§  設計和實現算術元件：加法器、減法器、和乘法器
+§  優化加/減法器電路</td></tr><tr id="f36bd56a-c15d-4302-b122-62e43465b21b"><td id="SCmO" class="">9</td><td id="qwKo" class="" style="width:321.6449890136719px">期中測驗</td><td id="EXxv" class="" style="width:579px">§  實作上機考試</td></tr><tr id="2a60a0cd-1130-4208-b55c-766f91386e37"><td id="SCmO" class="">10 ~ 12</td><td id="qwKo" class="" style="width:321.6449890136719px">記憶元件
+(Memory Components)</td><td id="EXxv" class="" style="width:579px">§  了解和使用鎖存器(Latch)、正反器(Flip-flop)、和暫存器(Register)
+§  在FPGAs設計和實現同步/非同步記憶元件
+§  了解時序限制(Timing constraints)與記憶元件的同步化(Synchronization)</td></tr><tr id="d9fd0aa2-92aa-46e5-b690-75eb2cc5e71a"><td id="SCmO" class="">13 ~ 15</td><td id="qwKo" class="" style="width:321.6449890136719px">序向邏輯和有限狀態機
+(Sequential Logics and FSMs)</td><td id="EXxv" class="" style="width:579px">§  設計/實現序向邏輯(Sequential Logics)電路和有限狀態機（FSM）
+§  了解FSM設計原則和實現方法
+§  在FPGA中實現有限狀態機
+§  在FPGA中測試序向邏輯電路</td></tr><tr id="008b8d9c-4a8d-49b7-8053-c555da0372b1"><td id="SCmO" class="">16 ~ 17</td><td id="qwKo" class="" style="width:321.6449890136719px">微型專題討論
+(Project Discussion)</td><td id="EXxv" class="" style="width:579px">§  設計/實現 4-bit SPI 介面元件
+§  專題報告書：包括需求分析、系統設計說明
+§  硬體實作：HDL程式碼和測試結果</td></tr><tr id="3efac7a7-38b6-4751-867f-d1233e5a8445"><td id="SCmO" class="">18</td><td id="qwKo" class="" style="width:321.6449890136719px">多元期末測驗
+(二擇一)</td><td id="EXxv" class="" style="width:579px">§  上機實作考試。
+§  微型專題「實體」展示。</td></tr></tbody></table><p id="c8d0823d-53dd-492b-90f4-61c282ce7991" class="">
+</p><figure id="46695532-5b78-47b7-9a05-7c2ff4717a2c" class="image"><a href="%E8%AA%B2%E7%A8%8B%E7%B0%A1%E4%BB%8B%20-%20%E6%95%B8%E4%BD%8D%E7%B3%BB%E7%B5%B1%E8%A8%AD%E8%A8%88%E5%AF%A6%E5%8B%99%20(2023%20Spring)%2099b0e4aae697421099048b7e70025a47/end1.png"><img style="width:4538px" src="%E8%AA%B2%E7%A8%8B%E7%B0%A1%E4%BB%8B%20-%20%E6%95%B8%E4%BD%8D%E7%B3%BB%E7%B5%B1%E8%A8%AD%E8%A8%88%E5%AF%A6%E5%8B%99%20(2023%20Spring)%2099b0e4aae697421099048b7e70025a47/end1.png"/></a></figure><p id="2fc7362a-ca27-422e-9ae1-17f29b14e324" class="">
+</p></div></article>
+<script>hljs.highlightAll();</script>
+</body></html>

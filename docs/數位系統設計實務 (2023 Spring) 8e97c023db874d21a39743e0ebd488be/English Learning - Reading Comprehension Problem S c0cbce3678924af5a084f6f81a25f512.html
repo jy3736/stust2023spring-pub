@@ -1,0 +1,854 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>English Learning - Reading Comprehension Problem Sets</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-translucentGray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style><link rel="stylesheet" href="dark-theme.css"><link rel="stylesheet"  target="_blank" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.0/styles/github-dark-dimmed.min.css"><script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.0/highlight.min.js"></script></head><body><article id="c0cbce36-7892-4af5-a084-f6f81a25f512" class="page sans"><header><img class="page-cover-image" src="https://images.unsplash.com/photo-1541829070764-84a7d30dd3f3?ixlib=rb-4.0.3&amp;q=80&amp;fm=jpg&amp;crop=entropy&amp;cs=tinysrgb" style="object-position:center 57.010000000000005%"/><div class="page-header-icon page-header-icon-with-cover"><img class="icon" src="%E8%AA%B2%E7%A8%8B%E7%B0%A1%E4%BB%8B%20-%20%E6%95%B8%E4%BD%8D%E7%B3%BB%E7%B5%B1%E8%A8%AD%E8%A8%88%E5%AF%A6%E5%8B%99%20(2023%20Spring)%2099b0e4aae697421099048b7e70025a47/yang01.png"/></div><h1 class="page-title">English Learning - Reading Comprehension Problem Sets</h1><link rel="stylesheet" href="dark-theme.css"><link rel="stylesheet"  target="_blank" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.0/styles/github-dark-dimmed.min.css"><script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.0/highlight.min.js"></script></header><div class="page-body"><h2 id="a51dc64d-60c0-415d-9b4e-f804c9e37c15" class="block-color-yellow_background">Reading Comprehension Problem Set 1</h2><h3 id="73f6172c-1605-4056-86d6-515a20603ff0" class=""><mark class="highlight-yellow"><a  target="_blank" href="https://jy3736.github.io/digisys-2023s-pub/digisys-eng01-dark-soundon.html">Read the full text here</a></mark></h3><ol type="1" id="498e0ba5-14fa-4891-98d3-91bfec223716" class="numbered-list" start="1"><li>What is a digital system?<p id="bc6dbae1-1128-4fa6-a44b-718628b2ed44" class="">A. A system that operates with analog signals
+B. A system that operates with digital signals
+C. A system that operates with both analog and digital signals
+D. A system that does not use signals</p><p id="d6d7be41-284d-4d1e-9704-da8a355449d0" class="">Answer: B</p></li></ol><ol type="1" id="9f392f3e-b879-4960-a8e8-9d1207b1a199" class="numbered-list" start="2"><li>In which fields are digital systems gaining widespread usage?<p id="6de060fc-4f9a-4be2-bd7c-6f41721fdd21" class="">A. Agriculture and construction
+B. Computing, telecommunications, and control systems
+C. Healthcare and hospitality
+D. Law and finance</p><p id="5994219b-9634-4a9c-ac8a-1b31564245c1" class="">Answer: B</p></li></ol><ol type="1" id="bdd4f8fa-bd07-4288-a52b-48c230222373" class="numbered-list" start="3"><li>What are FPGAs?<p id="ebe74942-f566-4de0-9d61-68c5af8e4214" class="">A. A type of analog system
+B. A type of digital system that cannot be programmed after manufacturing
+C. A type of digital system that can be programmed after manufacturing
+D. A type of mechanical system</p><p id="84171a37-e0ec-4e07-aae8-985fbcd1f538" class="">Answer: C</p></li></ol><ol type="1" id="2c6c99d6-ccd6-4808-99dc-955d0dfb41cf" class="numbered-list" start="4"><li>Why are FPGAs an appealing choice for applications requiring customization and versatility?<p id="01b517b5-07ab-4fbd-93f0-6c4ed76ceab7" class="">A. They are analog systems
+B. They are difficult to program
+C. They can be programmed after manufacturing to execute specific tasks
+D. They cannot be reconfigured at any time</p><p id="1a067bd3-bbae-47d6-b633-f75443e81f60" class="">Answer: C</p></li></ol><ol type="1" id="e2e37d6a-a0d8-4384-98f5-3b3dc6539b4e" class="numbered-list" start="5"><li>What is one major advantage of FPGAs over traditional integrated circuits?<p id="aacd88b9-d284-4803-a1b8-390dd58f61ee" class="">A. They are less flexible
+B. They cannot be reconfigured
+C. They are designed for a particular function
+D. They can be reconfigured at any time</p><p id="972eb2b6-baab-42b0-a30a-cbb4e9be4389" class="">Answer: D</p></li></ol><ol type="1" id="6f411dfb-a059-4d8b-b857-c19651f3028f" class="numbered-list" start="6"><li>How does the flexibility of FPGAs differ from that of traditional circuits?<p id="c8b65068-7a07-4615-8809-1746f46c2392" class="">A. FPGAs are more rigid
+B. FPGAs are less rigid
+C. FPGAs and traditional circuits are equally flexible
+D. FPGAs cannot be customized</p><p id="442f797f-d9c4-42d4-8fc1-181bf3c7217c" class="">Answer: B</p></li></ol><ol type="1" id="821fec0b-5552-47ca-8068-17e58c9bf64c" class="numbered-list" start="7"><li>Why do FPGAs offer high performance?<p id="7e079702-f6de-4f9f-9f8c-ed1953a1a7ca" class="">A. Because they are large
+B. Because they are analog systems
+C. Because the logic blocks within an FPGA can be programmed to perform specific tasks simultaneously
+D. Because they are slower than traditional integrated circuits</p><p id="e17fc8b1-3387-4d77-a026-5237bb4f0a65" class="">Answer: C</p></li></ol><ol type="1" id="18259344-27b7-436d-8a13-cfbdd33b8ba4" class="numbered-list" start="8"><li>What are the potential applications for FPGAs?<p id="7a901925-e4f7-440e-b505-9bbe063e3f9d" class="">A. Agriculture and construction
+B. Digital signal processing, image processing, and networking
+C. Healthcare and hospitality
+D. Law and finance</p><p id="b6556755-e88a-4601-bad2-1f9c413144e8" class="">Answer: B</p></li></ol><ol type="1" id="d73612b8-5490-4e2d-8d87-4f29959211a9" class="numbered-list" start="9"><li>Why are digital systems becoming crucial in a diverse array of applications?<p id="fca407a7-5440-4249-85a7-159f5fcd5b5a" class="">A. Because they are less accurate and reliable than analog systems
+B. Because they are more difficult to program than analog systems
+C. Because they are cheaper than analog systems
+D. Because they are accurate, reliable, and easy to program and reconfigure</p><p id="ffac5d86-e23a-4060-b9c7-ed89573cfd07" class="">Answer: D</p></li></ol><ol type="1" id="311c6399-17a0-414a-af5d-ff293f4e0c60" class="numbered-list" start="10"><li>What is the benefit of FPGAs for applications requiring customization and versatility?<p id="d50b0e60-b531-43d3-b7b1-07513f30e291" class="">A. They are more expensive than traditional integrated circuits
+B. They cannot be reconfigured after manufacturing
+C. They can be reconfigured at any time, offering the possibility of adapting the circuit without having to replace it entirely
+D. They are less flexible than traditional circuits</p><p id="781382bd-c062-4d91-9ea4-177caf00d5e3" class="">Answer: C</p></li></ol><p id="d02e1af9-2be0-4ce0-8dc3-df11345ec21d" class="">
+</p><h2 id="08ccc84c-e76c-4743-9fa3-d844cf516bf6" class="block-color-yellow_background">Reading Comprehension Problem Set 2</h2><h3 id="1070bc78-18d9-489e-8ce9-3935f38413fc" class=""><a  target="_blank" href="https://jy3736.github.io/digisys-2023s-pub/digisys-eng02-dark-soundon.html"><mark class="highlight-yellow">Read the full text here</mark></a></h3><ol type="1" id="6633377d-dfb1-4e12-9efd-182943ea33ca" class="numbered-list" start="1"><li>What are logical equations used for? <p id="bef18be7-cf7f-4b3d-b62e-fa66a936be9a" class="">A) To describe the behavior of analog circuits
+B) To describe the behavior of digital circuits
+C) To describe the behavior of both analog and digital circuits
+D) To describe the behavior of mechanical systems</p><p id="12618cff-bceb-471c-96e6-8a0d1cfeb543" class="">Answer: B</p></li></ol><ol type="1" id="c2c7009e-6043-4438-beea-99de8013c731" class="numbered-list" start="2"><li>What are logic gates?
+A) The basic building blocks of analog circuits
+B) The basic building blocks of digital circuits
+C) The basic building blocks of both analog and digital circuits
+D) The basic building blocks of mechanical systems<p id="fa4644e0-3e71-4edd-ad4e-3a218bfa3d26" class="">Answer: B</p></li></ol><ol type="1" id="ab5e7a82-b043-4ec6-b155-7dcda168df99" class="numbered-list" start="3"><li>How many different kinds of logic gates are mentioned in the text?
+A) Two
+B) Three
+C) Six
+D) Seven<p id="ec28f0ce-55f0-4f40-bf8a-2e3831ef48fd" class="">Answer: D</p></li></ol><ol type="1" id="228eebfc-a2af-4873-a24c-5a8a4cc8bfcd" class="numbered-list" start="4"><li>What is the function of a NOT (inverter) gate?
+A) To invert the output signal
+B) To invert the input signal
+C) To amplify the input signal
+D) To generate a clock signal<p id="182cd6b4-744f-4be9-9464-b288ac38a77f" class="">Answer: B</p></li></ol><ol type="1" id="4f2411b2-7122-4942-bac9-ba2ecd05db23" class="numbered-list" start="5"><li>Which gate is often considered the most fundamental and why?
+A) OR gate, as it is used for basic logic operations
+B) NOT gate, as it is the most basic and primary gate
+C) NAND gate, as it has the property of being universal
+D) XOR gate, as it is used for error detection and correction<p id="65ea50cd-f596-4ade-971d-6054ceacbb6c" class="">Answer: C</p></li></ol><ol type="1" id="5b57ed05-9023-4e95-8b03-b1d8769e052b" class="numbered-list" start="6"><li>What does it mean for a gate to be universal?
+A) It can be used in any circuit
+B) It is the most commonly used gate
+C) It can perform any logical function
+D) It can perform complex operations<p id="ab368d4c-6c29-4d34-8e1e-e1a9485d01f6" class="">Answer: C</p></li></ol><ol type="1" id="322d966d-67ec-4066-b019-60998f890f73" class="numbered-list" start="7"><li>What are AND and OR gates used for?
+A) To simplify circuit design
+B) To perform error detection and correction
+C) For basic logic operations
+D) For digital signal processing<p id="4643e754-8563-4630-9ce9-ed4a1fffa3de" class="">Answer: C</p></li></ol><ol type="1" id="f7500164-c2a5-497d-9b62-062de6ef1789" class="numbered-list" start="8"><li>What are NAND and NOR gates used for?
+A) To simplify circuit design
+B) To perform error detection and correction
+C) For basic logic operations
+D) For digital signal processing<p id="181839b0-2a71-4957-93a1-a8d5acf5d146" class="">Answer: A</p></li></ol><ol type="1" id="617cf39f-63c2-4c4a-a585-62252657dd8b" class="numbered-list" start="9"><li>What are XOR and XNOR gates used for?
+A) To simplify circuit design
+B) To perform error detection and correction
+C) For basic logic operations
+D) For image processing<p id="ff07f8e1-c351-4f6a-a043-35ffcb5a26cc" class="">Answer: B</p></li></ol><ol type="1" id="297065b3-1d06-43f9-9265-bb3143641ab9" class="numbered-list" start="10"><li>Why is it important to understand the behavior of logic gates?
+A) To design and implement analog circuits
+B) To design and implement digital circuits
+C) To design and implement mechanical systems
+D) To design and implement chemical processes<p id="e5c09b6d-d402-45a2-9a57-35585ac80e2b" class="">Answer: B</p></li></ol><h2 id="62f0f7d4-a551-4302-b139-cd60ffe1c36f" class="block-color-yellow_background">Reading Comprehension Problem Set 3</h2><h3 id="70eee30e-74b4-448d-bde4-25cfc0e6c6e8" class=""><a  target="_blank" href="https://jy3736.github.io/digisys-2023s-pub/digisys-eng03-dark-soundon.html"><mark class="highlight-yellow">Read the full text here</mark></a></h3><ol type="1" id="ca6fbd70-f9aa-42b5-bbdc-e5b72de3dff2" class="numbered-list" start="1"><li>What are combinational logic circuits?<p id="7e152728-34d2-4cac-93d5-cfa1af786fb8" class="">A. Analog circuits that perform mathematical operations on one or more input signals to produce a single output signal
+B. Digital circuits that perform logical operations on one or more input signals to produce a single output signal
+C. Circuits that store information from previous inputs to produce a single output signal
+D. Circuits that only work with Boolean equations</p><p id="40c3eaca-8eb6-4ab0-9d29-f17f5f0f9e54" class="">Answer: B</p></li></ol><ol type="1" id="5394d423-0540-49e3-b8c9-28f81d74aaf0" class="numbered-list" start="2"><li>Why are combinational logic circuits called &quot;combinational&quot;?
+A. Their output depends on previous inputs and internal memory
+B. Their output depends on the type of input signals used
+C. Their output depends only on the current values of the input signals and not on any previous inputs or internal memory
+D. Their output is unpredictable<p id="c3b57e87-69cb-4fb6-94d7-4403636d0379" class="">Answer: C</p></li></ol><ol type="1" id="2860aa5f-8cbe-4ca8-9048-5d73e53339ff" class="numbered-list" start="3"><li>What types of circuits are examples of combinational logic circuits?<p id="12623df8-89b4-419e-b945-29c0bef5e96c" class="">A. Transistors, resistors, capacitors, and inductors
+B. Power supplies, amplifiers, and filters
+C. Adders, decoders, multiplexers, and comparators
+D. None of the above</p><p id="c7723bf4-6be3-4372-8b1f-6c1b9277c632" class="">Answer: C</p></li></ol><ol type="1" id="be82b484-25c9-4b7d-b9bb-bc387a1836ba" class="numbered-list" start="4"><li>How do truth tables help designers build effective logic circuits?
+A. By showing the output for any input combination
+B. By predicting the circuit&#x27;s output
+C. By optimizing the circuit&#x27;s performance
+D. By reducing the complexity of the circuit<p id="d8ba5d6c-9ef0-4216-9f36-b164a06323b4" class="">Answer: A</p></li></ol><ol type="1" id="c3c36b50-b64b-4e59-af13-e4b81de882e1" class="numbered-list" start="5"><li>How do Boolean equations help us analyze combinational logic circuits?
+A. By predicting the circuit&#x27;s output, optimizing it, and troubleshooting issues
+B. By analyzing the circuit&#x27;s behavior and finding redundancies
+C. By reducing the complexity of the circuit and using fewer components
+D. By documenting the design process and making necessary changes or updates at a later date<p id="ca97bae4-bdd9-4969-8cfe-ebcb8c4329d0" class="">Answer: C</p></li></ol><ol type="1" id="078aec58-558c-4ee1-abde-230fb2e797ef" class="numbered-list" start="6"><li>What is the purpose of hardware description languages (HDLs) in designing combinational logic circuits?
+A. To quickly and effectively describe the behavior of a combinational logic circuit using a high-level programming language
+B. To simulate and verify the circuit&#x27;s functionality prior to construction
+C. To identify any potential problems or errors before the construction of the circuit begins
+D. All of the above<p id="855bda2e-5afc-472d-b7e0-81f93d4093ea" class="">Answer: D</p></li></ol><ol type="1" id="08264bbb-cc6e-4019-be07-01e37bf0f384" class="numbered-list" start="7"><li>Which of the following provides a simple and inexpensive way to implement basic logic functions?
+A. 7400 or 5400 series of digital logic integrated circuits
+B. Programmable Logic Arrays (PLAs)
+C. Field Programmable Gate Arrays (FPGAs)
+D. Full-custom builds ICs<p id="a6d09490-8caf-4223-9d12-efb373d510fe" class="">Answer: A</p></li></ol><ol type="1" id="3cd0a654-358a-400c-8834-edcb381eddbc" class="numbered-list" start="8"><li>What do Programmable Logic Arrays (PLAs) and Complex Programmable Logic Devices (CPLDs) offer?<p id="5cdf33a6-ddbe-46a1-b6e5-503f9026931f" class="">A. A simple and inexpensive way to implement basic logic functions
+B. More flexibility and programmability than the 7400 or 5400 series of digital logic integrated circuits
+C. The ability to program a wide range of digital functions, including combinational logic circuits
+D. The greatest performance and efficiency</p><p id="936cc182-f541-4053-9c5c-e68edb657d5f" class="">Answer: B</p></li></ol><ol type="1" id="f7670133-3e3e-424b-ab12-ed3a6817e2fc" class="numbered-list" start="9"><li>What is the advantage of using Field Programmable Gate Arrays (FPGAs)?
+A. They provide a simple and inexpensive way to implement basic logic functions
+B. They offer more flexibility and programmability than PLAs and CPLDs
+C. They provide the greatest performance and efficiency
+D. They can be programmed to implement a wide range of digital functions, including combinational logic circuits<p id="e841cb16-febf-4253-800a-b50d00198df2" class="">Answer: D</p></li></ol><ol type="1" id="7f4bf6d9-453e-4a2e-aea6-45c9267bbc9b" class="numbered-list" start="10"><li>What is the disadvantage of full-custom builds ICs?
+A. They offer the greatest performance and efficiency
+B. They are the most complex and expensive to design and build
+C. They are simple and inexpensive to design and build
+D. They offer less flexibility and programmability than PLAs and CPLDs<p id="004601f2-e29b-44c7-ba95-8fee19fe681d" class="">Answer: B</p></li></ol><h2 id="281e9a6e-53e0-4916-9afb-a68c35758a01" class="block-color-yellow_background">Reading Comprehension Problem Set 4</h2><h3 id="dfac42f8-467e-448f-9432-e8709e9e4f86" class=""><a  target="_blank" href="https://jy3736.github.io/digisys-2023s-pub/digisys-eng04-dark-soundon.html"><mark class="highlight-yellow">Read the full text here</mark></a></h3><ol type="1" id="532b0587-0619-4cdb-8d74-46bcb08eb3f1" class="numbered-list" start="1"><li>What are Arithmetic and Logic components?
+A. Analog circuits or modules
+B. Digital circuits or modules
+C. Mechanical circuits or modules
+D. Optical circuits or modules<p id="cf5bd6cc-7d32-4587-a8a2-6eca8ed800b1" class="">Answer: B</p></li></ol><ol type="1" id="e1d7db25-d33a-4c8d-95e7-dfcbfd3fedc3" class="numbered-list" start="2"><li>What are some of the operations that Arithmetic and Logic components can perform?
+A. Addition, subtraction, multiplication, and division
+B. Only addition and subtraction
+C. Only multiplication and division
+D. Only logical operations<p id="94df0e19-26d3-44df-80fd-be915395d1a9" class="">Answer: A</p></li></ol><ol type="1" id="a3bf2eb5-4563-474c-a1c2-048f9e875a5c" class="numbered-list" start="3"><li>What is an Arithmetic Logic Unit (ALU)?
+A. A single Arithmetic component
+B. A single Logic component
+C. A combination of Arithmetic and Logic components
+D. A combination of Analog and Digital components<p id="48b38673-97da-40ba-a874-0669e9eb3db5" class="">Answer: C</p></li></ol><ol type="1" id="e64dccd2-6f57-4a6f-96eb-934d9f6c00c5" class="numbered-list" start="4"><li>Why are Arithmetic components important for processors?
+A. They enable the processor to perform various computing tasks.
+B. They are used to construct processors.
+C. They make processors more powerful.
+D. They are more efficient than Logic components.<p id="ec0c2f1a-c2c1-4c85-9125-8403aec1ada7" class="">Answer: A</p></li></ol><ol type="1" id="6d091640-08cc-4624-aeaa-655a734a22a1" class="numbered-list" start="5"><li>What is binary arithmetic?
+A. A system of representing numbers using only one value
+B. A system of representing numbers using only three values
+C. A system of representing numbers using only two values
+D. A system of representing numbers using only four values<p id="129cc6fa-ba98-490d-9a16-d4be0ceaacd6" class="">Answer: C</p></li></ol><ol type="1" id="95b01613-e8cb-44fa-9244-4af441782a51" class="numbered-list" start="6"><li>Why are arithmetic components faster than traditional decimal arithmetic?
+A. They use binary arithmetic.
+B. They are more powerful.
+C. They are designed to work efficiently with Logic components.
+D. They can perform all necessary operations for data processing.<p id="d93654b7-374a-479a-b42b-30c247c59b14" class="">Answer: A</p></li></ol><ol type="1" id="a3b26917-cf81-4042-8b5a-ecd4bc3a965f" class="numbered-list" start="7"><li>What is an ALU responsible for?
+A. Performing only arithmetic operations
+B. Performing only logical operations
+C. Performing both arithmetic and logical operations
+D. Performing only digital operations<p id="edbf1272-fd9d-4ad2-96a9-c9e03b07f84f" class="">Answer: C</p></li></ol><ol type="1" id="ef15e75c-0454-41f5-8c40-5a756d6c11e0" class="numbered-list" start="8"><li>Can arithmetic components perform all necessary operations for a processor to process data?
+A. Yes
+B. No<p id="ffa100e0-c11d-45d0-86f1-ce0bc19289b5" class="">Answer: B</p></li></ol><ol type="1" id="3e34ad7b-9c54-482e-8e78-804d517c5106" class="numbered-list" start="9"><li>What kind of devices require fast and accurate computations?
+A. Typewriters and calculators
+B. Televisions and radios
+C. Laptops and phones
+D. Refrigerators and washing machines<p id="fc2a22fd-346e-437e-9748-30bfda3f261a" class="">Answer: C</p></li></ol><ol type="1" id="ba999fda-38a7-4365-aa32-5d9096fbb386" class="numbered-list" start="10"><li>Are arithmetic components an indispensable part of any computing device?
+A. Yes
+B. No<p id="c7e17211-9efc-44d8-9e34-9a40a45bb83e" class="">Answer: A</p></li></ol><h2 id="78bcf2af-7bfd-45d7-9ee9-e5b5d3ba4ea6" class="block-color-yellow_background">Reading Comprehension Problem Set 5</h2><h3 id="3e44e566-e137-47a3-9f69-b35530afae30" class=""><a  target="_blank" href="https://jy3736.github.io/digisys-2023s-pub/digisys-eng05-dark-soundon.html"><mark class="highlight-yellow">Read the full text here</mark></a></h3><ol type="1" id="918bd1e1-278f-4f37-9726-cdf29fad5e1f" class="numbered-list" start="1"><li>What are combinational logic circuits?
+A. Circuits that perform binary arithmetic operations on two or more input signals
+B. Circuits that store data with memory and feedback loops
+C. Circuits that perform Boolean algebra on input signals and on stored data without any memory or feedback loops
+D. Circuits that perform arithmetic operations using timing and feedback loops<p id="5d3291e7-683c-464d-be39-4def2dc13db0" class="">Answer: C</p></li></ol><ol type="1" id="5393729a-7a56-4d20-a7e4-aec4c97ff030" class="numbered-list" start="2"><li>In the given Dialogue Practice, what type of logic gates are used to implement combinational logic circuits?
+A. NAND, XOR, XNOR
+B. OR, NOR, NOT
+C. AND, OR, NOT, XOR
+D. AND, NAND, OR, NOR<p id="c84d18d4-774b-488c-9999-0c60da392070" class="">Answer: C</p></li></ol><ol type="1" id="d76fa524-efb4-4a16-aa8f-19f593a41725" class="numbered-list" start="3"><li>What is the output state of combinational logic circuits based on?
+A. Memory and feedback loops
+B. Timing and feedback loops
+C. Input states only
+D. Input and output states<p id="e6847e8a-ad2f-4a0b-a070-edf2e022c27f" class="">Answer: C</p></li></ol><ol type="1" id="be9a7ce4-aef5-45d9-bd0a-bc0f9569f53c" class="numbered-list" start="4"><li>What is a multiplexer (MUX)?
+A. A circuit that performs binary arithmetic operations on two or more input signals
+B. A circuit that stores data with memory and feedback loops
+C. A circuit that selects one of several input signals and forwards it to the output based on a control signal
+D. A circuit that performs arithmetic operations using timing and feedback loops<p id="2c03c8aa-c1e8-48e2-b028-f826cf12da88" class="">Answer: C</p></li></ol><ol type="1" id="0424f5e2-20e4-48bd-889c-b8fdb7c16912" class="numbered-list" start="5"><li>Can combinational logic circuits be used to implement subtraction?
+A. Yes
+B. No<p id="b0505812-5a73-4594-9a65-59b6cf4da7cb" class="">Answer: A</p></li></ol><ol type="1" id="15b2345d-34af-4fdf-a6f9-5f95ba737443" class="numbered-list" start="6"><li>How do you design combinational logic circuits?
+A. By using truth tables, Karnaugh maps or Boolean expressions to determine the output for each possible combination of inputs
+B. By using trial and error method
+C. By randomly connecting logic gates
+D. By using timing and feedback loops to determine the output<p id="3a1a718d-657d-4685-9501-1d7ecb5768e6" class="">Answer: A</p></li></ol><ol type="1" id="41b4767d-b0c6-4848-b337-d893b139dd7c" class="numbered-list" start="7"><li>What is the function of an adder circuit?
+A. To subtract two binary numbers
+B. To add two binary numbers and produce a sum and a carry output
+C. To multiply two binary numbers
+D. To divide two binary numbers<p id="753a0a6a-7540-42ef-93e5-85360cda2036" class="">Answer: B</p></li></ol><ol type="1" id="6f9a9d0c-77b2-447a-8eec-15d1d3728184" class="numbered-list" start="8"><li>What is the function of a subtractor circuit?
+A. To add two binary numbers
+B. To subtract one binary number from another and produce a difference and a borrow output
+C. To multiply two binary numbers
+D. To divide two binary numbers<p id="5092af6c-d63c-4e3a-ac84-360301f16d54" class="">Answer: B</p></li></ol><ol type="1" id="9700b352-9dd3-4f45-9bfc-8283d1b29b76" class="numbered-list" start="9"><li>What is the role of logic gates in combinational logic circuits?
+A. To store data with memory and feedback loops
+B. To determine the output based on input states only
+C. To perform arithmetic operations using timing and feedback loops
+D. To implement the desired function by using truth tables, Karnaugh maps or Boolean expressions<p id="bf7f5786-f6c2-4a9f-8364-9f002fed4dfe" class="">Answer: D</p></li></ol><ol type="1" id="0694f98b-e264-457f-bd7b-d04f93bacf01" class="numbered-list" start="10"><li>What are some examples of complex digital systems that require combinational logic circuits?
+A. Televisions and radios
+B. Computers, calculators and microprocessors
+C. Washing machines and refrigerators
+D. Cars and bicycles<p id="f397651a-d17e-4fd2-9406-75129a56f94d" class="">Answer: B</p></li></ol><p id="d68fe800-19e9-4b9f-94ec-bc17b1f99adc" class="">
+</p><figure id="98d0320f-fdc2-43e4-aeb4-00f45a9a8019" class="image"><a href="%E8%AA%B2%E7%A8%8B%E7%B0%A1%E4%BB%8B%20-%20%E6%95%B8%E4%BD%8D%E7%B3%BB%E7%B5%B1%E8%A8%AD%E8%A8%88%E5%AF%A6%E5%8B%99%20(2023%20Spring)%2099b0e4aae697421099048b7e70025a47/end1.png"><img style="width:4538px" src="%E8%AA%B2%E7%A8%8B%E7%B0%A1%E4%BB%8B%20-%20%E6%95%B8%E4%BD%8D%E7%B3%BB%E7%B5%B1%E8%A8%AD%E8%A8%88%E5%AF%A6%E5%8B%99%20(2023%20Spring)%2099b0e4aae697421099048b7e70025a47/end1.png"/></a></figure><p id="f59b967d-a511-4af7-8bb0-1d3cf062c27f" class="">
+</p></div></article>
+<script>hljs.highlightAll();</script>
+</body></html>

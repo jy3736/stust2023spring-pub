@@ -1,0 +1,737 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>English Learning - 數位系統和 FPGA 介紹</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-translucentGray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style><link rel="stylesheet" href="dark-theme.css"><link rel="stylesheet"  target="_blank" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.0/styles/github-dark-dimmed.min.css"><script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.0/highlight.min.js"></script></head><body><article id="c1c226dd-9c0a-4302-993f-750965fcee0a" class="page sans"><header><img class="page-cover-image" src="https://images.unsplash.com/photo-1541829070764-84a7d30dd3f3?ixlib=rb-4.0.3&amp;q=80&amp;fm=jpg&amp;crop=entropy&amp;cs=tinysrgb" style="object-position:center 57.010000000000005%"/><div class="page-header-icon page-header-icon-with-cover"><img class="icon" src="%E8%AA%B2%E7%A8%8B%E7%B0%A1%E4%BB%8B%20-%20%E6%95%B8%E4%BD%8D%E7%B3%BB%E7%B5%B1%E8%A8%AD%E8%A8%88%E5%AF%A6%E5%8B%99%20(2023%20Spring)%2099b0e4aae697421099048b7e70025a47/yang01.png"/></div><h1 class="page-title">English Learning - 數位系統和 FPGA 介紹</h1><link rel="stylesheet" href="dark-theme.css"><link rel="stylesheet"  target="_blank" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.0/styles/github-dark-dimmed.min.css"><script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.0/highlight.min.js"></script></header><div class="page-body"><h1 id="ea734f4c-f2a5-448b-a413-cd18df5c0504" class="">Introduction to Digital Systems and FPGA</h1><h2 id="47195596-dffd-4bd1-ab6d-db6043f7b14e" class="block-color-yellow_background">Reading Comprehension</h2><figure id="72c1cc21-302f-437d-89a6-20bb778dfea1"><a  target="_blank" href="https://youtu.be/Tf17EcVrmog" class="bookmark source"><div class="bookmark-info"><div class="bookmark-text"><div class="bookmark-title">Digital Systems and FPGAs (Reading Comprehension)</div></div><div class="bookmark-href"><img src="https://www.google.com/favicon.ico" class="icon bookmark-icon"/>https://youtu.be/Tf17EcVrmog</div></div><img src="https://i.ytimg.com/vi/Tf17EcVrmog/hqdefault.jpg" class="bookmark-image"/></a></figure><div><iframe src="https://player.soundon.fm/embed/?podcast=d5f7b15f-de14-4424-aad1-07b8f3128116&episode=c1c7708b-b21e-4706-b567-6c2c8aeb1e18" id="soundon"></iframe></div><p id="812f0c7c-4650-4e79-8245-8528b1db2a79" class="">
+</p><p id="13a62b77-8b95-4756-9e0d-5c9ebe0c400c" class="">Digital systems, which operate with digital signals rather than analog signals, are gaining widespread usage in various fields such as computing, telecommunications, and control systems. These systems are noted for their accuracy, reliability, and ease of programming and reconfiguration.</p><p id="4ae3a698-f4ba-4031-be85-40c7c4720fa3" class="">Field-Programmable Gate Arrays (FPGAs) are a specific type of digital system that are becoming increasingly prevalent. They are integrated circuits that can be programmed after manufacturing to execute specific tasks, making them an appealing choice for applications requiring customization and versatility.</p><p id="eef5fee7-471e-45b6-8fc7-b9c021209b60" class="">One major advantage of FPGAs over traditional integrated circuits is their flexibility. Unlike traditional circuits that are designed for a particular function and cannot be altered after production, FPGAs can be reconfigured at any time, offering the possibility of adapting the circuit without having to replace it entirely.</p><p id="2e04c727-83d2-4fb6-9984-fd2faf4df281" class="">Furthermore, FPGAs offer high performance. They can be designed to perform complex tasks such as digital signal processing much faster than traditional integrated circuits. This is because the logic blocks within an FPGA can be programmed to perform specific tasks simultaneously, resulting in high performance from a relatively small number of components.</p><p id="7fc44f43-9167-41e0-bdcb-20e3d990bbc8" class="">Overall, digital systems are becoming crucial in a diverse array of applications, and FPGAs in particular are seeing growing popularity due to their adaptability, customization, and high performance. With the ability to be reconfigured at any time, FPGAs are a suitable solution for applications ranging from digital signal processing to image processing and networking.</p><h2 id="021ef42b-bb96-4737-97d0-e3b3da33e6df" class="block-color-yellow_background">Dialogue Practice</h2><figure id="148bd7b9-23d3-48dc-bc62-71a7d6d1fdec"><a  target="_blank" href="https://youtu.be/i0J9iJWB7xo" class="bookmark source"><div class="bookmark-info"><div class="bookmark-text"><div class="bookmark-title">Digital Systems and FPGAs (Dialogue Practice)</div></div><div class="bookmark-href"><img src="https://www.google.com/favicon.ico" class="icon bookmark-icon"/>https://youtu.be/i0J9iJWB7xo</div></div><img src="https://i.ytimg.com/vi/i0J9iJWB7xo/hqdefault.jpg" class="bookmark-image"/></a></figure><div><iframe src="https://player.soundon.fm/embed/?podcast=d5f7b15f-de14-4424-aad1-07b8f3128116&episode=e9a8b93d-c53e-4acb-aa02-c000a4ee4f3c" id="soundon"></iframe></div><p id="50d96ed1-1488-4054-8066-6fa99b29594a" class="">
+</p><p id="aad95e20-a5ba-4cf8-a3e2-9eedac9fd751" class="">Henry: Hey Nency, I heard you&#x27;re interested in learning about digital systems.</p><p id="9eb1cdb3-2a02-43be-9024-d80f3c2e1ce0" class="">Nancy: Yes, I am Henry. I have a lot of questions about how computers work at the hardware level.</p><p id="65f191b2-b982-41e0-a2b0-29188e49dcfa" class="">Henry: Well, you&#x27;re in luck! I have a lot of experience with digital systems and I&#x27;d be happy to share my knowledge with you. Have you heard of FPGAs before?</p><p id="85802795-02cf-419d-bd98-552c623f1ffd" class="">Nancy: No, I haven&#x27;t. What are they?</p><p id="d656d8b7-6da7-4f65-a147-4340a6fe4401" class="">Henry: FPGAs are Field-Programmable Gate Arrays. They&#x27;re integrated circuits that can be configured after manufacturing to perform specific tasks. They&#x27;re a key component in many digital systems, including computers.</p><p id="1ff01391-3fab-475a-bfb1-4878dfb14fb8" class="">Nancy: That sounds really interesting. Can you give me a bit more information about how they work?</p><p id="016ab9df-695b-427e-a470-d19bde23548a" class="">Henry: Of course! FPGAs contain an array of configurable logic blocks and programmable interconnects. These blocks can be programmed to perform specific functions, allowing for flexibility and customization in the design of digital systems.</p><p id="3ffa5483-ab5a-43cc-96ea-86363d35ebaa" class="">Nancy: Wow, that&#x27;s really cool! I would love to learn more about FPGAs and how they&#x27;re used in [00:01:00] digital systems.</p><p id="ef2b7b27-70c7-4ed3-bfa4-b5d93ff24f0c" class="">Henry: Absolutely! Let&#x27;s start by looking at the different components of a digital system and how they work together.</p><p id="879c95e2-c66a-4cb2-8968-55871bb87dc5" class="">Nancy: Sure! Can you give me an example of a digital system?</p><p id="b4dfe200-2b28-4e14-84f0-62579119bd32" class="">Henry: Sure thing! A computer is a great example of a digital system. It&#x27;s made up of several interrelated parts, including the power supply, motherboard, printed circuit boards, integrated circuits, connectors, and components.</p><p id="6b60e151-28cf-4fe9-864c-77bc7006065d" class="">Nancy: That sounds really complicated. Can you break it down a bit more?</p><p id="0096ff57-86bd-4e40-8df5-93c02adca394" class="">Henry: Of course! Let&#x27;s start with the power supply. The power supply is responsible for providing energy to all the other components in the computer. It converts electrical power from the wall socket into the appropriate voltage and current needed by the computer.</p><p id="eaa4a55a-e221-4041-a201-7a5eb2868320" class="">Nancy: Okay, I understand. What about the motherboard?</p><p id="b6a0d452-aa26-4adc-94ff-84cb66e428a6" class="">Henry: The motherboard is the main circuit board in the computer and serves as the central hub for communication between the different components. It contains integrated circuits and connectors, which allow for communication [00:02:00] between the various components.</p><p id="9859520c-320a-49aa-9c5b-b5becf199fdf" class="">Nancy: And what are printed circuit boards?</p><p id="8a644ac5-cadf-488a-a215-53e79d4a0419" class="">Henry: Printed circuit boards (PCBs) are thin sheets of insulating material with conductive pathways etched onto them. They are used to hold and connect the various components in the computer, including the integrated circuits.</p><p id="b239b9be-978d-4e29-81b4-3beb540b0a58" class="">Nancy: And what about the integrated circuits?</p><p id="4508e5ef-6eb3-49de-a01a-d9782b4a448c" class="">Henry: Integrated circuits, commonly referred to as chips, are tiny microchips that contain multiple transistors and other components. They perform specific functions within the computer and can range from simple logic circuits to complex processors.</p><p id="88051720-182e-4340-b5c9-9653f8119bcd" class="">Nancy: That&#x27;s really interesting! And what are connectors used for?</p><p id="bb9ddb25-34fa-4685-a0e6-3cd6476b27f6" class="">Henry: Connectors are used to physically connect different components of the computer to each other. They can be simple pins or more complex interfaces, such as USB or Ethernet connectors.</p><p id="13e6ed9a-2690-44c5-9e3b-878f06ca2a76" class="">Nancy: And finally, what are components?</p><p id="d007aa91-fc3e-4e47-bf27-dc63f5ecc452" class="">Henry: Components, such as hard drives, memory modules, and video cards, are the parts of the computer that perform specific [00:03:00] functions. They are connected to the motherboard and communicate with each other through the connectors and integrated circuits.</p><p id="924312c9-c60b-404c-bb56-06e50f02261f" class="">Nancy: Wow, that&#x27;s a lot of information to process! I&#x27;m so glad I asked you about digital systems and FPGAs.</p><p id="f02c7bb3-f631-491d-8fe2-c48ec417a067" class="">Henry: No problem, Nency! I&#x27;m always here to help with any questions you have.</p><h2 id="5ecb6096-0d00-4262-8dd1-144956998334" class="block-color-yellow_background">Terminology &amp; Vocabulary Words</h2><figure id="fe582df2-e735-4c39-9845-b9219dacd98e"><a  target="_blank" href="https://youtu.be/4bGuHSik3us" class="bookmark source"><div class="bookmark-info"><div class="bookmark-text"><div class="bookmark-title">Digital Systems and FPGA (Terminology and Vocabulary)</div></div><div class="bookmark-href"><img src="https://www.google.com/favicon.ico" class="icon bookmark-icon"/>https://youtu.be/4bGuHSik3us</div></div><img src="https://i.ytimg.com/vi/4bGuHSik3us/hqdefault.jpg" class="bookmark-image"/></a></figure><div><iframe src="https://player.soundon.fm/embed/?podcast=d5f7b15f-de14-4424-aad1-07b8f3128116&episode=ed5321a9-7ca5-45b0-8b31-8fdcbb3eee35" id="soundon"></iframe></div><p id="b0b8b3aa-ff0f-4408-8c02-0e8aafd254d9" class="">
+</p><ol type="1" id="ae9689a2-5937-4268-b850-8aed9e03e889" class="numbered-list" start="1"><li>Digital
+Adjective (數位)
+Relating to or using signals or information represented by discrete values (digits) of a physical quantity such as electrical voltage or magnetic polarization</li></ol><ol type="1" id="61f064ce-bb19-435e-ba61-6d10a4b7c63e" class="numbered-list" start="2"><li>System
+Noun (系統)
+A set of things working together as parts of a mechanism or an interconnecting network</li></ol><ol type="1" id="23a884b0-e506-4d9c-9986-17ca504ded07" class="numbered-list" start="3"><li>Signal
+Noun (信號)
+A physical quantity, such as an electric current, light wave, or sound wave, that conveys information or represents a message</li></ol><ol type="1" id="82c6ba65-6310-4f0c-af9d-af9fb3158cb0" class="numbered-list" start="4"><li>Information
+Noun (資訊)
+Facts, data, or knowledge about something or someone</li></ol><ol type="1" id="83d2c63d-a985-400b-8e6f-33e997ffc8d9" class="numbered-list" start="5"><li>Processor
+Noun (處理器)
+A computer component that executes instructions of a computer program, performing arithmetic, logic, and input/output operations</li></ol><ol type="1" id="b523696b-41ae-411a-89c9-d4dd9bd9c94f" class="numbered-list" start="6"><li>Circuit
+Noun (電路)
+A complete path for an electric current, including the source of current, the load it drives, and the physical components and conductors that connect them</li></ol><ol type="1" id="8e2ed0e9-8928-4521-8f97-8e438b0e5a8f" class="numbered-list" start="7"><li>Circuit Board
+Noun (電路板)
+A thin board made of a non-conductive material, such as plastic or fiberglass, with conductive pathways printed or etched on its surface to connect electronic components</li></ol><ol type="1" id="32113281-1e36-4cc3-9c66-5b97f997588b" class="numbered-list" start="8"><li>Integrated Circuit
+Noun (積體電路)
+A type of electronic circuit, made of a thin slice of semiconducting material, that contains multiple interconnected transistors, diodes, resistors, and capacitors</li></ol><ol type="1" id="07880767-d58f-4f31-b390-ffcf873f35ca" class="numbered-list" start="9"><li>Input
+Noun (輸入)
+Data or signals that are fed into a system or device</li></ol><ol type="1" id="51a5860f-5035-4057-a45a-fca31252c8b1" class="numbered-list" start="10"><li>Output
+Noun (輸出)
+Data or signals that are produced by a system or device</li></ol><ol type="1" id="e8fd272d-a748-4d79-bc2d-9457899d8bd1" class="numbered-list" start="11"><li>Connector
+Noun (連接器)
+A device or piece of equipment used to connect two things, such as two electrical circuits or two computer peripherals</li></ol><ol type="1" id="65a5e10a-b829-4733-b2ad-d8ea162afc28" class="numbered-list" start="12"><li>Component
+Noun (元件)
+A part or element of a larger system or device</li></ol><ol type="1" id="07e8378a-b5b8-412d-9627-68aeaebc52df" class="numbered-list" start="13"><li>Software
+Noun (軟體)
+Computer programs and related data that provide the instructions for telling a computer what to do and how to do it</li></ol><ol type="1" id="b1f3226f-dd01-413c-8f28-2ea4ec2703af" class="numbered-list" start="14"><li>Algorithm
+Noun (演算法)
+A set of well-defined rules for solving a problem in a finite number of steps, used to find a solution or produce a desired outcome</li></ol><ol type="1" id="d7502c00-c637-4bdc-9f8e-a6c7ea81bfde" class="numbered-list" start="15"><li>Data
+Noun (資料)
+Information, especially numerical or scientific information, recorded or stored for analysis or reference.</li></ol><p id="da11b002-d781-4953-9c31-2dba5066afad" class="">
+</p><h2 id="13353b00-0759-4085-a0c5-f7a58cbdeb7a" class="block-color-yellow_background">Reading Comprehension Problems</h2><ol type="1" id="90a1cac0-6075-43b0-9388-e2ebeb0e20aa" class="numbered-list" start="1"><li>What is a digital system?<p id="f2b8c683-2d5d-4d8c-a4b1-dd43374f82f7" class="">A. A system that operates with analog signals
+B. A system that operates with digital signals
+C. A system that operates with both analog and digital signals
+D. A system that does not use signals</p><p id="c5e79a98-11d6-4edf-9e60-228af7e1fbbb" class="">Answer: B</p></li></ol><ol type="1" id="530bdb70-6f5e-441d-a1bb-282767a2f866" class="numbered-list" start="2"><li>In which fields are digital systems gaining widespread usage?<p id="2048bc88-3f6d-476d-a45d-0d9d910c9ef6" class="">A. Agriculture and construction
+B. Computing, telecommunications, and control systems
+C. Healthcare and hospitality
+D. Law and finance</p><p id="bd0f6e08-45e7-45b4-9c8a-75e26c5b44a2" class="">Answer: B</p></li></ol><ol type="1" id="8d5c74e0-85c6-443a-acd1-776866cb7d15" class="numbered-list" start="3"><li>What are FPGAs?<p id="4f68d357-3ba6-43a1-9021-d4e94a5d71b8" class="">A. A type of analog system
+B. A type of digital system that cannot be programmed after manufacturing
+C. A type of digital system that can be programmed after manufacturing
+D. A type of mechanical system</p><p id="48d1968e-73c3-4f60-9399-ed144f73421c" class="">Answer: C</p></li></ol><ol type="1" id="a0a3d7f2-afb0-4fca-a711-f6ece199f71e" class="numbered-list" start="4"><li>Why are FPGAs an appealing choice for applications requiring customization and versatility?<p id="e2959750-5aa2-4bc7-adee-5ae18099fc8b" class="">A. They are analog systems
+B. They are difficult to program
+C. They can be programmed after manufacturing to execute specific tasks
+D. They cannot be reconfigured at any time</p><p id="3b8c8370-11f0-43f5-a3ec-8b012b19d94d" class="">Answer: C</p></li></ol><ol type="1" id="6014fa03-ef13-4f7d-bcae-8601baf385a3" class="numbered-list" start="5"><li>What is one major advantage of FPGAs over traditional integrated circuits?<p id="8c5fec84-3e2a-4ee3-a1b9-e702a80d312d" class="">A. They are less flexible
+B. They cannot be reconfigured
+C. They are designed for a particular function
+D. They can be reconfigured at any time</p><p id="29fa89ee-b929-4091-90a0-75262d532479" class="">Answer: D</p></li></ol><ol type="1" id="5f020cf9-c9d6-4c6e-9072-700cb6ab15ca" class="numbered-list" start="6"><li>How does the flexibility of FPGAs differ from that of traditional circuits?<p id="23634486-effa-4329-bb43-d4a937614d18" class="">A. FPGAs are more rigid
+B. FPGAs are less rigid
+C. FPGAs and traditional circuits are equally flexible
+D. FPGAs cannot be customized</p><p id="1a2266c9-56b0-4290-bc87-145f6ff29e02" class="">Answer: B</p></li></ol><ol type="1" id="b34a4ded-cc2c-479e-bc7e-715b2ff46ca4" class="numbered-list" start="7"><li>Why do FPGAs offer high performance?<p id="7bfaf0c6-1187-4dcb-a08d-21cf051f5fca" class="">A. Because they are large
+B. Because they are analog systems
+C. Because the logic blocks within an FPGA can be programmed to perform specific tasks simultaneously
+D. Because they are slower than traditional integrated circuits</p><p id="64621418-171b-4c1b-83cf-ba24f78ff628" class="">Answer: C</p></li></ol><ol type="1" id="db99111f-cefa-444c-9667-95108f5d783f" class="numbered-list" start="8"><li>What are the potential applications for FPGAs?<p id="ab6eaa4b-f78b-4cbe-9689-6c8d500d7eab" class="">A. Agriculture and construction
+B. Digital signal processing, image processing, and networking
+C. Healthcare and hospitality
+D. Law and finance</p><p id="dc7f52e8-faf6-4a58-b2eb-77275f1f6130" class="">Answer: B</p></li></ol><ol type="1" id="c421ac81-aa99-4d91-8bcf-36f93762cb46" class="numbered-list" start="9"><li>Why are digital systems becoming crucial in a diverse array of applications?<p id="5526badd-ee2e-4024-9422-f592ab83ab66" class="">A. Because they are less accurate and reliable than analog systems
+B. Because they are more difficult to program than analog systems
+C. Because they are cheaper than analog systems
+D. Because they are accurate, reliable, and easy to program and reconfigure</p><p id="839dc87e-1fe6-49cc-9cbf-5f565986477f" class="">Answer: D</p></li></ol><ol type="1" id="886995de-1395-4add-9445-1f231d722668" class="numbered-list" start="10"><li>What is the benefit of FPGAs for applications requiring customization and versatility?<p id="1025ed36-16a1-458a-955e-105ff8ef2dd4" class="">A. They are more expensive than traditional integrated circuits
+B. They cannot be reconfigured after manufacturing
+C. They can be reconfigured at any time, offering the possibility of adapting the circuit without having to replace it entirely
+D. They are less flexible than traditional circuits</p><p id="55fcdb88-6c64-4505-a06e-bb21437514cb" class="">Answer: C</p></li></ol><p id="6575041b-67bb-4082-8564-35c80fd4fd71" class="">
+</p><figure id="bc7ca833-dc9e-4d6f-8601-1e1b56faf7c6" class="image"><a href="%E8%AA%B2%E7%A8%8B%E7%B0%A1%E4%BB%8B%20-%20%E6%95%B8%E4%BD%8D%E7%B3%BB%E7%B5%B1%E8%A8%AD%E8%A8%88%E5%AF%A6%E5%8B%99%20(2023%20Spring)%2099b0e4aae697421099048b7e70025a47/end1.png"><img style="width:4538px" src="%E8%AA%B2%E7%A8%8B%E7%B0%A1%E4%BB%8B%20-%20%E6%95%B8%E4%BD%8D%E7%B3%BB%E7%B5%B1%E8%A8%AD%E8%A8%88%E5%AF%A6%E5%8B%99%20(2023%20Spring)%2099b0e4aae697421099048b7e70025a47/end1.png"/></a></figure><p id="bb50f350-2f05-4e6e-b5ca-4e2f14977968" class="">
+</p></div></article>
+<script>hljs.highlightAll();</script>
+</body></html>
