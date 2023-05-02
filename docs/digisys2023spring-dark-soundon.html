@@ -1,0 +1,676 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>數位系統設計實務 (2023 Spring)</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-translucentGray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style><link rel="stylesheet" href="dark-theme.css"><link rel="stylesheet"  target="_blank" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.0/styles/github-dark-dimmed.min.css"><script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.0/highlight.min.js"></script></head><body><article id="8e97c023-db87-4d21-a397-43e0ebd488be" class="page sans"><header><img class="page-cover-image" src="%E6%95%B8%E4%BD%8D%E7%B3%BB%E7%B5%B1%E8%A8%AD%E8%A8%88%E5%AF%A6%E5%8B%99%20(2023%20Spring)%208e97c023db874d21a39743e0ebd488be/1.png" style="object-position:center 50%"/><div class="page-header-icon page-header-icon-with-cover"><img class="icon" src="%E6%95%B8%E4%BD%8D%E7%B3%BB%E7%B5%B1%E8%A8%AD%E8%A8%88%E5%AF%A6%E5%8B%99%20(2023%20Spring)%208e97c023db874d21a39743e0ebd488be/yang01.png"/></div><h1 class="page-title">數位系統設計實務 (2023 Spring)</h1><link rel="stylesheet" href="dark-theme.css"><link rel="stylesheet"  target="_blank" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.0/styles/github-dark-dimmed.min.css"><script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.0/highlight.min.js"></script></header><div class="page-body"><table id="d53915a5-eff1-41e8-b627-9a53e48bdf80" class="simple-table"><tbody><tr id="d66b6983-0a9d-4d24-9615-712f99edceab"><td id="aINU" class=""><strong>班級</strong></td><td id="uuHi" class="" style="width:162px"><strong>時間</strong></td><td id="HSC~" class=""><strong>教室</strong></td></tr><tr id="8c11fff7-48c1-43c8-ad39-e9444fc7bea5"><td id="aINU" class="">四技電子一丙</td><td id="uuHi" class="" style="width:162px">(週一)  3、4、5 節</td><td id="HSC~" class="">J501</td></tr></tbody></table><h1 id="a8a2a50f-0133-4dbe-8dce-6c3bc769db01" class="block-color-brown_background">課程簡介</h1><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="342c4ac4-a0e7-4d4f-95da-2bbafffde0a7"><div style="font-size:1.5em"><img class="icon" src="%E6%95%B8%E4%BD%8D%E7%B3%BB%E7%B5%B1%E8%A8%AD%E8%A8%88%E5%AF%A6%E5%8B%99%20(2023%20Spring)%208e97c023db874d21a39743e0ebd488be/yang02.png"/></div><div style="width:100%">「數位系統設計實務」是一門以可程式化邏輯閘陣列 (FPGA) 為平台的數位系統設計課程，將涵蓋以下主題：<ol type="1" id="2e90c68b-4302-42e6-abad-c3baa534599f" class="numbered-list" start="1"><li>基礎邏輯元件：了解數位系統的基礎構建邏輯閘(Logic gates)，以及它們在 FPGA 中的實現。</li></ol><ol type="1" id="8e55e09a-90f3-40c4-8250-cf40ee475af3" class="numbered-list" start="2"><li>組合邏輯(Combinaltional logics)：設計和實現具有組合邏輯的數位系統，包括使用多工器 (mux)、編碼器、和解碼器。</li></ol><ol type="1" id="1a6b0780-1b7d-4a14-ba93-cef16da3a7cb" class="numbered-list" start="3"><li>算術運算元件(Computational components)：設計和實現算數元件，例如加法器、減法器和乘法器。</li></ol><ol type="1" id="29b68a29-79c7-411e-ae45-3393c140318e" class="numbered-list" start="4"><li>記憶體元件(Memory components)：了解和使用鎖存器、翻轉邏輯和寄存器在數位系統設計中。</li></ol><ol type="1" id="4099786b-46fa-4e5c-87c5-79656c087fbf" class="numbered-list" start="5"><li>序向邏輯(Sequential logics)和有限狀態機 (FSM)：使用 FPGA 設計和實現序向邏輯系統。</li></ol><ol type="1" id="891b911c-3237-469a-a650-4d43babff06f" class="numbered-list" start="6"><li>期末微型專題(Final project)：課程將以微型專題作為課程學習總結，學生將實現一個 4 位元資料寬度的小型串列外設介面 (SPI) 元件。</li></ol><p id="42e7abde-15ca-4fcb-a941-875e2baa76a5" class="">課程將提供實際操作、設計、及測試體驗，讓學生利用 FPGA 學習數位系統設計的實用技能。</p></div></figure><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="3b1692a3-c4e6-4789-a57d-5473809ad118"><div style="font-size:1.5em"><img class="icon" src="%E6%95%B8%E4%BD%8D%E7%B3%BB%E7%B5%B1%E8%A8%AD%E8%A8%88%E5%AF%A6%E5%8B%99%20(2023%20Spring)%208e97c023db874d21a39743e0ebd488be/yang02%201.png"/></div><div style="width:100%">&quot;Practical Digital Systems Design” is a course that covers the fundamentals of digital systems design, with a focus on the use of Field Programmable Gate Arrays (FPGAs) as a platform for implementation. The course will cover the following topics:<ol type="1" id="9095eb54-9631-4d4a-8760-8574ece0629d" class="numbered-list" start="1"><li>Basic Logic Gates: Understanding the basic building blocks of digital systems and their implementation in FPGA.</li></ol><ol type="1" id="ab830d5d-2caa-474a-bc61-cc84e0cea32a" class="numbered-list" start="2"><li>Combinational logics: Design and implementation of digital systems with combinational logic, including the use of multiplexers (mux), encoders, and decoders.</li></ol><ol type="1" id="7a1ba064-1ca9-4321-8102-6b597a324ea4" class="numbered-list" start="3"><li>Computational components: Design and implementation of arithmetic components such as adders, subtractors, and multipliers.</li></ol><ol type="1" id="751ebc06-65c5-4ac9-8ef2-f2707ef235c8" class="numbered-list" start="4"><li>Memory components: Understanding and using latches, flip-flops, and registers in digital systems design.</li></ol><ol type="1" id="c57d857d-654e-4479-891e-163df685c9b9" class="numbered-list" start="5"><li>Sequential logics and Finite State Machines (FSMs): Design and implementation of sequential systems with FPGAs.</li></ol><ol type="1" id="d9531e3d-57a3-447a-9c2b-bc54efa9f6b1" class="numbered-list" start="6"><li>Final project: The course will conclude with a final project in which students will implement a tiny Serial Peripheral Interface (SPI) component with 4-bit data width.</li></ol><p id="d3d436f3-0160-442c-ae4e-1acf9c38228e" class="">The course will offer hands-on experience with industry-standard design tools, enabling students to acquire practical skills in digital systems design and testing using FPGAs.</p></div></figure><h1 id="57a13397-ac4a-4f8d-a65c-e1a11a82541f" class="block-color-brown_background">數位教材目錄</h1><figure id="99b0e4aa-e697-4210-9904-8b7e70025a47" class="link-to-page"><a href="%E6%95%B8%E4%BD%8D%E7%B3%BB%E7%B5%B1%E8%A8%AD%E8%A8%88%E5%AF%A6%E5%8B%99%20(2023%20Spring)%208e97c023db874d21a39743e0ebd488be/%E8%AA%B2%E7%A8%8B%E7%B0%A1%E4%BB%8B%20-%20%E6%95%B8%E4%BD%8D%E7%B3%BB%E7%B5%B1%E8%A8%AD%E8%A8%88%E5%AF%A6%E5%8B%99%20(2023%20Spring)%2099b0e4aae697421099048b7e70025a47.html"><img class="icon" src="%E6%95%B8%E4%BD%8D%E7%B3%BB%E7%B5%B1%E8%A8%AD%E8%A8%88%E5%AF%A6%E5%8B%99%20(2023%20Spring)%208e97c023db874d21a39743e0ebd488be/%E8%AA%B2%E7%A8%8B%E7%B0%A1%E4%BB%8B%20-%20%E6%95%B8%E4%BD%8D%E7%B3%BB%E7%B5%B1%E8%A8%AD%E8%A8%88%E5%AF%A6%E5%8B%99%20(2023%20Spring)%2099b0e4aae697421099048b7e70025a47/yang01.png"/>課程簡介 - 數位系統設計實務 (2023 Spring)</a></figure><figure id="28287346-a7a1-4d43-ab5f-5ec62c9798da" class="link-to-page"><a href="%E6%95%B8%E4%BD%8D%E7%B3%BB%E7%B5%B1%E8%A8%AD%E8%A8%88%E5%AF%A6%E5%8B%99%20(2023%20Spring)%208e97c023db874d21a39743e0ebd488be/%E6%95%B8%E4%BD%8D%E7%B3%BB%E7%B5%B1%E5%92%8C%20FPGA%20%E4%BB%8B%E7%B4%B9%2028287346a7a14d43ab5f5ec62c9798da.html"><img class="icon" src="%E6%95%B8%E4%BD%8D%E7%B3%BB%E7%B5%B1%E8%A8%AD%E8%A8%88%E5%AF%A6%E5%8B%99%20(2023%20Spring)%208e97c023db874d21a39743e0ebd488be/%E8%AA%B2%E7%A8%8B%E7%B0%A1%E4%BB%8B%20-%20%E6%95%B8%E4%BD%8D%E7%B3%BB%E7%B5%B1%E8%A8%AD%E8%A8%88%E5%AF%A6%E5%8B%99%20(2023%20Spring)%2099b0e4aae697421099048b7e70025a47/yang01.png"/>數位系統和 FPGA 介紹</a></figure><figure id="0e43700d-65fb-4423-8787-a5b0a993cf6c" class="link-to-page"><a href="%E6%95%B8%E4%BD%8D%E7%B3%BB%E7%B5%B1%E8%A8%AD%E8%A8%88%E5%AF%A6%E5%8B%99%20(2023%20Spring)%208e97c023db874d21a39743e0ebd488be/%E9%82%8F%E8%BC%AF%E6%96%B9%E7%A8%8B%E5%BC%8F%E8%88%87%E5%9F%BA%E6%9C%AC%E9%96%98%200e43700d65fb44238787a5b0a993cf6c.html"><img class="icon" src="%E6%95%B8%E4%BD%8D%E7%B3%BB%E7%B5%B1%E8%A8%AD%E8%A8%88%E5%AF%A6%E5%8B%99%20(2023%20Spring)%208e97c023db874d21a39743e0ebd488be/%E8%AA%B2%E7%A8%8B%E7%B0%A1%E4%BB%8B%20-%20%E6%95%B8%E4%BD%8D%E7%B3%BB%E7%B5%B1%E8%A8%AD%E8%A8%88%E5%AF%A6%E5%8B%99%20(2023%20Spring)%2099b0e4aae697421099048b7e70025a47/yang01.png"/>邏輯方程式與基本閘</a></figure><figure id="efbe32bb-6e63-43a3-b299-2ba8912db61f" class="link-to-page"><a href="%E6%95%B8%E4%BD%8D%E7%B3%BB%E7%B5%B1%E8%A8%AD%E8%A8%88%E5%AF%A6%E5%8B%99%20(2023%20Spring)%208e97c023db874d21a39743e0ebd488be/%E7%B5%84%E5%90%88%E9%82%8F%E8%BC%AF%E9%9B%BB%E8%B7%AF%20-%20%E9%82%8F%E8%BC%AF%E9%81%8B%E7%AE%97%E5%AD%90%E8%88%87%E4%BD%8D%E5%85%83%E5%90%91%E9%87%8F%20efbe32bb6e6343a3b2992ba8912db61f.html"><img class="icon" src="%E6%95%B8%E4%BD%8D%E7%B3%BB%E7%B5%B1%E8%A8%AD%E8%A8%88%E5%AF%A6%E5%8B%99%20(2023%20Spring)%208e97c023db874d21a39743e0ebd488be/%E8%AA%B2%E7%A8%8B%E7%B0%A1%E4%BB%8B%20-%20%E6%95%B8%E4%BD%8D%E7%B3%BB%E7%B5%B1%E8%A8%AD%E8%A8%88%E5%AF%A6%E5%8B%99%20(2023%20Spring)%2099b0e4aae697421099048b7e70025a47/yang01.png"/>組合邏輯電路 - 邏輯運算子與位元向量</a></figure><figure id="74378101-49fd-4e59-b7fe-435c1f16baaf" class="link-to-page"><a href="%E6%95%B8%E4%BD%8D%E7%B3%BB%E7%B5%B1%E8%A8%AD%E8%A8%88%E5%AF%A6%E5%8B%99%20(2023%20Spring)%208e97c023db874d21a39743e0ebd488be/%E7%B5%84%E5%90%88%E9%82%8F%E8%BC%AF%E9%9B%BB%E8%B7%AF%20-%20%E5%A4%9A%E5%B7%A5%E5%99%A8%E8%88%87%E9%81%8B%E7%AE%97%E9%9B%BB%E8%B7%AF%207437810149fd4e59b7fe435c1f16baaf.html"><img class="icon" src="%E6%95%B8%E4%BD%8D%E7%B3%BB%E7%B5%B1%E8%A8%AD%E8%A8%88%E5%AF%A6%E5%8B%99%20(2023%20Spring)%208e97c023db874d21a39743e0ebd488be/%E8%AA%B2%E7%A8%8B%E7%B0%A1%E4%BB%8B%20-%20%E6%95%B8%E4%BD%8D%E7%B3%BB%E7%B5%B1%E8%A8%AD%E8%A8%88%E5%AF%A6%E5%8B%99%20(2023%20Spring)%2099b0e4aae697421099048b7e70025a47/yang01.png"/>組合邏輯電路 - 多工器與運算電路 </a></figure><figure id="212e7609-6a0a-4751-9883-a17d29ff45cd" class="link-to-page"><a href="%E6%95%B8%E4%BD%8D%E7%B3%BB%E7%B5%B1%E8%A8%AD%E8%A8%88%E5%AF%A6%E5%8B%99%20(2023%20Spring)%208e97c023db874d21a39743e0ebd488be/%E9%9A%8E%E5%B1%A4%E5%BC%8F%20Verilog%20%E8%A8%AD%E8%A8%88%20-%20%E6%A8%A1%E7%B5%84%E5%AF%A6%E4%BE%8B%E5%8C%96%20212e76096a0a47519883a17d29ff45cd.html"><img class="icon" src="%E6%95%B8%E4%BD%8D%E7%B3%BB%E7%B5%B1%E8%A8%AD%E8%A8%88%E5%AF%A6%E5%8B%99%20(2023%20Spring)%208e97c023db874d21a39743e0ebd488be/%E8%AA%B2%E7%A8%8B%E7%B0%A1%E4%BB%8B%20-%20%E6%95%B8%E4%BD%8D%E7%B3%BB%E7%B5%B1%E8%A8%AD%E8%A8%88%E5%AF%A6%E5%8B%99%20(2023%20Spring)%2099b0e4aae697421099048b7e70025a47/yang01.png"/>階層式 Verilog 設計 - 模組實例化</a></figure><figure id="1602382d-1fb5-4a5e-91e6-a7181fcd14b4" class="link-to-page"><a href="%E6%95%B8%E4%BD%8D%E7%B3%BB%E7%B5%B1%E8%A8%AD%E8%A8%88%E5%AF%A6%E5%8B%99%20(2023%20Spring)%208e97c023db874d21a39743e0ebd488be/%E6%9C%9F%E4%B8%AD%E6%B8%AC%E9%A9%97%20(Midterm%20Exam)%201602382d1fb54a5e91e6a7181fcd14b4.html"><img class="icon" src="%E6%95%B8%E4%BD%8D%E7%B3%BB%E7%B5%B1%E8%A8%AD%E8%A8%88%E5%AF%A6%E5%8B%99%20(2023%20Spring)%208e97c023db874d21a39743e0ebd488be/%E8%AA%B2%E7%A8%8B%E7%B0%A1%E4%BB%8B%20-%20%E6%95%B8%E4%BD%8D%E7%B3%BB%E7%B5%B1%E8%A8%AD%E8%A8%88%E5%AF%A6%E5%8B%99%20(2023%20Spring)%2099b0e4aae697421099048b7e70025a47/yang01.png"/>期中測驗 (Midterm Exam)</a></figure><figure id="afa9d830-0f33-492f-86b1-c13e24eb15f1" class="link-to-page"><a href="%E6%95%B8%E4%BD%8D%E7%B3%BB%E7%B5%B1%E8%A8%AD%E8%A8%88%E5%AF%A6%E5%8B%99%20(2023%20Spring)%208e97c023db874d21a39743e0ebd488be/Verilog%20Testbench%20and%20FPGA%20Design%20Flow%20afa9d8300f33492f86b1c13e24eb15f1.html"><img class="icon" src="%E6%95%B8%E4%BD%8D%E7%B3%BB%E7%B5%B1%E8%A8%AD%E8%A8%88%E5%AF%A6%E5%8B%99%20(2023%20Spring)%208e97c023db874d21a39743e0ebd488be/%E8%AA%B2%E7%A8%8B%E7%B0%A1%E4%BB%8B%20-%20%E6%95%B8%E4%BD%8D%E7%B3%BB%E7%B5%B1%E8%A8%AD%E8%A8%88%E5%AF%A6%E5%8B%99%20(2023%20Spring)%2099b0e4aae697421099048b7e70025a47/yang01.png"/>Verilog Testbench and FPGA Design Flow</a></figure><figure id="d64e0b0c-1d61-49e2-be4e-c8033fd6192e" class="link-to-page"><a href="%E6%95%B8%E4%BD%8D%E7%B3%BB%E7%B5%B1%E8%A8%AD%E8%A8%88%E5%AF%A6%E5%8B%99%20(2023%20Spring)%208e97c023db874d21a39743e0ebd488be/Verilog%20%E8%A1%8C%E7%82%BA%E5%B1%A4%E6%AC%A1%E6%A8%A1%E7%B5%84%E8%A8%AD%E8%A8%88%201%20d64e0b0c1d6149e2be4ec8033fd6192e.html"><img class="icon" src="%E6%95%B8%E4%BD%8D%E7%B3%BB%E7%B5%B1%E8%A8%AD%E8%A8%88%E5%AF%A6%E5%8B%99%20(2023%20Spring)%208e97c023db874d21a39743e0ebd488be/%E8%AA%B2%E7%A8%8B%E7%B0%A1%E4%BB%8B%20-%20%E6%95%B8%E4%BD%8D%E7%B3%BB%E7%B5%B1%E8%A8%AD%E8%A8%88%E5%AF%A6%E5%8B%99%20(2023%20Spring)%2099b0e4aae697421099048b7e70025a47/yang01.png"/>Verilog 行為層次模組設計 1</a></figure><figure id="8227a4bf-21e1-4ca8-815d-20098d075355" class="link-to-page"><a href="%E6%95%B8%E4%BD%8D%E7%B3%BB%E7%B5%B1%E8%A8%AD%E8%A8%88%E5%AF%A6%E5%8B%99%20(2023%20Spring)%208e97c023db874d21a39743e0ebd488be/Verilog%20%E8%A1%8C%E7%82%BA%E5%B1%A4%E6%AC%A1%E6%A8%A1%E7%B5%84%E8%A8%AD%E8%A8%88%202%208227a4bf21e14ca8815d20098d075355.html"><img class="icon" src="%E6%95%B8%E4%BD%8D%E7%B3%BB%E7%B5%B1%E8%A8%AD%E8%A8%88%E5%AF%A6%E5%8B%99%20(2023%20Spring)%208e97c023db874d21a39743e0ebd488be/%E8%AA%B2%E7%A8%8B%E7%B0%A1%E4%BB%8B%20-%20%E6%95%B8%E4%BD%8D%E7%B3%BB%E7%B5%B1%E8%A8%AD%E8%A8%88%E5%AF%A6%E5%8B%99%20(2023%20Spring)%2099b0e4aae697421099048b7e70025a47/yang01.png"/>Verilog 行為層次模組設計 2</a></figure><figure id="2d05cf96-e422-479d-a159-3fbac1b5be57" class="link-to-page"><a href="%E6%95%B8%E4%BD%8D%E7%B3%BB%E7%B5%B1%E8%A8%AD%E8%A8%88%E5%AF%A6%E5%8B%99%20(2023%20Spring)%208e97c023db874d21a39743e0ebd488be/Xilinx%20Vivado%20-%20Post-map%20Simulation%202d05cf96e422479da1593fbac1b5be57.html"><img class="icon" src="%E6%95%B8%E4%BD%8D%E7%B3%BB%E7%B5%B1%E8%A8%AD%E8%A8%88%E5%AF%A6%E5%8B%99%20(2023%20Spring)%208e97c023db874d21a39743e0ebd488be/%E8%AA%B2%E7%A8%8B%E7%B0%A1%E4%BB%8B%20-%20%E6%95%B8%E4%BD%8D%E7%B3%BB%E7%B5%B1%E8%A8%AD%E8%A8%88%E5%AF%A6%E5%8B%99%20(2023%20Spring)%2099b0e4aae697421099048b7e70025a47/yang01.png"/>Xilinx Vivado - Post-map Simulation</a></figure><figure id="c58369ed-9b04-4244-9450-a66dcef4958a" class="link-to-page"><a href="%E6%95%B8%E4%BD%8D%E7%B3%BB%E7%B5%B1%E8%A8%AD%E8%A8%88%E5%AF%A6%E5%8B%99%20(2023%20Spring)%208e97c023db874d21a39743e0ebd488be/Xilinx%20Vivado%20Tutorial%20+%20Zedboard%20c58369ed9b0442449450a66dcef4958a.html"><img class="icon" src="%E6%95%B8%E4%BD%8D%E7%B3%BB%E7%B5%B1%E8%A8%AD%E8%A8%88%E5%AF%A6%E5%8B%99%20(2023%20Spring)%208e97c023db874d21a39743e0ebd488be/%E8%AA%B2%E7%A8%8B%E7%B0%A1%E4%BB%8B%20-%20%E6%95%B8%E4%BD%8D%E7%B3%BB%E7%B5%B1%E8%A8%AD%E8%A8%88%E5%AF%A6%E5%8B%99%20(2023%20Spring)%2099b0e4aae697421099048b7e70025a47/yang01.png"/>Xilinx Vivado Tutorial + Zedboard</a></figure><p id="81001eec-8311-48f9-b703-367283e5a4de" class="">
+</p><figure id="bfb0eae9-e541-49c7-8b78-2112b74368eb" class="link-to-page"><a href="%E6%95%B8%E4%BD%8D%E7%B3%BB%E7%B5%B1%E8%A8%AD%E8%A8%88%E5%AF%A6%E5%8B%99%20(2023%20Spring)%208e97c023db874d21a39743e0ebd488be/Formative%20Assessment%20-%20%E7%A1%AC%E9%AB%94%E6%8F%8F%E8%BF%B0%E8%AA%9E%E8%A8%80%20Verilog%20%E5%9F%BA%E7%A4%8E%201%20bfb0eae9e54149c78b782112b74368eb.html"><img class="icon" src="%E6%95%B8%E4%BD%8D%E7%B3%BB%E7%B5%B1%E8%A8%AD%E8%A8%88%E5%AF%A6%E5%8B%99%20(2023%20Spring)%208e97c023db874d21a39743e0ebd488be/%E8%AA%B2%E7%A8%8B%E7%B0%A1%E4%BB%8B%20-%20%E6%95%B8%E4%BD%8D%E7%B3%BB%E7%B5%B1%E8%A8%AD%E8%A8%88%E5%AF%A6%E5%8B%99%20(2023%20Spring)%2099b0e4aae697421099048b7e70025a47/yang01.png"/>Formative Assessment - 硬體描述語言 Verilog 基礎 1</a></figure><figure id="6dacc512-055b-48a4-8bbd-53a8dd6c83a1" class="link-to-page"><a href="%E6%95%B8%E4%BD%8D%E7%B3%BB%E7%B5%B1%E8%A8%AD%E8%A8%88%E5%AF%A6%E5%8B%99%20(2023%20Spring)%208e97c023db874d21a39743e0ebd488be/Basics%20of%20Programmable%20Logic%20-%20Multiplexer%20(MUX)%206dacc512055b48a48bbd53a8dd6c83a1.html"><img class="icon" src="%E6%95%B8%E4%BD%8D%E7%B3%BB%E7%B5%B1%E8%A8%AD%E8%A8%88%E5%AF%A6%E5%8B%99%20(2023%20Spring)%208e97c023db874d21a39743e0ebd488be/Basics%20of%20Programmable%20Logic%20-%20Multiplexer%20(MUX)%206dacc512055b48a48bbd53a8dd6c83a1/yang-tr-wb.png"/>Basics of Programmable Logic - Multiplexer (MUX)</a></figure><h1 id="bc50002d-4ec2-40a8-ae8d-5378df5e8202" class="block-color-brown_background">數位教材目錄 (補充教材)</h1><figure id="c1c226dd-9c0a-4302-993f-750965fcee0a" class="link-to-page"><a href="%E6%95%B8%E4%BD%8D%E7%B3%BB%E7%B5%B1%E8%A8%AD%E8%A8%88%E5%AF%A6%E5%8B%99%20(2023%20Spring)%208e97c023db874d21a39743e0ebd488be/English%20Learning%20-%20%E6%95%B8%E4%BD%8D%E7%B3%BB%E7%B5%B1%E5%92%8C%20FPGA%20%E4%BB%8B%E7%B4%B9%20c1c226dd9c0a4302993f750965fcee0a.html"><img class="icon" src="%E6%95%B8%E4%BD%8D%E7%B3%BB%E7%B5%B1%E8%A8%AD%E8%A8%88%E5%AF%A6%E5%8B%99%20(2023%20Spring)%208e97c023db874d21a39743e0ebd488be/%E8%AA%B2%E7%A8%8B%E7%B0%A1%E4%BB%8B%20-%20%E6%95%B8%E4%BD%8D%E7%B3%BB%E7%B5%B1%E8%A8%AD%E8%A8%88%E5%AF%A6%E5%8B%99%20(2023%20Spring)%2099b0e4aae697421099048b7e70025a47/yang01.png"/>English Learning - 數位系統和 FPGA 介紹</a></figure><figure id="f466594c-0210-49a6-9c78-d33bfccae45b" class="link-to-page"><a href="%E6%95%B8%E4%BD%8D%E7%B3%BB%E7%B5%B1%E8%A8%AD%E8%A8%88%E5%AF%A6%E5%8B%99%20(2023%20Spring)%208e97c023db874d21a39743e0ebd488be/English%20Learning%20-%20%E9%82%8F%E8%BC%AF%E6%96%B9%E7%A8%8B%E5%BC%8F%E8%88%87%E5%9F%BA%E6%9C%AC%E9%96%98%20f466594c021049a69c78d33bfccae45b.html"><img class="icon" src="%E6%95%B8%E4%BD%8D%E7%B3%BB%E7%B5%B1%E8%A8%AD%E8%A8%88%E5%AF%A6%E5%8B%99%20(2023%20Spring)%208e97c023db874d21a39743e0ebd488be/%E8%AA%B2%E7%A8%8B%E7%B0%A1%E4%BB%8B%20-%20%E6%95%B8%E4%BD%8D%E7%B3%BB%E7%B5%B1%E8%A8%AD%E8%A8%88%E5%AF%A6%E5%8B%99%20(2023%20Spring)%2099b0e4aae697421099048b7e70025a47/yang01.png"/>English Learning - 邏輯方程式與基本閘</a></figure><figure id="ff3866c9-65c6-425e-bad0-d74e7940054f" class="link-to-page"><a href="%E6%95%B8%E4%BD%8D%E7%B3%BB%E7%B5%B1%E8%A8%AD%E8%A8%88%E5%AF%A6%E5%8B%99%20(2023%20Spring)%208e97c023db874d21a39743e0ebd488be/English%20Learning%20-%20%E7%B5%84%E5%90%88%E9%82%8F%E8%BC%AF%E9%9B%BB%E8%B7%AF%20ff3866c965c6425ebad0d74e7940054f.html"><img class="icon" src="%E6%95%B8%E4%BD%8D%E7%B3%BB%E7%B5%B1%E8%A8%AD%E8%A8%88%E5%AF%A6%E5%8B%99%20(2023%20Spring)%208e97c023db874d21a39743e0ebd488be/%E8%AA%B2%E7%A8%8B%E7%B0%A1%E4%BB%8B%20-%20%E6%95%B8%E4%BD%8D%E7%B3%BB%E7%B5%B1%E8%A8%AD%E8%A8%88%E5%AF%A6%E5%8B%99%20(2023%20Spring)%2099b0e4aae697421099048b7e70025a47/yang01.png"/>English Learning - 組合邏輯電路</a></figure><figure id="d931c332-cba3-41c1-844f-5cbff786b484" class="link-to-page"><a href="%E6%95%B8%E4%BD%8D%E7%B3%BB%E7%B5%B1%E8%A8%AD%E8%A8%88%E5%AF%A6%E5%8B%99%20(2023%20Spring)%208e97c023db874d21a39743e0ebd488be/English%20Learning%20-%20%E7%AE%97%E8%A1%93%20%E9%82%8F%E8%BC%AF%E9%81%8B%E7%AE%97%E5%85%83%E4%BB%B6%20d931c332cba341c1844f5cbff786b484.html"><img class="icon" src="%E6%95%B8%E4%BD%8D%E7%B3%BB%E7%B5%B1%E8%A8%AD%E8%A8%88%E5%AF%A6%E5%8B%99%20(2023%20Spring)%208e97c023db874d21a39743e0ebd488be/%E8%AA%B2%E7%A8%8B%E7%B0%A1%E4%BB%8B%20-%20%E6%95%B8%E4%BD%8D%E7%B3%BB%E7%B5%B1%E8%A8%AD%E8%A8%88%E5%AF%A6%E5%8B%99%20(2023%20Spring)%2099b0e4aae697421099048b7e70025a47/yang01.png"/>English Learning - 算術/邏輯運算元件</a></figure><figure id="d695b1fd-6d67-4e02-b86c-24e9c0334ffc" class="link-to-page"><a href="%E6%95%B8%E4%BD%8D%E7%B3%BB%E7%B5%B1%E8%A8%AD%E8%A8%88%E5%AF%A6%E5%8B%99%20(2023%20Spring)%208e97c023db874d21a39743e0ebd488be/English%20Learning%20-%20%E5%A4%9A%E5%B7%A5%E5%99%A8%E8%88%87%E9%81%8B%E7%AE%97%E9%9B%BB%E8%B7%AF%20d695b1fd6d674e02b86c24e9c0334ffc.html"><img class="icon" src="%E6%95%B8%E4%BD%8D%E7%B3%BB%E7%B5%B1%E8%A8%AD%E8%A8%88%E5%AF%A6%E5%8B%99%20(2023%20Spring)%208e97c023db874d21a39743e0ebd488be/%E8%AA%B2%E7%A8%8B%E7%B0%A1%E4%BB%8B%20-%20%E6%95%B8%E4%BD%8D%E7%B3%BB%E7%B5%B1%E8%A8%AD%E8%A8%88%E5%AF%A6%E5%8B%99%20(2023%20Spring)%2099b0e4aae697421099048b7e70025a47/yang01.png"/>English Learning - 多工器與運算電路</a></figure><figure id="c0cbce36-7892-4af5-a084-f6f81a25f512" class="link-to-page"><a href="%E6%95%B8%E4%BD%8D%E7%B3%BB%E7%B5%B1%E8%A8%AD%E8%A8%88%E5%AF%A6%E5%8B%99%20(2023%20Spring)%208e97c023db874d21a39743e0ebd488be/English%20Learning%20-%20Reading%20Comprehension%20Problem%20S%20c0cbce3678924af5a084f6f81a25f512.html"><img class="icon" src="%E6%95%B8%E4%BD%8D%E7%B3%BB%E7%B5%B1%E8%A8%AD%E8%A8%88%E5%AF%A6%E5%8B%99%20(2023%20Spring)%208e97c023db874d21a39743e0ebd488be/%E8%AA%B2%E7%A8%8B%E7%B0%A1%E4%BB%8B%20-%20%E6%95%B8%E4%BD%8D%E7%B3%BB%E7%B5%B1%E8%A8%AD%E8%A8%88%E5%AF%A6%E5%8B%99%20(2023%20Spring)%2099b0e4aae697421099048b7e70025a47/yang01.png"/>English Learning - Reading Comprehension Problem Sets</a></figure><p id="71d84157-d660-4885-8f82-851df5867cd8" class="">
+</p><figure id="9e7f12b1-d62e-4e66-83d7-3a9bef9dfcc5" class="link-to-page"><a href="%E6%95%B8%E4%BD%8D%E7%B3%BB%E7%B5%B1%E8%A8%AD%E8%A8%88%E5%AF%A6%E5%8B%99%20(2023%20Spring)%208e97c023db874d21a39743e0ebd488be/English%20Learning%20-%20%E4%B8%AD%E6%96%87%E6%A8%99%E9%A1%8C%20(Template)%209e7f12b1d62e4e6683d73a9bef9dfcc5.html"><img class="icon" src="%E6%95%B8%E4%BD%8D%E7%B3%BB%E7%B5%B1%E8%A8%AD%E8%A8%88%E5%AF%A6%E5%8B%99%20(2023%20Spring)%208e97c023db874d21a39743e0ebd488be/%E8%AA%B2%E7%A8%8B%E7%B0%A1%E4%BB%8B%20-%20%E6%95%B8%E4%BD%8D%E7%B3%BB%E7%B5%B1%E8%A8%AD%E8%A8%88%E5%AF%A6%E5%8B%99%20(2023%20Spring)%2099b0e4aae697421099048b7e70025a47/yang01.png"/>English Learning - 中文標題 (Template)</a></figure><h1 id="9584395b-10aa-4442-9a54-85e05754c40a" class="block-color-brown_background">教材設計參考資料</h1><figure id="562c3f5c-6026-4189-a220-5c8b122bc9e0" class="link-to-page"><a href="%E6%95%B8%E4%BD%8D%E7%B3%BB%E7%B5%B1%E8%A8%AD%E8%A8%88%E5%AF%A6%E5%8B%99%20(2023%20Spring)%208e97c023db874d21a39743e0ebd488be/%E5%8F%83%E8%80%83%E8%B3%87%E6%96%99%20(References)%20562c3f5c60264189a2205c8b122bc9e0.html"><img class="icon" src="%E6%95%B8%E4%BD%8D%E7%B3%BB%E7%B5%B1%E8%A8%AD%E8%A8%88%E5%AF%A6%E5%8B%99%20(2023%20Spring)%208e97c023db874d21a39743e0ebd488be/%E5%8F%83%E8%80%83%E8%B3%87%E6%96%99%20(References)%20562c3f5c60264189a2205c8b122bc9e0/76.png"/>參考資料 (References)</a></figure><figure id="516a2759-a2de-45c3-85a8-d97d9ab56965" class="link-to-page"><a href="%E6%95%B8%E4%BD%8D%E7%B3%BB%E7%B5%B1%E8%A8%AD%E8%A8%88%E5%AF%A6%E5%8B%99%20(2023%20Spring)%208e97c023db874d21a39743e0ebd488be/%E6%95%99%E5%AD%B8%E4%BD%BF%E7%94%A8%E8%BB%9F%E9%AB%94%20516a2759a2de45c385a8d97d9ab56965.html"><img class="icon" src="%E6%95%B8%E4%BD%8D%E7%B3%BB%E7%B5%B1%E8%A8%AD%E8%A8%88%E5%AF%A6%E5%8B%99%20(2023%20Spring)%208e97c023db874d21a39743e0ebd488be/%E6%95%99%E5%AD%B8%E4%BD%BF%E7%94%A8%E8%BB%9F%E9%AB%94%20516a2759a2de45c385a8d97d9ab56965/5.png"/>教學使用軟體</a></figure><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="df6625e8-5dcc-4d97-9fa5-629691b77668"><div style="font-size:1.5em"><span class="icon">📚</span></div><div style="width:100%">Digital Design and Computer Architecture 2nd Edition
+by David Harris (Author), Sarah L. Harris (Author)<figure id="f2fd8517-da13-46e4-a5e1-dc5e4d640c36"><a href="http://pages.hmc.edu/harris/ddca/ddca2e.html" class="bookmark source"><div class="bookmark-info"><div class="bookmark-text"><div class="bookmark-title">Digital Design and Computer Architecture, 2nd Edition</div></div><div class="bookmark-href">http://pages.hmc.edu/harris/ddca/ddca2e.html</div></div><img src="http://pages.hmc.edu/harris/ddca/ddca2e/DDCA2e_Cover.jpg" class="bookmark-image"/></a></figure><figure id="936cb697-14e6-4923-9ff7-666178ca1c50" class="link-to-page"><a href="%E6%95%B8%E4%BD%8D%E7%B3%BB%E7%B5%B1%E8%A8%AD%E8%A8%88%E5%AF%A6%E5%8B%99%20(2023%20Spring)%208e97c023db874d21a39743e0ebd488be/Request%20for%20Permission%20to%20Use%20Lecture%20Slides%20for%20I%20936cb69714e649239ff7666178ca1c50.html"><span class="icon">✉️</span>Request for Permission to Use Lecture Slides for Instructional Video</a></figure></div></figure><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="a6a94222-0188-46e3-9277-d4d3166f6fcb"><div style="font-size:1.5em"><span class="icon">📚</span></div><div style="width:100%">Digital Design and Computer Architecture, RISC-V Edition: RISC-V Edition 1st Edition<p id="e7f54bee-324e-4569-b171-559034ace4dc" class="">by <a  target="_blank" href="https://www.amazon.com/s/ref=dp_byline_sr_book_1?ie=UTF8&amp;field-author=Sarah+L.+Harris&amp;text=Sarah+L.+Harris&amp;sort=relevancerank&amp;search-alias=books">Sarah L. Harris</a> (Author), <a  target="_blank" href="https://www.amazon.com/s/ref=dp_byline_sr_book_2?ie=UTF8&amp;field-author=David+Harris&amp;text=David+Harris&amp;sort=relevancerank&amp;search-alias=books">David Harris</a> (Author)</p><figure id="90e060a4-5a18-4da6-9c3b-47263d3bad00"><a href="http://pages.hmc.edu/harris/ddca/ddcarv/ddcarv_videos.html" class="bookmark source"><div class="bookmark-info"><div class="bookmark-text"><div class="bookmark-title">Digital Design</div></div><div class="bookmark-href">http://pages.hmc.edu/harris/ddca/ddcarv/ddcarv_videos.html</div></div><img src="http://pages.hmc.edu/harris/ddca/ddcarv/DDCArv_Cover.jpg" class="bookmark-image"/></a></figure></div></figure><p id="1bf63b8a-dcdb-44f8-b6aa-e8c4a4858673" class="">
+</p><p id="4af63882-e575-40a2-befc-918720cea71c" class="">
+</p><figure id="c3e24bc0-c1fb-4b54-ab60-7bfb2493c918" class="image"><a href="%E6%95%B8%E4%BD%8D%E7%B3%BB%E7%B5%B1%E8%A8%AD%E8%A8%88%E5%AF%A6%E5%8B%99%20(2023%20Spring)%208e97c023db874d21a39743e0ebd488be/3.png"><img style="width:1500px" src="%E6%95%B8%E4%BD%8D%E7%B3%BB%E7%B5%B1%E8%A8%AD%E8%A8%88%E5%AF%A6%E5%8B%99%20(2023%20Spring)%208e97c023db874d21a39743e0ebd488be/3.png"/></a></figure></div></article>
+<script>hljs.highlightAll();</script>
+</body></html>
