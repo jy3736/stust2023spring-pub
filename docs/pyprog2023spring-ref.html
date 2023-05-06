@@ -1,0 +1,676 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>數位教材及形成性評量 (Python 程式設計)</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-translucentGray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style><link rel="stylesheet" href="dark-theme.css"><link rel="stylesheet"  target="_blank" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.0/styles/github-dark-dimmed.min.css"><script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.0/highlight.min.js"></script></head><body><article id="bc21520e-9346-4c9c-ac10-9a3c2ce06524" class="page sans"><header><img class="page-cover-image" src="%E6%95%B8%E4%BD%8D%E6%95%99%E6%9D%90%E5%8F%8A%E5%BD%A2%E6%88%90%E6%80%A7%E8%A9%95%E9%87%8F%20(Python%20%E7%A8%8B%E5%BC%8F%E8%A8%AD%E8%A8%88)%20bc21520e93464c9cac109a3c2ce06524/3.png" style="object-position:center 100%"/><div class="page-header-icon page-header-icon-with-cover"><img class="icon" src="%E6%95%B8%E4%BD%8D%E6%95%99%E6%9D%90%E5%8F%8A%E5%BD%A2%E6%88%90%E6%80%A7%E8%A9%95%E9%87%8F%20(Python%20%E7%A8%8B%E5%BC%8F%E8%A8%AD%E8%A8%88)%20bc21520e93464c9cac109a3c2ce06524/yang01.png"/></div><h1 class="page-title">數位教材及形成性評量 (Python 程式設計)</h1><link rel="stylesheet" href="dark-theme.css"><link rel="stylesheet"  target="_blank" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.0/styles/github-dark-dimmed.min.css"><script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.0/highlight.min.js"></script></header><div class="page-body"><h1 id="df6762ee-666a-4eb8-ba35-a47b8308ac33" class="block-color-yellow_background">『原創』教學影片及Podcast 音檔、線上講義、範例專案</h1><div id="3b8d37d6-3e89-418e-b170-5b620209f9a9" class="column-list"><div id="7d5212e9-89c1-47a0-a609-ba5b44e026e8" style="width:12.5%" class="column"><figure id="41217296-a477-42db-b4d8-cf24fef0fc5d" class="image"><a href="%E6%95%B8%E4%BD%8D%E6%95%99%E6%9D%90%E5%8F%8A%E5%BD%A2%E6%88%90%E6%80%A7%E8%A9%95%E9%87%8F%20(Python%20%E7%A8%8B%E5%BC%8F%E8%A8%AD%E8%A8%88)%20bc21520e93464c9cac109a3c2ce06524/yang02.png"><img style="width:84px" src="%E6%95%B8%E4%BD%8D%E6%95%99%E6%9D%90%E5%8F%8A%E5%BD%A2%E6%88%90%E6%80%A7%E8%A9%95%E9%87%8F%20(Python%20%E7%A8%8B%E5%BC%8F%E8%A8%AD%E8%A8%88)%20bc21520e93464c9cac109a3c2ce06524/yang02.png"/></a></figure><p id="4adfccf9-d4a6-4747-b0ee-bc00ca9018cb" class="">
+</p></div><div id="a7c26823-9cc0-43ae-9153-e8fa7223d383" style="width:87.5%" class="column"><figure class="block-color-yellow callout" style="white-space:pre-wrap;display:flex" id="7ee878f3-b8ce-419d-ba9c-7201f036ba01"><div style="font-size:1.5em"><img class="icon" src="%E6%95%B8%E4%BD%8D%E6%95%99%E6%9D%90%E5%8F%8A%E5%BD%A2%E6%88%90%E6%80%A7%E8%A9%95%E9%87%8F%20(Python%20%E7%A8%8B%E5%BC%8F%E8%A8%AD%E8%A8%88)%20bc21520e93464c9cac109a3c2ce06524/yang-recording.png"/></div><div style="width:100%">本教材是根據本人109年『績優教學實踐計畫』的成果所設計的。這是第二次運用『複習翻轉』教學策略，因此整個教材的內容更加完善和豐富。希望透過非傳統教學方式，提升學生的學習效果和興趣。此外，本教材的形成性評量設計是應用生成式AI (ChatGPT、New Being) 輔助設計，大幅提升了題目的設計效率，並可隨時更改，不需重複使用考古題。部分教材使用課程屬大學社會責任課程(USR)，因此，特別引入了SDGs桌遊的活動，以向同學介紹CSR、USR、ESG和SDGs的基本概念。透過有趣的團體桌遊互動，我希望讓學生在輕鬆愉快的環境中自然地獲取這些重要的知識。</div></figure></div></div><h3 id="c0d1a401-c018-405a-aaa1-aa23266ebbd6" class="block-color-yellow">【<strong>數位教材】</strong>及【形成性評量】<strong>：</strong></h3><p id="6d0a1cce-ff7f-4949-8ad3-4afc736f6bbf" class="">共計<mark class="highlight-yellow"> 23個 </mark>教學/評量單元(視需求持續增加中)。</p><figure id="c7c6c584-13f5-41e5-8766-619c7be0297a"><a  target="_blank" href="https://jy3736.github.io/stust2023spring-pub/pyprog2023spring-lectures.html" class="bookmark source"><div class="bookmark-info"><div class="bookmark-text"><div class="bookmark-title">Python 程式設計 (2023 Spring)</div></div><div class="bookmark-href">https://jy3736.github.io/stust2023spring-pub/pyprog2023spring-lectures.html</div></div></a></figure><h3 id="27a3c579-11e8-443a-8431-c7861d89e07d" class=""><mark class="highlight-yellow"><strong>教學影片(Youtube)清單：</strong></mark></h3><p id="61384aa4-e0f7-43ac-bad7-d8ec0408a05e" class="">設計錄製 <mark class="highlight-yellow">22部 </mark>複習翻轉及補救教學影片(視需求持續增加中)。</p><figure id="e2d54933-f622-4061-86c4-4440fe03fcb8"><a  target="_blank" href="https://www.youtube.com/playlist?list=PLx2JssCji9QwoUnqI8JFq7ZeMGaj1lBZB" class="bookmark source"><div class="bookmark-info"><div class="bookmark-text"><div class="bookmark-title">Python 程式設計 (2023)</div></div><div class="bookmark-href"><img src="https://www.youtube.com/s/desktop/fa273944/img/favicon_144x144.png" class="icon bookmark-icon"/>https://www.youtube.com/playlist?list=PLx2JssCji9QwoUnqI8JFq7ZeMGaj1lBZB</div></div><img src="https://i.ytimg.com/vi/Y9W6NgtUfRo/hqdefault.jpg" class="bookmark-image"/></a></figure><h3 id="b7f0c6df-32b3-4d9d-b396-5aeb01ae798e" class=""><mark class="highlight-yellow"><strong>教學音檔(Podcast)清單：</strong></mark></h3><p id="2d919333-965e-44ff-98aa-e4fac140068b" class="">目前共計 <mark class="highlight-yellow">26部 </mark>播客音檔(視需求持續增加中)。</p><figure id="5faeb7ad-b2e9-4324-b5c4-3a21b8ade527"><a  target="_blank" href="https://player.soundon.fm/p/8faaae18-d718-46a4-b9a8-8a17a7674c41" class="bookmark source"><div class="bookmark-info"><div class="bookmark-text"><div class="bookmark-title">SoundOn Player</div></div><div class="bookmark-href"><img src="https://player.soundon.fm/assets/apple-touch-icon-1024x1024.png" class="icon bookmark-icon"/>https://player.soundon.fm/p/8faaae18-d718-46a4-b9a8-8a17a7674c41</div></div></a></figure><h1 id="d90cba1f-84c6-47c2-bac6-73d4b512621a" class=""><strong>作品摘要說明</strong></h1><h3 id="3b669f76-0bc9-4c4e-8660-95bf3c25b54a" class="block-color-yellow_background">實際用於教學科目(課程代碼/課程名稱)</h3><p id="91f3a04d-69b9-4a45-90bc-ae5829515622" class=""><strong>課程代碼：30D1EH01、30D1EH02、G0D17S01、30D1DV02、30D1DV03</strong></p><p id="b84df8f9-aaa3-4662-afeb-691600bf4586" class=""><strong><strong>課程名稱：Python 程式設計</strong></strong></p><p id="6167ae65-dde1-4132-8dc1-4c30c2c17927" class=""><strong>上課班級：(111) </strong><a  target="_blank" href="https://flipclass.stust.edu.tw/course/24839">四技電子一甲</a>、<a  target="_blank" href="https://flipclass.stust.edu.tw/course/24840">四技電子一乙</a>、<a  target="_blank" href="https://flipclass.stust.edu.tw/course/24909">五專資工四甲</a> <strong> (110) </strong><a  target="_blank" href="https://flipclass.stust.edu.tw/course/15442">四技電子二乙</a>、<a  target="_blank" href="https://flipclass.stust.edu.tw/course/15443">四技電子二丙</a></p><h3 id="54ec2727-c4ce-4ef5-90ff-5d354e0afe17" class="block-color-yellow_background">申請類別： 編纂教材</h3><ul id="ac9484da-ea0f-4ee1-820b-67bff79338bc" class="bulleted-list"><li style="list-style-type:disc">編纂教材：『原創』數位教材 <ul id="a64112c3-4fc0-4629-bbe4-2b541f962e3b" class="bulleted-list"><li style="list-style-type:circle"><a  target="_blank" href="https://jy3736.github.io/stust2023spring-pub/pyprog2023spring-lectures.html"><strong>線上教材 (Github)：</strong></a><a  target="_blank" href="https://jy3736.github.io/stust2023spring-pub/pyprog2023spring-lectures.html">依課程規劃設計 2 大主題，目前共計</a><a  target="_blank" href="https://jy3736.github.io/stust2023spring-pub/pyprog2023spring-lectures.html"><mark class="highlight-yellow"> 23個 </mark></a><a  target="_blank" href="https://jy3736.github.io/stust2023spring-pub/pyprog2023spring-lectures.html">教學/評量單元(視需求持續增加中)。</a></li></ul><ul id="c94ac7e9-052b-4e1d-9dbe-e6dbc29b6d20" class="bulleted-list"><li style="list-style-type:circle"><a  target="_blank" href="https://www.youtube.com/playlist?list=PLx2JssCji9QwoUnqI8JFq7ZeMGaj1lBZB"><strong>教學影片 (Youtube)：</strong></a><a  target="_blank" href="https://www.youtube.com/playlist?list=PLx2JssCji9QwoUnqI8JFq7ZeMGaj1lBZB">觀察學生需求設計錄製 </a><a  target="_blank" href="https://www.youtube.com/playlist?list=PLx2JssCji9QwoUnqI8JFq7ZeMGaj1lBZB"><mark class="highlight-yellow">22部 </mark></a><a  target="_blank" href="https://www.youtube.com/playlist?list=PLx2JssCji9QwoUnqI8JFq7ZeMGaj1lBZB">複習翻轉及補救教學影片(視需求持續增加中)。</a></li></ul><ul id="3de601a7-a1c8-454b-b83e-0aad64fc88e2" class="bulleted-list"><li style="list-style-type:circle"><a  target="_blank" href="https://player.soundon.fm/p/8faaae18-d718-46a4-b9a8-8a17a7674c41"><strong>教學音檔 (Podcast)：</strong></a><a  target="_blank" href="https://player.soundon.fm/p/8faaae18-d718-46a4-b9a8-8a17a7674c41">應用 Podcast 的彈性，適時錄製廣播補充教材，及即時的課程相關訊息(ChatGPT、New Bing、...)，目前共計 </a><a  target="_blank" href="https://player.soundon.fm/p/8faaae18-d718-46a4-b9a8-8a17a7674c41"><mark class="highlight-yellow">26部 </mark></a><a  target="_blank" href="https://player.soundon.fm/p/8faaae18-d718-46a4-b9a8-8a17a7674c41">播客音檔(視需求持續增加中)。</a></li></ul></li></ul><h3 id="2770fd99-856b-4f8d-8c34-0e6542784da7" class="block-color-yellow_background">完整性 (教材內容與課程大綱內容結合情形)</h3><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="c7f0e5ff-c061-4a37-bee3-934068d3602f"><div style="font-size:1.5em"><img class="icon" src="%E6%95%B8%E4%BD%8D%E6%95%99%E6%9D%90%E5%8F%8A%E5%BD%A2%E6%88%90%E6%80%A7%E8%A9%95%E9%87%8F%20(Python%20%E7%A8%8B%E5%BC%8F%E8%A8%AD%E8%A8%88)%20bc21520e93464c9cac109a3c2ce06524/yang02%201.png"/></div><div style="width:100%">本課程在上半學期採用 Snakify 線上資源，教授 Python 程式語言基礎。授課教師為每個單元錄製完整說明影片，課堂搭配使用授課教師自行設計的，入門及進階兩份形成性評量。形成性評量是由 10 道選擇題所組成，授課教師利用這兩份評量工具，確實掌握學生對授課內容的了解程度，適時地調整上課節奏及內容，進而達到有效提升學生學習成效的目的。<p id="dd30b648-6177-4139-9fb6-9b57cc7d0f30" class="">所有課程材料均由授課老師原創設計。學生學習完 Python 基礎後，課程開始採用遊戲式學習工具 PAIA，協助學生提高 Python 程式設計的知識。此外，本課程採用 YouTube 和 Podcast 進行講義開發，並在必要時不斷更新。除此之外，Github 課堂自動評分系統也用於提供更強大的程式設計練習和期中考試。</p><p id="13035e5d-5377-46f3-a690-2f5cf42e107b" class="">教材內容與課程大綱內容結合情形良好，不僅充分考慮學生學習的需求和能力，更融合了遊戲化學習等現代化元素。課程材料的原創設計，充分體現了授課老師的專業素養和教學熱情。而使用形成性評量確認學生的學習狀況，能夠及時發現學生的問題，進一步調整課程內容和教學策略，提高學生的學習效果。</p><p id="bb90d0fa-e7af-4576-a503-39dc733158f9" class="">課程進一步運用了 YouTube 和 Podcast 進行講義開發。這樣不僅方便學生學習和複習，還可以在必要時進行更新，保持課程內容的新鮮度和時效性。此外，採用 Github 課堂自動評分系統，更能夠提供更豐富和更有挑戰性的程式設計練習和期中考試，進一步激發學生的學習動力和創造力。</p><p id="3fa4076b-4732-4c2d-8742-95acea5d8f84" class="">綜上所述，本課程的教材內容與課程大綱內容結合情形良好，不僅融合了現代化的學習元素，更注重形成性評量和教學策略的調整，進一步提高學生的學習效果。</p></div></figure><h3 id="abb29b78-db09-40f7-9620-512a5dc0099c" class="block-color-teal_background"><strong>數位線上教材</strong></h3><p id="6a91d15e-9269-48e0-a0a8-61d963cb14a7" class=""><a  target="_blank" href="https://jy3736.github.io/stust2023spring-pub/Python%20%E7%A8%8B%E5%BC%8F%E8%A8%AD%E8%A8%88%20(2023%20Spring)%20906b289e0ba245ae93efa2e35ef1b589/%E8%AA%B2%E7%A8%8B%E7%B0%A1%E4%BB%8B%20-%20Python%20%E7%A8%8B%E5%BC%8F%E8%A8%AD%E8%A8%88%20(2023%20Spring)%20dfe998bcbbce4e56a79a4a0fe544ad60.html"><strong>課程簡介 - Python 程式設計 (2023 Spring)</strong></a></p><p id="df3a80ae-138d-4496-aaaa-ee87107ffcd4" class=""><a  target="_blank" href="https://jy3736.github.io/stust2023spring-pub/Python%20%E7%A8%8B%E5%BC%8F%E8%A8%AD%E8%A8%88%20(2023%20Spring)%20906b289e0ba245ae93efa2e35ef1b589/Python%20%E7%A8%8B%E5%BC%8F%E8%A8%AD%E8%A8%88%E5%9F%BA%E7%A4%8E%E5%85%A5%E9%96%80%20(1%206)%202b08444b0b90422d9b49eb26e8be99ce.html"><strong>Python 程式設計基礎入門 (1/6)</strong></a></p><p id="b93159cb-92a3-43b9-8922-564419fa531c" class=""><a  target="_blank" href="https://jy3736.github.io/stust2023spring-pub/Python%20%E7%A8%8B%E5%BC%8F%E8%A8%AD%E8%A8%88%20(2023%20Spring)%20906b289e0ba245ae93efa2e35ef1b589/Python%20%E7%A8%8B%E5%BC%8F%E8%A8%AD%E8%A8%88%E5%9F%BA%E7%A4%8E%E5%85%A5%E9%96%80%20(2%206)%2031d9f607211b440ea7e5103a45e5faf8.html"><strong>Python 程式設計基礎入門 (2/6)</strong></a></p><p id="08de3716-b147-43f7-a33a-47ad988ec322" class=""><a  target="_blank" href="https://jy3736.github.io/stust2023spring-pub/Python%20%E7%A8%8B%E5%BC%8F%E8%A8%AD%E8%A8%88%20(2023%20Spring)%20906b289e0ba245ae93efa2e35ef1b589/Python%20%E7%A8%8B%E5%BC%8F%E8%A8%AD%E8%A8%88%E5%9F%BA%E7%A4%8E%E5%85%A5%E9%96%80%20(3%206)%20dcb75769dc854e61b07cdabcf90f7ee3.html"><strong>Python 程式設計基礎入門 (3/6)</strong></a></p><p id="1243dd72-55aa-4565-94e2-6d0e1a482984" class=""><a  target="_blank" href="https://jy3736.github.io/stust2023spring-pub/Python%20%E7%A8%8B%E5%BC%8F%E8%A8%AD%E8%A8%88%20(2023%20Spring)%20906b289e0ba245ae93efa2e35ef1b589/Python%20%E7%A8%8B%E5%BC%8F%E8%A8%AD%E8%A8%88%E5%9F%BA%E7%A4%8E%E5%85%A5%E9%96%80%20(4%206)%209a95ff17f6cb40cdb722ec1972706b13.html"><strong>Python 程式設計基礎入門 (4/6)</strong></a></p><p id="6caa3ef2-735b-41c9-b495-6b3c459a4c79" class=""><a  target="_blank" href="https://jy3736.github.io/stust2023spring-pub/Python%20%E7%A8%8B%E5%BC%8F%E8%A8%AD%E8%A8%88%20(2023%20Spring)%20906b289e0ba245ae93efa2e35ef1b589/Python%20%E7%A8%8B%E5%BC%8F%E8%A8%AD%E8%A8%88%E5%9F%BA%E7%A4%8E%E5%85%A5%E9%96%80%20(5%206)%2059ba4c7f853c43f597ca688cd6e3bdd3.html"><strong>Python 程式設計基礎入門 (5/6)</strong></a></p><p id="70b47294-5dd6-474b-9a0a-4080cbdb34c5" class=""><a  target="_blank" href="https://jy3736.github.io/stust2023spring-pub/Python%20%E7%A8%8B%E5%BC%8F%E8%A8%AD%E8%A8%88%20(2023%20Spring)%20906b289e0ba245ae93efa2e35ef1b589/Python%20%E7%A8%8B%E5%BC%8F%E8%A8%AD%E8%A8%88%E5%9F%BA%E7%A4%8E%E5%85%A5%E9%96%80%20(6%206)%20cf428c1fda944640b4e7e79e31514c45.html"><strong>Python 程式設計基礎入門 (6/6)</strong></a></p><p id="79facd7a-fb55-4f8b-9aa6-700b86bb5e2b" class=""><a  target="_blank" href="https://jy3736.github.io/stust2023spring-pub/Python%20%E7%A8%8B%E5%BC%8F%E8%A8%AD%E8%A8%88%20(2023%20Spring)%20906b289e0ba245ae93efa2e35ef1b589/%E6%9C%9F%E4%B8%AD%E6%B8%AC%E9%A9%97%20(Midterm%20Exam)%204a6a774e7db740f2aa2e2eb35c28eb5b.html"><strong>📝期中測驗 (Midterm Exam)</strong></a></p><p id="cb0b9211-2742-47d5-91aa-53cd32ee49fd" class=""><a  target="_blank" href="https://jy3736.github.io/stust2023spring-pub/Python%20%E7%A8%8B%E5%BC%8F%E8%A8%AD%E8%A8%88%20(2023%20Spring)%20906b289e0ba245ae93efa2e35ef1b589/%E6%9C%9F%E4%B8%AD%E6%B8%AC%E9%A9%97%E8%A7%A3%E7%AD%94%20(Midterm%20Exam%20Solutions)%20b54b2d01431e47f9b96c059e3ef0eb19.html"><strong>📝期中測驗解答 (Midterm Exam Solutions)</strong></a></p><p id="ce2836af-0410-4d9a-9675-e1152e323566" class=""><a  target="_blank" href="https://jy3736.github.io/stust2023spring-pub/Python%20%E7%A8%8B%E5%BC%8F%E8%A8%AD%E8%A8%88%20(2023%20Spring)%20906b289e0ba245ae93efa2e35ef1b589/An%20Overview%20of%20SDGs,%20CSR,%20ESG,%20and%20USR%20412e087f0b1440f5bfdeb80bee02d819.html"><strong>An Overview of SDGs, CSR, ESG, and USR</strong></a></p><p id="1c4f792e-dc33-438f-92f6-4dc971622a5d" class=""><a  target="_blank" href="https://jy3736.github.io/stust2023spring-pub/Python%20%E7%A8%8B%E5%BC%8F%E8%A8%AD%E8%A8%88%20(2023%20Spring)%20906b289e0ba245ae93efa2e35ef1b589/Python%20%E7%89%A9%E4%BB%B6%E5%B0%8E%E5%90%91%E7%A8%8B%E5%BC%8F%E8%A8%AD%E8%A8%88(OOP)%201%209e1a7af416f04af4a56ff7e6786b1204.html"><strong>Python 物件導向程式設計(OOP) 1</strong></a></p><p id="cea089da-faff-4e02-81b3-9d3c674563b4" class=""><a  target="_blank" href="https://jy3736.github.io/stust2023spring-pub/Python%20%E7%A8%8B%E5%BC%8F%E8%A8%AD%E8%A8%88%20(2023%20Spring)%20906b289e0ba245ae93efa2e35ef1b589/Python%20%E7%89%A9%E4%BB%B6%E5%B0%8E%E5%90%91%E7%A8%8B%E5%BC%8F%E8%A8%AD%E8%A8%88(OOP)%201%20-%20Exercises%20e5ce3217ea5e4366ba5b73fa81278d97.html"><strong>Python 物件導向程式設計(OOP) 1 - Exercises</strong></a></p><p id="36a05797-bf22-421f-9fdb-5610bd2c5016" class=""><a  target="_blank" href="https://jy3736.github.io/stust2023spring-pub/Python%20%E7%A8%8B%E5%BC%8F%E8%A8%AD%E8%A8%88%20(2023%20Spring)%20906b289e0ba245ae93efa2e35ef1b589/Python%20%E7%89%A9%E4%BB%B6%E5%B0%8E%E5%90%91%E7%A8%8B%E5%BC%8F%E8%A8%AD%E8%A8%88(OOP)%201%20-%20Exercises%20%E3%80%90Solutions%E3%80%91%20cc624763c16746ad8396572474ce8bb6.html"><strong>Python 物件導向程式設計(OOP) 1 - Exercises 【Solutions】</strong></a></p><p id="995dbfa0-0863-4154-aaa7-5b7d544e4c8a" class=""><a  target="_blank" href="https://jy3736.github.io/stust2023spring-pub/Python%20%E7%A8%8B%E5%BC%8F%E8%A8%AD%E8%A8%88%20(2023%20Spring)%20906b289e0ba245ae93efa2e35ef1b589/Python%20%E7%89%A9%E4%BB%B6%E5%B0%8E%E5%90%91%E7%A8%8B%E5%BC%8F%E8%A8%AD%E8%A8%88(OOP)%202%20afe54a5dacf44492a992521db6f12b66.html"><strong>Python 物件導向程式設計(OOP) 2</strong></a></p><p id="5bc14a69-6c2f-46a8-9daf-408ffbec159f" class=""><a  target="_blank" href="https://jy3736.github.io/stust2023spring-pub/Python%20%E7%A8%8B%E5%BC%8F%E8%A8%AD%E8%A8%88%20(2023%20Spring)%20906b289e0ba245ae93efa2e35ef1b589/Python%20%E7%89%A9%E4%BB%B6%E5%B0%8E%E5%90%91%E7%A8%8B%E5%BC%8F%E8%A8%AD%E8%A8%88(OOP)%203%203ed9623e1a4941178d77f1ab2b0c9ef1.html"><strong>Python 物件導向程式設計(OOP) 3</strong></a></p><p id="5254121e-d7ff-448b-9de2-dc35d04f5307" class=""><a  target="_blank" href="https://jy3736.github.io/stust2023spring-pub/Python%20%E7%A8%8B%E5%BC%8F%E8%A8%AD%E8%A8%88%20(2023%20Spring)%20906b289e0ba245ae93efa2e35ef1b589/Python%20References%204689e91cf3cf46ad8edeae06faa313e8.html"><strong>Python References</strong></a></p><h3 id="6ff3ee4c-a5c0-4bf5-ba19-b081d0c0a48e" class="block-color-teal_background"><strong>形成性評量 【題目與解答】</strong></h3><p id="7145405d-d455-4bc0-b836-6881950766b9" class=""><a  target="_blank" href="https://jy3736.github.io/stust2023spring-pub/Python%20%E7%A8%8B%E5%BC%8F%E8%A8%AD%E8%A8%88%20(2023%20Spring)%20906b289e0ba245ae93efa2e35ef1b589/Formative%20Assessment%20-%20Snakify%20Lesson%205%202209e47984eb4329b1b46bb6ffaf4392.html"><strong>📝Formative Assessment - Snakify Lesson 5</strong></a></p><p id="42bf5c77-b25a-4026-864c-40e0fb7bf014" class=""><a  target="_blank" href="https://jy3736.github.io/stust2023spring-pub/Python%20%E7%A8%8B%E5%BC%8F%E8%A8%AD%E8%A8%88%20(2023%20Spring)%20906b289e0ba245ae93efa2e35ef1b589/Formative%20Assessment%20-%20Snakify%20Lesson%206%20d19ba3a28ca84d30a81d2cb81d65ae58.html"><strong>📝Formative Assessment - Snakify Lesson 6</strong></a></p><p id="7b91c052-a629-4753-bfed-fb411876f9e7" class=""><a  target="_blank" href="https://jy3736.github.io/stust2023spring-pub/Python%20%E7%A8%8B%E5%BC%8F%E8%A8%AD%E8%A8%88%20(2023%20Spring)%20906b289e0ba245ae93efa2e35ef1b589/Formative%20Assessment%20-%20Snakify%20Lesson%207%20448ea4d4ed2843888688c1976489b275.html"><strong>📝Formative Assessment - Snakify Lesson 7</strong></a></p><p id="70a8b318-dc6d-4978-9b33-02a4951e9409" class=""><a  target="_blank" href="https://jy3736.github.io/stust2023spring-pub/Python%20%E7%A8%8B%E5%BC%8F%E8%A8%AD%E8%A8%88%20(2023%20Spring)%20906b289e0ba245ae93efa2e35ef1b589/Formative%20Assessment%20-%20Snakify%20Lesson%208%20f238fb70971146f8bcc5a6207beb50fa.html"><strong>📝Formative Assessment - Snakify Lesson 8</strong></a></p><p id="9b4f387f-06a2-4703-88fc-a157462e6665" class=""><a  target="_blank" href="https://jy3736.github.io/stust2023spring-pub/Python%20%E7%A8%8B%E5%BC%8F%E8%A8%AD%E8%A8%88%20(2023%20Spring)%20906b289e0ba245ae93efa2e35ef1b589/Formative%20Assessment%20-%20Snakify%20Lesson%209%20190f18a21c544a27be0f1dbaf452f4b5.html"><strong>📝Formative Assessment - Snakify Lesson 9</strong></a></p><p id="e7c7a4f1-a0c4-4d34-b29f-30412f12c8dc" class=""><a  target="_blank" href="https://jy3736.github.io/stust2023spring-pub/Python%20%E7%A8%8B%E5%BC%8F%E8%A8%AD%E8%A8%88%20(2023%20Spring)%20906b289e0ba245ae93efa2e35ef1b589/Formative%20Assessment%20-%20Snakify%20Lesson%2010%20d2e8326f6e3649e0b98267aa843d2031.html"><strong>📝Formative Assessment - Snakify Lesson 10</strong></a></p><p id="6974bea3-6b2c-4b9e-976c-22c4865e5ab9" class=""><a  target="_blank" href="https://jy3736.github.io/stust2023spring-pub/Python%20%E7%A8%8B%E5%BC%8F%E8%A8%AD%E8%A8%88%20(2023%20Spring)%20906b289e0ba245ae93efa2e35ef1b589/Formative%20Assessment%20-%20Snakify%20Lesson%2011%20808aed11c77a45f4bcb1f246cfd21440.html"><strong>📝Formative Assessment - Snakify Lesson 11</strong></a></p><p id="96fdabc7-d3ad-4864-8fa4-7d9f3a267f82" class=""><a  target="_blank" href="https://jy3736.github.io/stust2023spring-pub/Python%20%E7%A8%8B%E5%BC%8F%E8%A8%AD%E8%A8%88%20(2023%20Spring)%20906b289e0ba245ae93efa2e35ef1b589/Formative%20Assessment%20-%20Python%20OOP%201%20a1936471a7864e478b912f15f839f1df.html"><strong>📝Formative Assessment - Python OOP 1</strong></a></p><h3 id="8fb66f68-c501-4453-a13e-110216c23f89" class="block-color-yellow_background">創新性 (教材原創性及貢獻度，說明該作品與類似作品之差異或優於類似教材部分)</h3><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="32e37f73-6ba2-40bf-89a0-9cc059df796f"><div style="font-size:1.5em"><img class="icon" src="%E6%95%B8%E4%BD%8D%E6%95%99%E6%9D%90%E5%8F%8A%E5%BD%A2%E6%88%90%E6%80%A7%E8%A9%95%E9%87%8F%20(Python%20%E7%A8%8B%E5%BC%8F%E8%A8%AD%E8%A8%88)%20bc21520e93464c9cac109a3c2ce06524/yang05.png"/></div><div style="width:100%">這份教材具有很高的創新性，因為所有範例程式及翻轉教室影音教材都是原創作品，並且沒有使用任何書商提供的教材。這與其他教材不同，因為所有內容都是作者自行搜尋國內外資料整理設計，同時也有明確表列引用到的外部參考資料來源網址。<p id="bd6bfc30-a776-4df7-86a4-49925c59e6a8" class="">此外，本教材的教學方法和知識傳遞的媒體都做了大幅度的改變，使用了學生熟悉的 YouTube、Podcast、線上教材、及雲端 Github 等，這種方式和傳統的課堂授課方式不同。這份教材融合了翻轉教室、做中學、及適性化教學等技巧，並且漸進式地調整教學內容、授課方式、及教材呈現，因應近年來學生程度的轉變，這種客製化改良設計也是其他教材所不具備的優勢之一。</p><p id="4004a5f4-d2a7-4f70-adea-7ebb71806aca" class="">此外，本教材的內容以線上筆記軟體 Notion 設計編纂，不但方便閱讀，且減少了紙張的使用，同時也方便日後更新及與其他教師共筆編修。所有講義以網頁形式分享於網際網路 Github平臺，並且所有翻轉教室影音教材已在上課期間上傳至 YouTube，不定時地利用podcast增加教材補充說明，同時也用於分享與課程相關的最新資訊，例如生成式AI ChatGPT及New Being等，這也是其他教材所缺乏的部分。</p><p id="b92b85d6-70a5-4df2-84d3-a18d7ba6e18b" class="">綜合以上優勢，本教材在創新性、教材原創性及貢獻度方面優於其他類似教材。</p></div></figure><h3 id="42d04b89-0ace-42e5-b892-be1cc7dd849d" class="block-color-yellow_background">學習成效(教材/教具輔助教學之運用情形，說明該作品對學生學習或教師教學之貢獻)</h3><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="a89690a7-839f-4150-92e4-6319a209c7e2"><div style="font-size:1.5em"><img class="icon" src="%E6%95%B8%E4%BD%8D%E6%95%99%E6%9D%90%E5%8F%8A%E5%BD%A2%E6%88%90%E6%80%A7%E8%A9%95%E9%87%8F%20(Python%20%E7%A8%8B%E5%BC%8F%E8%A8%AD%E8%A8%88)%20bc21520e93464c9cac109a3c2ce06524/800x800.png"/></div><div style="width:100%">這個作品(教材/教具)採用了多種創新的教學方式和原創教具，對學生學習和教師教學都有很大的貢獻。其中，翻轉教學可以讓學生在課堂外自主學習，讓未能及時掌握授課內容的學生得到有效的補救；Zuvio 即時互動工具可以即時掌握學生學習進度，並用以調整課程內容及授課節奏；SDGs桌遊競賽可以強化學生對大學社會責任的認知，提升學生對參與社會服務的認同；遊戲式學習 PAIA 則可以強化學生Python程式設計的基本技能，同時又可藉此訓練學生符合USR場域活動的需求。<p id="5780a9a8-6f5b-46d0-a6f5-082df00cf04a" class="">本學期，教師引入了課堂形成性評量，透過評量結果了解學生學習狀況，並且根據結果調整教學內容和方法。這種教學方式相對於單純的詢問學生更為科學和準確，可以幫助教師更精準的掌握學生的學習狀況，進而針對性的調整教學內容和方法。透過形成性評量的結果，教師可以得知學生的學習情況，從而針對不同學生提供有針對性的補救措施，以提高學生的學習效果。</p><p id="33550eae-b88f-42c6-90de-4cddfc239f6c" class="">此外，授課教師還增加了線上/實體培訓課程，訓練自願參與社會責任場域服務大學生，並帶領這些學生實踐社會責任場域實作服務，讓學生親身經歷專業學習的實務運用。這樣的培訓和實踐，不僅有助於學生將所學應用於實際生活中，更能增強學生的實務能力和社會責任感。
+綜合來說，形成性評量在這份作品中發揮了非常重要的作用，為其他教學措施提供了有力的支持。透過形成性評量的實施，教師可以更精準有效地了解學生的學習狀況，及時調整教學內容和方法，從而提高學生的學習效果。同時，形成性評量也能提高學生的自主學習和自我管理能力，從而培養學生的實務能力和社會責任感。</p></div></figure><h3 id="f7a479e7-5300-48e4-8484-4c38e699a145" class="block-color-teal_background"><strong>【參考資料】</strong>111 學年課堂形成性評量使用與分析</h3><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="ef792d5c-35b1-4d64-a5d6-57a7d4275ed0"><div style="font-size:1.5em"><img class="icon" src="%E6%95%B8%E4%BD%8D%E6%95%99%E6%9D%90%E5%8F%8A%E5%BD%A2%E6%88%90%E6%80%A7%E8%A9%95%E9%87%8F%20(Python%20%E7%A8%8B%E5%BC%8F%E8%A8%AD%E8%A8%88)%20bc21520e93464c9cac109a3c2ce06524/yang02%202.png"/></div><div style="width:100%">我每週會進行一到兩次形成性評量，以協助了解學生的學習狀況，並根據結果調整教學內容和方法。我認為這樣比直接詢問學生更為有效和科學。儘管設計形成性評量需要花費一些時間，但我認為這是值得的，因為它能更準確有效地提高學生的學習成效。以下是一份期中考前的形成性評量，進行簡單的分析和說明：<p id="7008f09d-708b-44a6-9c07-cf7928438ce0" class="">根據課堂上的形成性評量，這個班級的學習狀況有以下特點：</p><ul id="3e24066d-85fc-4523-a51e-77fd02c51fd8" class="bulleted-list"><li style="list-style-type:disc">平均分數58.29分，低於及格標準，顯示整體學習效果仍有進步空間。</li></ul><ul id="13620582-18f5-458b-b1ba-aaaedcbe22c4" class="bulleted-list"><li style="list-style-type:disc">最高分數100分，最低分數20分，分數範圍很大，顯示學生間的學習差異很大。</li></ul><ul id="0b870a21-7584-4cd5-8b1e-fdb6968bc0e2" class="bulleted-list"><li style="list-style-type:disc">眾數70分，中位數60分，標準差19.11分，變異係數0.33，顯示學生的分數分布不均勻，有一部分學生的成績集中在70分左右，但也有一部分學生的成績偏低或偏高。</li></ul><ul id="50cd56af-4410-4683-a089-e7d76a42dd1e" class="bulleted-list"><li style="list-style-type:disc">90分以上的學生有3人，佔5%；75到90分的學生有5人，佔8.33%；60到75分的學生有15人，佔25%；45到60分的學生有7人，佔11.67%；30到45分的學生有10人，佔16.67%；15到30分的學生有1人，佔1.67%。顯示這個班級的高分組和低分組都很少，大部分學生的成績在中等水平。</li></ul><p id="a03d65d8-4767-4cc1-8bbe-f597e3d1cb59" class="">綜上所述，這個班級整體學習表現相對穩定，平均分數為58.29分，中位數為60分，眾數為70分，且標準差為19.11分，變異係數為0.33，數據變異程度中等。其中，表現最好的學生有3人獲得90分以上，另有5人獲得75至90分的成績，顯示班級中有一些較為優秀的學生。另一方面，也有11人（包括15到45分的學生）的學習表現偏低，需要進一步關注及提供輔導。在總體表現上，班級整體學習表現良好，但需注意個別學生的進度，以便提供更個別化的支援與協助，幫助他們提升學習成效。</p></div></figure><figure id="99669f40-0422-4359-b054-21452a6eb97f" class="image"><a href="%E6%95%B8%E4%BD%8D%E6%95%99%E6%9D%90%E5%8F%8A%E5%BD%A2%E6%88%90%E6%80%A7%E8%A9%95%E9%87%8F%20(Python%20%E7%A8%8B%E5%BC%8F%E8%A8%AD%E8%A8%88)%20bc21520e93464c9cac109a3c2ce06524/Untitled.png"><img style="width:2129px" src="%E6%95%B8%E4%BD%8D%E6%95%99%E6%9D%90%E5%8F%8A%E5%BD%A2%E6%88%90%E6%80%A7%E8%A9%95%E9%87%8F%20(Python%20%E7%A8%8B%E5%BC%8F%E8%A8%AD%E8%A8%88)%20bc21520e93464c9cac109a3c2ce06524/Untitled.png"/></a></figure><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="b3d6d378-aa11-4f0f-a20d-232d51f2dc43"><div style="font-size:1.5em"><img class="icon" src="%E6%95%B8%E4%BD%8D%E6%95%99%E6%9D%90%E5%8F%8A%E5%BD%A2%E6%88%90%E6%80%A7%E8%A9%95%E9%87%8F%20(Python%20%E7%A8%8B%E5%BC%8F%E8%A8%AD%E8%A8%88)%20bc21520e93464c9cac109a3c2ce06524/yang02%203.png"/></div><div style="width:100%">簡略說明自主開發的形成性評量使用方式：根據當週上課單元的不同，我們會設計簡單和進階兩份形成性評量，每一份都包含 10 道選擇題，每題分值為 10 分。學生回答完每一道題目後，Zuvio 就會計算出平均得分。就以下兩道題目為例：第一題的平均得分為 8.78 分，表示接近 90% 的學生會正確回答這道題目，這也代表著大部分學生已經掌握了這個單元的知識。而第三道題目的平均得分只有2.93，也就是只有不到 30% 的學生回答正確，這代表著大部分學生仍然對這個單元的知識感到困惑。在這種情況下，授課教師就會使用不同的方式進行說明，以達到補強的作用。這些形成性評量的設計可以幫助我們更準確地了解學生對於不同單元的掌握情況，進而調整教學內容和方法，提高教學效果。</div></figure><figure id="d524a7c6-8ec5-4c8c-9916-3bc75b94f3ef" class="image"><a href="%E6%95%B8%E4%BD%8D%E6%95%99%E6%9D%90%E5%8F%8A%E5%BD%A2%E6%88%90%E6%80%A7%E8%A9%95%E9%87%8F%20(Python%20%E7%A8%8B%E5%BC%8F%E8%A8%AD%E8%A8%88)%20bc21520e93464c9cac109a3c2ce06524/Untitled%201.png"><img style="width:1625px" src="%E6%95%B8%E4%BD%8D%E6%95%99%E6%9D%90%E5%8F%8A%E5%BD%A2%E6%88%90%E6%80%A7%E8%A9%95%E9%87%8F%20(Python%20%E7%A8%8B%E5%BC%8F%E8%A8%AD%E8%A8%88)%20bc21520e93464c9cac109a3c2ce06524/Untitled%201.png"/></a></figure><h3 id="9b338b3e-225d-4244-81df-aeded4dbb378" class="block-color-teal_background"><strong>【參考資料】</strong>110 學年教材/教具使用狀況</h3><h3 id="c8c49731-5049-4f4d-abf9-2835dfb1cecc" class="block-color-yellow"><a  target="_blank" href="https://flipclass.stust.edu.tw/course/15443">四技電子二丙</a> (FlipClass 數位學習)</h3><div id="5ad00e48-74f4-4a58-bc8e-8242f82ef36c" class="column-list"><div id="3f7c4e76-cb58-4722-9f1c-1e1534b59e5e" style="width:50%" class="column"><figure id="0b6de7fb-5273-457d-8cdd-5b850cdd258b" class="image"><a href="%E6%95%B8%E4%BD%8D%E6%95%99%E6%9D%90%E5%8F%8A%E5%BD%A2%E6%88%90%E6%80%A7%E8%A9%95%E9%87%8F%20(Python%20%E7%A8%8B%E5%BC%8F%E8%A8%AD%E8%A8%88)%20bc21520e93464c9cac109a3c2ce06524/Untitled%202.png"><img style="width:1061px" src="%E6%95%B8%E4%BD%8D%E6%95%99%E6%9D%90%E5%8F%8A%E5%BD%A2%E6%88%90%E6%80%A7%E8%A9%95%E9%87%8F%20(Python%20%E7%A8%8B%E5%BC%8F%E8%A8%AD%E8%A8%88)%20bc21520e93464c9cac109a3c2ce06524/Untitled%202.png"/></a></figure></div><div id="7eb10c28-a540-4852-b785-642212c695a9" style="width:50%" class="column"><figure id="b2c552eb-f50b-442d-94ae-45514f8d658c" class="image"><a href="%E6%95%B8%E4%BD%8D%E6%95%99%E6%9D%90%E5%8F%8A%E5%BD%A2%E6%88%90%E6%80%A7%E8%A9%95%E9%87%8F%20(Python%20%E7%A8%8B%E5%BC%8F%E8%A8%AD%E8%A8%88)%20bc21520e93464c9cac109a3c2ce06524/Untitled%203.png"><img style="width:2084px" src="%E6%95%B8%E4%BD%8D%E6%95%99%E6%9D%90%E5%8F%8A%E5%BD%A2%E6%88%90%E6%80%A7%E8%A9%95%E9%87%8F%20(Python%20%E7%A8%8B%E5%BC%8F%E8%A8%AD%E8%A8%88)%20bc21520e93464c9cac109a3c2ce06524/Untitled%203.png"/></a></figure></div></div><h3 id="a7dbcbdb-e7fa-44d3-81e0-1363f057d8ab" class="block-color-yellow"><a  target="_blank" href="https://flipclass.stust.edu.tw/course/15442">四技電子二乙</a> (FlipClass 數位學習)</h3><div id="dc660ecb-b306-4ab2-922c-b5f17382f43a" class="column-list"><div id="59ad88f9-e386-4e94-be3b-f8b1059120ca" style="width:50%" class="column"><figure id="c327b9ad-b4c1-4c1e-bda3-0d9390a7cdbc" class="image"><a href="%E6%95%B8%E4%BD%8D%E6%95%99%E6%9D%90%E5%8F%8A%E5%BD%A2%E6%88%90%E6%80%A7%E8%A9%95%E9%87%8F%20(Python%20%E7%A8%8B%E5%BC%8F%E8%A8%AD%E8%A8%88)%20bc21520e93464c9cac109a3c2ce06524/Untitled%204.png"><img style="width:1057px" src="%E6%95%B8%E4%BD%8D%E6%95%99%E6%9D%90%E5%8F%8A%E5%BD%A2%E6%88%90%E6%80%A7%E8%A9%95%E9%87%8F%20(Python%20%E7%A8%8B%E5%BC%8F%E8%A8%AD%E8%A8%88)%20bc21520e93464c9cac109a3c2ce06524/Untitled%204.png"/></a></figure></div><div id="77fccc41-4ecd-46f6-889f-eecbb0c30cc8" style="width:50%" class="column"><figure id="8cebaecf-c9e3-40d5-b334-74c4a15141a1" class="image"><a href="%E6%95%B8%E4%BD%8D%E6%95%99%E6%9D%90%E5%8F%8A%E5%BD%A2%E6%88%90%E6%80%A7%E8%A9%95%E9%87%8F%20(Python%20%E7%A8%8B%E5%BC%8F%E8%A8%AD%E8%A8%88)%20bc21520e93464c9cac109a3c2ce06524/Untitled%205.png"><img style="width:2060px" src="%E6%95%B8%E4%BD%8D%E6%95%99%E6%9D%90%E5%8F%8A%E5%BD%A2%E6%88%90%E6%80%A7%E8%A9%95%E9%87%8F%20(Python%20%E7%A8%8B%E5%BC%8F%E8%A8%AD%E8%A8%88)%20bc21520e93464c9cac109a3c2ce06524/Untitled%205.png"/></a></figure></div></div><h3 id="80ae5d69-43fd-4ce8-a083-e12c4825718a" class="block-color-teal_background"><strong>【參考資料】</strong>111 學年教材/教具使用狀況 (以下資料統計至第11週)</h3><h3 id="9c1ba473-3da5-42cd-8cdd-13c0975b3556" class="block-color-yellow"><a  target="_blank" href="https://flipclass.stust.edu.tw/course/24909">五專資工四甲</a> (FlipClass 數位學習)</h3><div id="d9dbb905-0e5a-460c-90be-1a01a0036e75" class="column-list"><div id="9d26ba17-7348-421e-aa99-6b04739ac09e" style="width:50%" class="column"><figure id="3c95da05-8555-496e-ae90-d8a2b1edade8" class="image"><a href="%E6%95%B8%E4%BD%8D%E6%95%99%E6%9D%90%E5%8F%8A%E5%BD%A2%E6%88%90%E6%80%A7%E8%A9%95%E9%87%8F%20(Python%20%E7%A8%8B%E5%BC%8F%E8%A8%AD%E8%A8%88)%20bc21520e93464c9cac109a3c2ce06524/Untitled%206.png"><img style="width:1051px" src="%E6%95%B8%E4%BD%8D%E6%95%99%E6%9D%90%E5%8F%8A%E5%BD%A2%E6%88%90%E6%80%A7%E8%A9%95%E9%87%8F%20(Python%20%E7%A8%8B%E5%BC%8F%E8%A8%AD%E8%A8%88)%20bc21520e93464c9cac109a3c2ce06524/Untitled%206.png"/></a></figure></div><div id="e870f92d-b9a4-4563-b1e5-ae7e06b4dd2a" style="width:50%" class="column"><figure id="fb22148e-7b14-47e5-b704-ba9544a17a8b" class="image"><a href="%E6%95%B8%E4%BD%8D%E6%95%99%E6%9D%90%E5%8F%8A%E5%BD%A2%E6%88%90%E6%80%A7%E8%A9%95%E9%87%8F%20(Python%20%E7%A8%8B%E5%BC%8F%E8%A8%AD%E8%A8%88)%20bc21520e93464c9cac109a3c2ce06524/Untitled%207.png"><img style="width:2072px" src="%E6%95%B8%E4%BD%8D%E6%95%99%E6%9D%90%E5%8F%8A%E5%BD%A2%E6%88%90%E6%80%A7%E8%A9%95%E9%87%8F%20(Python%20%E7%A8%8B%E5%BC%8F%E8%A8%AD%E8%A8%88)%20bc21520e93464c9cac109a3c2ce06524/Untitled%207.png"/></a></figure></div></div><h3 id="3f1abf52-1686-4570-9d72-e5cc550552f2" class="block-color-yellow">Zuvio <strong>互動平台 - 形成性評量</strong></h3><figure id="620d52b7-a02d-4004-b358-1fc2710ee534" class="image"><a href="%E6%95%B8%E4%BD%8D%E6%95%99%E6%9D%90%E5%8F%8A%E5%BD%A2%E6%88%90%E6%80%A7%E8%A9%95%E9%87%8F%20(Python%20%E7%A8%8B%E5%BC%8F%E8%A8%AD%E8%A8%88)%20bc21520e93464c9cac109a3c2ce06524/Untitled%208.png"><img style="width:1144px" src="%E6%95%B8%E4%BD%8D%E6%95%99%E6%9D%90%E5%8F%8A%E5%BD%A2%E6%88%90%E6%80%A7%E8%A9%95%E9%87%8F%20(Python%20%E7%A8%8B%E5%BC%8F%E8%A8%AD%E8%A8%88)%20bc21520e93464c9cac109a3c2ce06524/Untitled%208.png"/></a></figure><h3 id="157c7785-1440-4dab-886a-3dad21ada847" class="block-color-yellow"><a  target="_blank" href="https://flipclass.stust.edu.tw/course/24839">四技電子一甲</a> (FlipClass 數位學習)</h3><div id="6a144987-7582-4ec6-b350-60aa20de1853" class="column-list"><div id="bf1dff21-7a99-47d9-b564-989e1d212c25" style="width:50%" class="column"><figure id="84c1a5a6-4e8d-4e38-ba13-ed1cc2a68999" class="image"><a href="%E6%95%B8%E4%BD%8D%E6%95%99%E6%9D%90%E5%8F%8A%E5%BD%A2%E6%88%90%E6%80%A7%E8%A9%95%E9%87%8F%20(Python%20%E7%A8%8B%E5%BC%8F%E8%A8%AD%E8%A8%88)%20bc21520e93464c9cac109a3c2ce06524/Untitled%209.png"><img style="width:1049px" src="%E6%95%B8%E4%BD%8D%E6%95%99%E6%9D%90%E5%8F%8A%E5%BD%A2%E6%88%90%E6%80%A7%E8%A9%95%E9%87%8F%20(Python%20%E7%A8%8B%E5%BC%8F%E8%A8%AD%E8%A8%88)%20bc21520e93464c9cac109a3c2ce06524/Untitled%209.png"/></a></figure></div><div id="9e22960e-43c7-4c41-9fc0-23ea4405d01c" style="width:50%" class="column"><figure id="27fc5895-b090-4ed9-b126-6b9994c9ca54" class="image"><a href="%E6%95%B8%E4%BD%8D%E6%95%99%E6%9D%90%E5%8F%8A%E5%BD%A2%E6%88%90%E6%80%A7%E8%A9%95%E9%87%8F%20(Python%20%E7%A8%8B%E5%BC%8F%E8%A8%AD%E8%A8%88)%20bc21520e93464c9cac109a3c2ce06524/Untitled%2010.png"><img style="width:2072px" src="%E6%95%B8%E4%BD%8D%E6%95%99%E6%9D%90%E5%8F%8A%E5%BD%A2%E6%88%90%E6%80%A7%E8%A9%95%E9%87%8F%20(Python%20%E7%A8%8B%E5%BC%8F%E8%A8%AD%E8%A8%88)%20bc21520e93464c9cac109a3c2ce06524/Untitled%2010.png"/></a></figure></div></div><h3 id="29330e7e-46e7-4f35-b68f-9cd26cb721f0" class="block-color-yellow">Zuvio <strong>互動平台 - 形成性評量</strong></h3><figure id="d4027b85-9864-4f00-abae-f4b8bd96c24d" class="image"><a href="%E6%95%B8%E4%BD%8D%E6%95%99%E6%9D%90%E5%8F%8A%E5%BD%A2%E6%88%90%E6%80%A7%E8%A9%95%E9%87%8F%20(Python%20%E7%A8%8B%E5%BC%8F%E8%A8%AD%E8%A8%88)%20bc21520e93464c9cac109a3c2ce06524/Untitled%2011.png"><img style="width:1415px" src="%E6%95%B8%E4%BD%8D%E6%95%99%E6%9D%90%E5%8F%8A%E5%BD%A2%E6%88%90%E6%80%A7%E8%A9%95%E9%87%8F%20(Python%20%E7%A8%8B%E5%BC%8F%E8%A8%AD%E8%A8%88)%20bc21520e93464c9cac109a3c2ce06524/Untitled%2011.png"/></a></figure><h3 id="906f1a40-bb37-43dc-a1b3-bea97c278cbb" class="block-color-yellow"><a  target="_blank" href="https://flipclass.stust.edu.tw/course/24840">四技電子一乙</a> (FlipClass 數位學習)</h3><div id="8d976cf2-1f4d-4fa7-a7fa-108730c124b6" class="column-list"><div id="47824395-11a5-4278-a2bf-722f7e1e88f7" style="width:50%" class="column"><figure id="6bf70e1e-013d-46b9-b9e6-c2fbe9a2deea" class="image"><a href="%E6%95%B8%E4%BD%8D%E6%95%99%E6%9D%90%E5%8F%8A%E5%BD%A2%E6%88%90%E6%80%A7%E8%A9%95%E9%87%8F%20(Python%20%E7%A8%8B%E5%BC%8F%E8%A8%AD%E8%A8%88)%20bc21520e93464c9cac109a3c2ce06524/Untitled%2012.png"><img style="width:1060px" src="%E6%95%B8%E4%BD%8D%E6%95%99%E6%9D%90%E5%8F%8A%E5%BD%A2%E6%88%90%E6%80%A7%E8%A9%95%E9%87%8F%20(Python%20%E7%A8%8B%E5%BC%8F%E8%A8%AD%E8%A8%88)%20bc21520e93464c9cac109a3c2ce06524/Untitled%2012.png"/></a></figure></div><div id="3a31ecce-152c-4984-acdd-3a4b01f4ce72" style="width:50%" class="column"><figure id="d0204731-df4a-475c-b84a-228d55660916" class="image"><a href="%E6%95%B8%E4%BD%8D%E6%95%99%E6%9D%90%E5%8F%8A%E5%BD%A2%E6%88%90%E6%80%A7%E8%A9%95%E9%87%8F%20(Python%20%E7%A8%8B%E5%BC%8F%E8%A8%AD%E8%A8%88)%20bc21520e93464c9cac109a3c2ce06524/Untitled%2013.png"><img style="width:2061px" src="%E6%95%B8%E4%BD%8D%E6%95%99%E6%9D%90%E5%8F%8A%E5%BD%A2%E6%88%90%E6%80%A7%E8%A9%95%E9%87%8F%20(Python%20%E7%A8%8B%E5%BC%8F%E8%A8%AD%E8%A8%88)%20bc21520e93464c9cac109a3c2ce06524/Untitled%2013.png"/></a></figure></div></div><h3 id="da96dacb-e9bf-4f96-a7a3-320fb5c40036" class="block-color-yellow">Zuvio <strong>互動平台 - 形成性評量</strong></h3><figure id="38660f8e-4111-464a-a28e-8e11e07a6654" class="image"><a href="%E6%95%B8%E4%BD%8D%E6%95%99%E6%9D%90%E5%8F%8A%E5%BD%A2%E6%88%90%E6%80%A7%E8%A9%95%E9%87%8F%20(Python%20%E7%A8%8B%E5%BC%8F%E8%A8%AD%E8%A8%88)%20bc21520e93464c9cac109a3c2ce06524/2n9px2bh.png"><img style="width:1443px" src="%E6%95%B8%E4%BD%8D%E6%95%99%E6%9D%90%E5%8F%8A%E5%BD%A2%E6%88%90%E6%80%A7%E8%A9%95%E9%87%8F%20(Python%20%E7%A8%8B%E5%BC%8F%E8%A8%AD%E8%A8%88)%20bc21520e93464c9cac109a3c2ce06524/2n9px2bh.png"/></a></figure><h3 id="69f4c3ab-efca-4154-98fb-9f65a3153bc0" class="block-color-teal_background"><strong>【參考資料】Github Classroom Auto-grading 程式自動批閱設計</strong></h3><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="f6871aac-cf4f-4197-af40-d0dca78050bb"><div style="font-size:1.5em"><img class="icon" src="%E6%95%B8%E4%BD%8D%E6%95%99%E6%9D%90%E5%8F%8A%E5%BD%A2%E6%88%90%E6%80%A7%E8%A9%95%E9%87%8F%20(Python%20%E7%A8%8B%E5%BC%8F%E8%A8%AD%E8%A8%88)%20bc21520e93464c9cac109a3c2ce06524/800x800%201.png"/></div><div style="width:100%">這份自動批閱試卷包含6道程式設計題，每道題目都有詳細的說明。學生只需按照題目要求完成程式設計，並使用題目中提供的測試程式，進行線上或本地端測試驗證。學生完成作答後，需將程式上傳至 Github Classroom，接著，我開發的測試程式將自動批閱學生繳交的程式並記錄得分。這個自動批閱機制可以讓學生即時了解自己的答題狀況，並讓老師即時掌握學生解題情況，在適當的時候給予提示協助學生完成作答。</div></figure><p id="733dc194-fb64-4a38-bc65-49b967b480c1" class="block-color-yellow"><strong> 程式『自動批閱』系統運作截圖 (以期中測驗第5題目為例)</strong></p><figure id="830d3bc1-ba19-48c6-af72-2f46e3d81d46" class="image"><a href="%E6%95%B8%E4%BD%8D%E6%95%99%E6%9D%90%E5%8F%8A%E5%BD%A2%E6%88%90%E6%80%A7%E8%A9%95%E9%87%8F%20(Python%20%E7%A8%8B%E5%BC%8F%E8%A8%AD%E8%A8%88)%20bc21520e93464c9cac109a3c2ce06524/Untitled%2014.png"><img style="width:1992px" src="%E6%95%B8%E4%BD%8D%E6%95%99%E6%9D%90%E5%8F%8A%E5%BD%A2%E6%88%90%E6%80%A7%E8%A9%95%E9%87%8F%20(Python%20%E7%A8%8B%E5%BC%8F%E8%A8%AD%E8%A8%88)%20bc21520e93464c9cac109a3c2ce06524/Untitled%2014.png"/></a></figure><figure id="d02417fa-5a51-46bc-afda-3036c4390487" class="image"><a href="%E6%95%B8%E4%BD%8D%E6%95%99%E6%9D%90%E5%8F%8A%E5%BD%A2%E6%88%90%E6%80%A7%E8%A9%95%E9%87%8F%20(Python%20%E7%A8%8B%E5%BC%8F%E8%A8%AD%E8%A8%88)%20bc21520e93464c9cac109a3c2ce06524/Untitled%2015.png"><img style="width:1994px" src="%E6%95%B8%E4%BD%8D%E6%95%99%E6%9D%90%E5%8F%8A%E5%BD%A2%E6%88%90%E6%80%A7%E8%A9%95%E9%87%8F%20(Python%20%E7%A8%8B%E5%BC%8F%E8%A8%AD%E8%A8%88)%20bc21520e93464c9cac109a3c2ce06524/Untitled%2015.png"/></a></figure><figure id="7c3ee85f-3617-45fe-b722-e1c641fb861e" class="image"><a href="%E6%95%B8%E4%BD%8D%E6%95%99%E6%9D%90%E5%8F%8A%E5%BD%A2%E6%88%90%E6%80%A7%E8%A9%95%E9%87%8F%20(Python%20%E7%A8%8B%E5%BC%8F%E8%A8%AD%E8%A8%88)%20bc21520e93464c9cac109a3c2ce06524/Untitled%2016.png"><img style="width:1937px" src="%E6%95%B8%E4%BD%8D%E6%95%99%E6%9D%90%E5%8F%8A%E5%BD%A2%E6%88%90%E6%80%A7%E8%A9%95%E9%87%8F%20(Python%20%E7%A8%8B%E5%BC%8F%E8%A8%AD%E8%A8%88)%20bc21520e93464c9cac109a3c2ce06524/Untitled%2016.png"/></a></figure><p id="07cbed5a-062b-4316-9367-687c40608aff" class="block-color-yellow"><strong> 程式『自動批閱』系統運作截圖 (期中測驗期間，教師螢幕上的即時狀態更新畫面)</strong></p><figure id="2dfa0ccc-28ae-48ea-b0dc-965fc67f080c" class="image"><a href="%E6%95%B8%E4%BD%8D%E6%95%99%E6%9D%90%E5%8F%8A%E5%BD%A2%E6%88%90%E6%80%A7%E8%A9%95%E9%87%8F%20(Python%20%E7%A8%8B%E5%BC%8F%E8%A8%AD%E8%A8%88)%20bc21520e93464c9cac109a3c2ce06524/Untitled%2017.png"><img style="width:3841px" src="%E6%95%B8%E4%BD%8D%E6%95%99%E6%9D%90%E5%8F%8A%E5%BD%A2%E6%88%90%E6%80%A7%E8%A9%95%E9%87%8F%20(Python%20%E7%A8%8B%E5%BC%8F%E8%A8%AD%E8%A8%88)%20bc21520e93464c9cac109a3c2ce06524/Untitled%2017.png"/></a></figure><figure id="37f3e4c4-7546-406d-89d1-4d3fcf7d8470" class="image"><a href="%E6%95%B8%E4%BD%8D%E6%95%99%E6%9D%90%E5%8F%8A%E5%BD%A2%E6%88%90%E6%80%A7%E8%A9%95%E9%87%8F%20(Python%20%E7%A8%8B%E5%BC%8F%E8%A8%AD%E8%A8%88)%20bc21520e93464c9cac109a3c2ce06524/Untitled%2018.png"><img style="width:2000px" src="%E6%95%B8%E4%BD%8D%E6%95%99%E6%9D%90%E5%8F%8A%E5%BD%A2%E6%88%90%E6%80%A7%E8%A9%95%E9%87%8F%20(Python%20%E7%A8%8B%E5%BC%8F%E8%A8%AD%E8%A8%88)%20bc21520e93464c9cac109a3c2ce06524/Untitled%2018.png"/></a></figure><figure id="d83d26c1-e11e-4e2e-a359-5008224ec125" class="image"><a href="%E6%95%B8%E4%BD%8D%E6%95%99%E6%9D%90%E5%8F%8A%E5%BD%A2%E6%88%90%E6%80%A7%E8%A9%95%E9%87%8F%20(Python%20%E7%A8%8B%E5%BC%8F%E8%A8%AD%E8%A8%88)%20bc21520e93464c9cac109a3c2ce06524/Untitled%2019.png"><img style="width:2000px" src="%E6%95%B8%E4%BD%8D%E6%95%99%E6%9D%90%E5%8F%8A%E5%BD%A2%E6%88%90%E6%80%A7%E8%A9%95%E9%87%8F%20(Python%20%E7%A8%8B%E5%BC%8F%E8%A8%AD%E8%A8%88)%20bc21520e93464c9cac109a3c2ce06524/Untitled%2019.png"/></a></figure><h3 id="5ce01d5d-9f6e-452d-98d4-dcb868715ba6" class="block-color-teal_background"><strong>【參考資料】</strong>Zuvio <strong>互動平台 - 自主開發形成性評量 </strong></h3><figure id="3c507319-2466-4f49-82c8-e64f34d02e48" class="image"><a href="%E6%95%B8%E4%BD%8D%E6%95%99%E6%9D%90%E5%8F%8A%E5%BD%A2%E6%88%90%E6%80%A7%E8%A9%95%E9%87%8F%20(Python%20%E7%A8%8B%E5%BC%8F%E8%A8%AD%E8%A8%88)%20bc21520e93464c9cac109a3c2ce06524/Untitled%2020.png"><img style="width:1625px" src="%E6%95%B8%E4%BD%8D%E6%95%99%E6%9D%90%E5%8F%8A%E5%BD%A2%E6%88%90%E6%80%A7%E8%A9%95%E9%87%8F%20(Python%20%E7%A8%8B%E5%BC%8F%E8%A8%AD%E8%A8%88)%20bc21520e93464c9cac109a3c2ce06524/Untitled%2020.png"/></a></figure><figure id="f40acaa7-57df-4fb2-9156-9b9b6ec046a7" class="image"><a href="%E6%95%B8%E4%BD%8D%E6%95%99%E6%9D%90%E5%8F%8A%E5%BD%A2%E6%88%90%E6%80%A7%E8%A9%95%E9%87%8F%20(Python%20%E7%A8%8B%E5%BC%8F%E8%A8%AD%E8%A8%88)%20bc21520e93464c9cac109a3c2ce06524/Untitled%2021.png"><img style="width:1992px" src="%E6%95%B8%E4%BD%8D%E6%95%99%E6%9D%90%E5%8F%8A%E5%BD%A2%E6%88%90%E6%80%A7%E8%A9%95%E9%87%8F%20(Python%20%E7%A8%8B%E5%BC%8F%E8%A8%AD%E8%A8%88)%20bc21520e93464c9cac109a3c2ce06524/Untitled%2021.png"/></a></figure><figure id="fc9225be-ee79-4c94-9435-c0af2f405fb1" class="image"><a href="%E6%95%B8%E4%BD%8D%E6%95%99%E6%9D%90%E5%8F%8A%E5%BD%A2%E6%88%90%E6%80%A7%E8%A9%95%E9%87%8F%20(Python%20%E7%A8%8B%E5%BC%8F%E8%A8%AD%E8%A8%88)%20bc21520e93464c9cac109a3c2ce06524/Untitled%2022.png"><img style="width:1989px" src="%E6%95%B8%E4%BD%8D%E6%95%99%E6%9D%90%E5%8F%8A%E5%BD%A2%E6%88%90%E6%80%A7%E8%A9%95%E9%87%8F%20(Python%20%E7%A8%8B%E5%BC%8F%E8%A8%AD%E8%A8%88)%20bc21520e93464c9cac109a3c2ce06524/Untitled%2022.png"/></a></figure><figure id="694b5d75-2cb0-4b79-b3e5-4d3145e96505" class="image"><a href="%E6%95%B8%E4%BD%8D%E6%95%99%E6%9D%90%E5%8F%8A%E5%BD%A2%E6%88%90%E6%80%A7%E8%A9%95%E9%87%8F%20(Python%20%E7%A8%8B%E5%BC%8F%E8%A8%AD%E8%A8%88)%20bc21520e93464c9cac109a3c2ce06524/Untitled%2023.png"><img style="width:1999px" src="%E6%95%B8%E4%BD%8D%E6%95%99%E6%9D%90%E5%8F%8A%E5%BD%A2%E6%88%90%E6%80%A7%E8%A9%95%E9%87%8F%20(Python%20%E7%A8%8B%E5%BC%8F%E8%A8%AD%E8%A8%88)%20bc21520e93464c9cac109a3c2ce06524/Untitled%2023.png"/></a></figure><figure id="686f743f-7356-40cc-9131-cf2b7d81c4ec" class="image"><a href="%E6%95%B8%E4%BD%8D%E6%95%99%E6%9D%90%E5%8F%8A%E5%BD%A2%E6%88%90%E6%80%A7%E8%A9%95%E9%87%8F%20(Python%20%E7%A8%8B%E5%BC%8F%E8%A8%AD%E8%A8%88)%20bc21520e93464c9cac109a3c2ce06524/Untitled%2024.png"><img style="width:1984px" src="%E6%95%B8%E4%BD%8D%E6%95%99%E6%9D%90%E5%8F%8A%E5%BD%A2%E6%88%90%E6%80%A7%E8%A9%95%E9%87%8F%20(Python%20%E7%A8%8B%E5%BC%8F%E8%A8%AD%E8%A8%88)%20bc21520e93464c9cac109a3c2ce06524/Untitled%2024.png"/></a></figure><figure id="ce657af7-dfb2-48e2-a6ed-d0a2cf254953" class="image"><a href="%E6%95%B8%E4%BD%8D%E6%95%99%E6%9D%90%E5%8F%8A%E5%BD%A2%E6%88%90%E6%80%A7%E8%A9%95%E9%87%8F%20(Python%20%E7%A8%8B%E5%BC%8F%E8%A8%AD%E8%A8%88)%20bc21520e93464c9cac109a3c2ce06524/Untitled%2025.png"><img style="width:1996px" src="%E6%95%B8%E4%BD%8D%E6%95%99%E6%9D%90%E5%8F%8A%E5%BD%A2%E6%88%90%E6%80%A7%E8%A9%95%E9%87%8F%20(Python%20%E7%A8%8B%E5%BC%8F%E8%A8%AD%E8%A8%88)%20bc21520e93464c9cac109a3c2ce06524/Untitled%2025.png"/></a></figure><figure id="0395996a-248c-4f16-983e-196f39189d71" class="image"><a href="%E6%95%B8%E4%BD%8D%E6%95%99%E6%9D%90%E5%8F%8A%E5%BD%A2%E6%88%90%E6%80%A7%E8%A9%95%E9%87%8F%20(Python%20%E7%A8%8B%E5%BC%8F%E8%A8%AD%E8%A8%88)%20bc21520e93464c9cac109a3c2ce06524/Untitled%2026.png"><img style="width:1986px" src="%E6%95%B8%E4%BD%8D%E6%95%99%E6%9D%90%E5%8F%8A%E5%BD%A2%E6%88%90%E6%80%A7%E8%A9%95%E9%87%8F%20(Python%20%E7%A8%8B%E5%BC%8F%E8%A8%AD%E8%A8%88)%20bc21520e93464c9cac109a3c2ce06524/Untitled%2026.png"/></a></figure><figure id="4ccbbd7b-1850-4808-aac9-3dfc27030c86" class="image"><a href="%E6%95%B8%E4%BD%8D%E6%95%99%E6%9D%90%E5%8F%8A%E5%BD%A2%E6%88%90%E6%80%A7%E8%A9%95%E9%87%8F%20(Python%20%E7%A8%8B%E5%BC%8F%E8%A8%AD%E8%A8%88)%20bc21520e93464c9cac109a3c2ce06524/Untitled%2027.png"><img style="width:1999px" src="%E6%95%B8%E4%BD%8D%E6%95%99%E6%9D%90%E5%8F%8A%E5%BD%A2%E6%88%90%E6%80%A7%E8%A9%95%E9%87%8F%20(Python%20%E7%A8%8B%E5%BC%8F%E8%A8%AD%E8%A8%88)%20bc21520e93464c9cac109a3c2ce06524/Untitled%2027.png"/></a></figure><figure id="b12fb6fc-90b5-4775-8021-5e0a7dc4eb6b" class="image"><a href="%E6%95%B8%E4%BD%8D%E6%95%99%E6%9D%90%E5%8F%8A%E5%BD%A2%E6%88%90%E6%80%A7%E8%A9%95%E9%87%8F%20(Python%20%E7%A8%8B%E5%BC%8F%E8%A8%AD%E8%A8%88)%20bc21520e93464c9cac109a3c2ce06524/Untitled%2028.png"><img style="width:1991px" src="%E6%95%B8%E4%BD%8D%E6%95%99%E6%9D%90%E5%8F%8A%E5%BD%A2%E6%88%90%E6%80%A7%E8%A9%95%E9%87%8F%20(Python%20%E7%A8%8B%E5%BC%8F%E8%A8%AD%E8%A8%88)%20bc21520e93464c9cac109a3c2ce06524/Untitled%2028.png"/></a></figure><figure id="ce1d38fd-3aa1-4306-be3f-5b5bd867677a" class="image"><a href="%E6%95%B8%E4%BD%8D%E6%95%99%E6%9D%90%E5%8F%8A%E5%BD%A2%E6%88%90%E6%80%A7%E8%A9%95%E9%87%8F%20(Python%20%E7%A8%8B%E5%BC%8F%E8%A8%AD%E8%A8%88)%20bc21520e93464c9cac109a3c2ce06524/Untitled%2029.png"><img style="width:1992px" src="%E6%95%B8%E4%BD%8D%E6%95%99%E6%9D%90%E5%8F%8A%E5%BD%A2%E6%88%90%E6%80%A7%E8%A9%95%E9%87%8F%20(Python%20%E7%A8%8B%E5%BC%8F%E8%A8%AD%E8%A8%88)%20bc21520e93464c9cac109a3c2ce06524/Untitled%2029.png"/></a></figure><figure id="84976166-029a-46bc-970c-2d8d0758c9cf" class="image"><a href="%E6%95%B8%E4%BD%8D%E6%95%99%E6%9D%90%E5%8F%8A%E5%BD%A2%E6%88%90%E6%80%A7%E8%A9%95%E9%87%8F%20(Python%20%E7%A8%8B%E5%BC%8F%E8%A8%AD%E8%A8%88)%20bc21520e93464c9cac109a3c2ce06524/Untitled%2030.png"><img style="width:1996px" src="%E6%95%B8%E4%BD%8D%E6%95%99%E6%9D%90%E5%8F%8A%E5%BD%A2%E6%88%90%E6%80%A7%E8%A9%95%E9%87%8F%20(Python%20%E7%A8%8B%E5%BC%8F%E8%A8%AD%E8%A8%88)%20bc21520e93464c9cac109a3c2ce06524/Untitled%2030.png"/></a></figure><h3 id="427c24a5-2004-4796-a35a-a17906cdf3ac" class="block-color-teal_background"><strong>【參考資料】利用桌遊，讓同學了解聯合國永續發展的17項目標(SDGs)</strong></h3><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="ab9d52cb-7cb8-43fc-9a51-710c5ba0ffb1"><div style="font-size:1.5em"><img class="icon" src="%E6%95%B8%E4%BD%8D%E6%95%99%E6%9D%90%E5%8F%8A%E5%BD%A2%E6%88%90%E6%80%A7%E8%A9%95%E9%87%8F%20(Python%20%E7%A8%8B%E5%BC%8F%E8%A8%AD%E8%A8%88)%20bc21520e93464c9cac109a3c2ce06524/800x800%202.png"/></div><div style="width:100%">本教材規劃了一週的時間，運用USR辦公室提供的SDGs桌遊來向同學介紹CSR、USR、ESG以及SDGs的基本常識，希望透過有趣的團體桌遊互動，讓學生在輕鬆愉快的環境中自然地獲取這些重要的知識。原本這個桌遊需要委託外師來帶團，但考慮到4個班級都請外師成本高昂，因此，我想到自學這個有趣且有效的SDGs推廣方式，如果我們可以學會如何自己帶團，就可以在所有的課程中使用這個工具，讓學生輕鬆有趣且高效地認識聯合國永續發展的17項目標，特別是與台灣在地相關的議題。因此，我和我的助教及研究生，利用課後時間研究如何玩這個團體桌遊，並自行創作了一套有趣的帶團方式。在這學期的課堂中，我使用這套帶團方式在4個班級實際操作，每個班級的學生都給予極高的評價及反饋，且在不知不覺中，學生已能脫口而出部分永續發展目標主題。這是這學期一個非常重大的收穫，我很慶幸沒有用「錢」來解決帶團的問題，反而讓我和我的助教獲得了一項帶團體桌遊的專長。</div></figure><h3 id="c1bd2e05-ac52-4951-9cb9-eda2225acb7a" class="block-color-yellow">和助教團隊討論如何帶這個團體桌遊</h3><div id="eaca3408-2f0c-4130-8b2b-c1d7b7c33112" class="column-list"><div id="2a25773b-5fc6-42a7-a5cc-47786dd6b168" style="width:50%" class="column"><figure id="3975b04c-492f-4e4e-85c7-91803a8d9aa7" class="image"><a href="%E6%95%B8%E4%BD%8D%E6%95%99%E6%9D%90%E5%8F%8A%E5%BD%A2%E6%88%90%E6%80%A7%E8%A9%95%E9%87%8F%20(Python%20%E7%A8%8B%E5%BC%8F%E8%A8%AD%E8%A8%88)%20bc21520e93464c9cac109a3c2ce06524/IMG_20230323_121303_1.jpg"><img style="width:4000px" src="%E6%95%B8%E4%BD%8D%E6%95%99%E6%9D%90%E5%8F%8A%E5%BD%A2%E6%88%90%E6%80%A7%E8%A9%95%E9%87%8F%20(Python%20%E7%A8%8B%E5%BC%8F%E8%A8%AD%E8%A8%88)%20bc21520e93464c9cac109a3c2ce06524/IMG_20230323_121303_1.jpg"/></a></figure></div><div id="79bf12e6-8cee-4353-b7b4-2550b74233e4" style="width:50%" class="column"><figure id="7b8b99e0-9335-4a3d-9893-f4e1529434ee" class="image"><a href="%E6%95%B8%E4%BD%8D%E6%95%99%E6%9D%90%E5%8F%8A%E5%BD%A2%E6%88%90%E6%80%A7%E8%A9%95%E9%87%8F%20(Python%20%E7%A8%8B%E5%BC%8F%E8%A8%AD%E8%A8%88)%20bc21520e93464c9cac109a3c2ce06524/IMG_20230323_121308_1.jpg"><img style="width:4000px" src="%E6%95%B8%E4%BD%8D%E6%95%99%E6%9D%90%E5%8F%8A%E5%BD%A2%E6%88%90%E6%80%A7%E8%A9%95%E9%87%8F%20(Python%20%E7%A8%8B%E5%BC%8F%E8%A8%AD%E8%A8%88)%20bc21520e93464c9cac109a3c2ce06524/IMG_20230323_121308_1.jpg"/></a></figure></div></div><figure id="ae19c962-cf99-4871-bf7a-56b840f5f1c0" class="image"><a href="%E6%95%B8%E4%BD%8D%E6%95%99%E6%9D%90%E5%8F%8A%E5%BD%A2%E6%88%90%E6%80%A7%E8%A9%95%E9%87%8F%20(Python%20%E7%A8%8B%E5%BC%8F%E8%A8%AD%E8%A8%88)%20bc21520e93464c9cac109a3c2ce06524/IMG_20230323_121416_1.jpg"><img style="width:4000px" src="%E6%95%B8%E4%BD%8D%E6%95%99%E6%9D%90%E5%8F%8A%E5%BD%A2%E6%88%90%E6%80%A7%E8%A9%95%E9%87%8F%20(Python%20%E7%A8%8B%E5%BC%8F%E8%A8%AD%E8%A8%88)%20bc21520e93464c9cac109a3c2ce06524/IMG_20230323_121416_1.jpg"/></a></figure><h3 id="1ba845d6-ecd1-4b64-b6c7-e4bd9f3951b3" class="block-color-yellow">利用SDGs團體桌遊，讓學生認識CSR、USR、ESG以及SDGs的基本常識</h3><div id="f52bfe4b-d9fd-4219-a077-c115b64e0390" class="column-list"><div id="2dbd414b-d914-4ea8-87eb-d1d7ed49e4fa" style="width:50%" class="column"><figure id="ad7cfbcb-6370-44c8-a630-c34eb1ef20a8" class="image"><a href="%E6%95%B8%E4%BD%8D%E6%95%99%E6%9D%90%E5%8F%8A%E5%BD%A2%E6%88%90%E6%80%A7%E8%A9%95%E9%87%8F%20(Python%20%E7%A8%8B%E5%BC%8F%E8%A8%AD%E8%A8%88)%20bc21520e93464c9cac109a3c2ce06524/IMG20230327135334.jpg"><img style="width:4000px" src="%E6%95%B8%E4%BD%8D%E6%95%99%E6%9D%90%E5%8F%8A%E5%BD%A2%E6%88%90%E6%80%A7%E8%A9%95%E9%87%8F%20(Python%20%E7%A8%8B%E5%BC%8F%E8%A8%AD%E8%A8%88)%20bc21520e93464c9cac109a3c2ce06524/IMG20230327135334.jpg"/></a></figure><figure id="caf34b9b-6997-44d5-819f-5689ca13f231" class="image"><a href="%E6%95%B8%E4%BD%8D%E6%95%99%E6%9D%90%E5%8F%8A%E5%BD%A2%E6%88%90%E6%80%A7%E8%A9%95%E9%87%8F%20(Python%20%E7%A8%8B%E5%BC%8F%E8%A8%AD%E8%A8%88)%20bc21520e93464c9cac109a3c2ce06524/IMG20230327140743.jpg"><img style="width:4000px" src="%E6%95%B8%E4%BD%8D%E6%95%99%E6%9D%90%E5%8F%8A%E5%BD%A2%E6%88%90%E6%80%A7%E8%A9%95%E9%87%8F%20(Python%20%E7%A8%8B%E5%BC%8F%E8%A8%AD%E8%A8%88)%20bc21520e93464c9cac109a3c2ce06524/IMG20230327140743.jpg"/></a></figure></div><div id="2f909e7d-4b43-41e9-8eaa-6a9ef862a230" style="width:50%" class="column"><figure id="5bc35c17-0607-4f4f-9b44-140d39f4512b" class="image"><a href="%E6%95%B8%E4%BD%8D%E6%95%99%E6%9D%90%E5%8F%8A%E5%BD%A2%E6%88%90%E6%80%A7%E8%A9%95%E9%87%8F%20(Python%20%E7%A8%8B%E5%BC%8F%E8%A8%AD%E8%A8%88)%20bc21520e93464c9cac109a3c2ce06524/IMG20230327140025.jpg"><img style="width:4000px" src="%E6%95%B8%E4%BD%8D%E6%95%99%E6%9D%90%E5%8F%8A%E5%BD%A2%E6%88%90%E6%80%A7%E8%A9%95%E9%87%8F%20(Python%20%E7%A8%8B%E5%BC%8F%E8%A8%AD%E8%A8%88)%20bc21520e93464c9cac109a3c2ce06524/IMG20230327140025.jpg"/></a></figure><figure id="c74296fe-2eb3-41d9-b610-6cf8757e6a3e" class="image"><a href="%E6%95%B8%E4%BD%8D%E6%95%99%E6%9D%90%E5%8F%8A%E5%BD%A2%E6%88%90%E6%80%A7%E8%A9%95%E9%87%8F%20(Python%20%E7%A8%8B%E5%BC%8F%E8%A8%AD%E8%A8%88)%20bc21520e93464c9cac109a3c2ce06524/IMG20230327143952.jpg"><img style="width:4000px" src="%E6%95%B8%E4%BD%8D%E6%95%99%E6%9D%90%E5%8F%8A%E5%BD%A2%E6%88%90%E6%80%A7%E8%A9%95%E9%87%8F%20(Python%20%E7%A8%8B%E5%BC%8F%E8%A8%AD%E8%A8%88)%20bc21520e93464c9cac109a3c2ce06524/IMG20230327143952.jpg"/></a></figure></div></div><h3 id="d12279e7-49d2-4677-b84c-907c27b40c35" class="block-color-yellow">從沒看過學生這麼「認真、專注」的在討論…</h3><div id="38905c36-8184-4f8b-b540-5774f334be00" class="column-list"><div id="8e2ec240-e365-4202-abde-1b6aaa0556e9" style="width:50%" class="column"><figure id="09953522-7f94-492f-886b-6f426670fbd0" class="image"><a href="%E6%95%B8%E4%BD%8D%E6%95%99%E6%9D%90%E5%8F%8A%E5%BD%A2%E6%88%90%E6%80%A7%E8%A9%95%E9%87%8F%20(Python%20%E7%A8%8B%E5%BC%8F%E8%A8%AD%E8%A8%88)%20bc21520e93464c9cac109a3c2ce06524/IMG20230327144501.jpg"><img style="width:4000px" src="%E6%95%B8%E4%BD%8D%E6%95%99%E6%9D%90%E5%8F%8A%E5%BD%A2%E6%88%90%E6%80%A7%E8%A9%95%E9%87%8F%20(Python%20%E7%A8%8B%E5%BC%8F%E8%A8%AD%E8%A8%88)%20bc21520e93464c9cac109a3c2ce06524/IMG20230327144501.jpg"/></a></figure><figure id="5367edb2-b2a6-4ac3-b864-9a4d3e409d95" class="image"><a href="%E6%95%B8%E4%BD%8D%E6%95%99%E6%9D%90%E5%8F%8A%E5%BD%A2%E6%88%90%E6%80%A7%E8%A9%95%E9%87%8F%20(Python%20%E7%A8%8B%E5%BC%8F%E8%A8%AD%E8%A8%88)%20bc21520e93464c9cac109a3c2ce06524/IMG20230327152533.jpg"><img style="width:4000px" src="%E6%95%B8%E4%BD%8D%E6%95%99%E6%9D%90%E5%8F%8A%E5%BD%A2%E6%88%90%E6%80%A7%E8%A9%95%E9%87%8F%20(Python%20%E7%A8%8B%E5%BC%8F%E8%A8%AD%E8%A8%88)%20bc21520e93464c9cac109a3c2ce06524/IMG20230327152533.jpg"/></a></figure><figure id="db046c33-0009-4c34-b89d-42f0e9c5cdae" class="image"><a href="%E6%95%B8%E4%BD%8D%E6%95%99%E6%9D%90%E5%8F%8A%E5%BD%A2%E6%88%90%E6%80%A7%E8%A9%95%E9%87%8F%20(Python%20%E7%A8%8B%E5%BC%8F%E8%A8%AD%E8%A8%88)%20bc21520e93464c9cac109a3c2ce06524/IMG20230327150644.jpg"><img style="width:4000px" src="%E6%95%B8%E4%BD%8D%E6%95%99%E6%9D%90%E5%8F%8A%E5%BD%A2%E6%88%90%E6%80%A7%E8%A9%95%E9%87%8F%20(Python%20%E7%A8%8B%E5%BC%8F%E8%A8%AD%E8%A8%88)%20bc21520e93464c9cac109a3c2ce06524/IMG20230327150644.jpg"/></a></figure></div><div id="def5d900-7d36-41a4-80b5-c7ba9b2e264c" style="width:50%" class="column"><figure id="9060cffd-5f79-4a0f-9f1f-7eb73d82c474" class="image"><a href="%E6%95%B8%E4%BD%8D%E6%95%99%E6%9D%90%E5%8F%8A%E5%BD%A2%E6%88%90%E6%80%A7%E8%A9%95%E9%87%8F%20(Python%20%E7%A8%8B%E5%BC%8F%E8%A8%AD%E8%A8%88)%20bc21520e93464c9cac109a3c2ce06524/IMG20230327150116.jpg"><img style="width:4000px" src="%E6%95%B8%E4%BD%8D%E6%95%99%E6%9D%90%E5%8F%8A%E5%BD%A2%E6%88%90%E6%80%A7%E8%A9%95%E9%87%8F%20(Python%20%E7%A8%8B%E5%BC%8F%E8%A8%AD%E8%A8%88)%20bc21520e93464c9cac109a3c2ce06524/IMG20230327150116.jpg"/></a></figure><figure id="aabc30cd-1775-477b-bad9-53fa4f59aaa7" class="image"><a href="%E6%95%B8%E4%BD%8D%E6%95%99%E6%9D%90%E5%8F%8A%E5%BD%A2%E6%88%90%E6%80%A7%E8%A9%95%E9%87%8F%20(Python%20%E7%A8%8B%E5%BC%8F%E8%A8%AD%E8%A8%88)%20bc21520e93464c9cac109a3c2ce06524/IMG20230327150809.jpg"><img style="width:4000px" src="%E6%95%B8%E4%BD%8D%E6%95%99%E6%9D%90%E5%8F%8A%E5%BD%A2%E6%88%90%E6%80%A7%E8%A9%95%E9%87%8F%20(Python%20%E7%A8%8B%E5%BC%8F%E8%A8%AD%E8%A8%88)%20bc21520e93464c9cac109a3c2ce06524/IMG20230327150809.jpg"/></a></figure><figure id="1ab4b46f-a37d-4e9b-8390-467a28159f07" class="image"><a href="%E6%95%B8%E4%BD%8D%E6%95%99%E6%9D%90%E5%8F%8A%E5%BD%A2%E6%88%90%E6%80%A7%E8%A9%95%E9%87%8F%20(Python%20%E7%A8%8B%E5%BC%8F%E8%A8%AD%E8%A8%88)%20bc21520e93464c9cac109a3c2ce06524/IMG20230327160512.jpg"><img style="width:4000px" src="%E6%95%B8%E4%BD%8D%E6%95%99%E6%9D%90%E5%8F%8A%E5%BD%A2%E6%88%90%E6%80%A7%E8%A9%95%E9%87%8F%20(Python%20%E7%A8%8B%E5%BC%8F%E8%A8%AD%E8%A8%88)%20bc21520e93464c9cac109a3c2ce06524/IMG20230327160512.jpg"/></a></figure></div></div><p id="b2a50de9-8c09-49ea-9c35-bbc96e863270" class="">
+</p><p id="7e23289f-3a83-49df-87ba-d84e5e376dd0" class="">
+</p><figure id="c6f4e338-ba80-4ae6-9ca4-ae681be356d9" class="image"><a href="%E6%95%B8%E4%BD%8D%E6%95%99%E6%9D%90%E5%8F%8A%E5%BD%A2%E6%88%90%E6%80%A7%E8%A9%95%E9%87%8F%20(Python%20%E7%A8%8B%E5%BC%8F%E8%A8%AD%E8%A8%88)%20bc21520e93464c9cac109a3c2ce06524/edu5.png"><img style="width:1920px" src="%E6%95%B8%E4%BD%8D%E6%95%99%E6%9D%90%E5%8F%8A%E5%BD%A2%E6%88%90%E6%80%A7%E8%A9%95%E9%87%8F%20(Python%20%E7%A8%8B%E5%BC%8F%E8%A8%AD%E8%A8%88)%20bc21520e93464c9cac109a3c2ce06524/edu5.png"/></a></figure><p id="2d976baf-a139-4d2e-adf2-ae00ee53e065" class="">
+</p></div></article>
+<script>hljs.highlightAll();</script>
+</body></html>
