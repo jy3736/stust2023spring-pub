@@ -1,0 +1,678 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>數位教材及專業英文閱讀(數位系統設計實務)</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-translucentGray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style><link rel="stylesheet" href="dark-theme.css"><link rel="stylesheet"  target="_blank" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.0/styles/github-dark-dimmed.min.css"><script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.0/highlight.min.js"></script></head><body><article id="2d4cee08-8aa7-4ece-95c1-12e32684f00e" class="page sans"><header><img class="page-cover-image" src="%E6%95%B8%E4%BD%8D%E6%95%99%E6%9D%90%E5%8F%8A%E5%B0%88%E6%A5%AD%E8%8B%B1%E6%96%87%E9%96%B1%E8%AE%80(%E6%95%B8%E4%BD%8D%E7%B3%BB%E7%B5%B1%E8%A8%AD%E8%A8%88%E5%AF%A6%E5%8B%99)%202d4cee088aa74ece95c112e32684f00e/5.png" style="object-position:center 98.36%"/><div class="page-header-icon page-header-icon-with-cover"><img class="icon" src="%E6%95%B8%E4%BD%8D%E6%95%99%E6%9D%90%E5%8F%8A%E5%B0%88%E6%A5%AD%E8%8B%B1%E6%96%87%E9%96%B1%E8%AE%80(%E6%95%B8%E4%BD%8D%E7%B3%BB%E7%B5%B1%E8%A8%AD%E8%A8%88%E5%AF%A6%E5%8B%99)%202d4cee088aa74ece95c112e32684f00e/yang01.png"/></div><h1 class="page-title">數位教材及專業英文閱讀(數位系統設計實務)</h1><link rel="stylesheet" href="dark-theme.css"><link rel="stylesheet"  target="_blank" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.0/styles/github-dark-dimmed.min.css"><script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.0/highlight.min.js"></script></header><div class="page-body"><h1 id="56463357-10ba-4e9d-8342-0bd882a55e0b" class="block-color-yellow_background">『原創』教學影片及Podcast 音檔、線上講義、範例專案</h1><div id="3a5a622c-6f62-4ad1-b974-c5aaf89d6c81" class="column-list"><div id="8e93e0f7-b690-4e18-b54a-e0ded5be540f" style="width:12.5%" class="column"><figure id="e05c5cce-e1a2-4f3b-8f39-f0fc06518a67" class="image"><a href="%E6%95%B8%E4%BD%8D%E6%95%99%E6%9D%90%E5%8F%8A%E5%B0%88%E6%A5%AD%E8%8B%B1%E6%96%87%E9%96%B1%E8%AE%80(%E6%95%B8%E4%BD%8D%E7%B3%BB%E7%B5%B1%E8%A8%AD%E8%A8%88%E5%AF%A6%E5%8B%99)%202d4cee088aa74ece95c112e32684f00e/yang02.png"><img style="width:84px" src="%E6%95%B8%E4%BD%8D%E6%95%99%E6%9D%90%E5%8F%8A%E5%B0%88%E6%A5%AD%E8%8B%B1%E6%96%87%E9%96%B1%E8%AE%80(%E6%95%B8%E4%BD%8D%E7%B3%BB%E7%B5%B1%E8%A8%AD%E8%A8%88%E5%AF%A6%E5%8B%99)%202d4cee088aa74ece95c112e32684f00e/yang02.png"/></a></figure><p id="0ca07fd5-06f4-4586-aec9-98343c0109b3" class="">
+</p></div><div id="64314d20-cdb0-4cd9-aa07-d1b17babfce0" style="width:87.5%" class="column"><figure class="block-color-yellow callout" style="white-space:pre-wrap;display:flex" id="3fb36ece-b723-40ed-bf79-f4d9497b123a"><div style="font-size:1.5em"><img class="icon" src="%E6%95%B8%E4%BD%8D%E6%95%99%E6%9D%90%E5%8F%8A%E5%B0%88%E6%A5%AD%E8%8B%B1%E6%96%87%E9%96%B1%E8%AE%80(%E6%95%B8%E4%BD%8D%E7%B3%BB%E7%B5%B1%E8%A8%AD%E8%A8%88%E5%AF%A6%E5%8B%99)%202d4cee088aa74ece95c112e32684f00e/yang-recording.png"/></div><div style="width:100%">本教材是根據本人109年『績優教學實踐計畫』的成果所設計的。這是第二次運用『複習翻轉』教學策略，因此整個教材的內容更加完善和豐富，希望透過非傳統教學方式，提升學生的學習效果和興趣。本教材的另一項重要任務，是幫助學生提升專業英文的閱讀和對話能力。為了達到這個目的，我們採用了生成式AI(ChatGPT、New Being)作為教材的輔助設計工具，依據每週的課程單元主題，設計適合學生的英文閱讀材料和對話情境，讓學生能在有趣和實用的情境中，學習專業英文詞彙和表達方式。我們還設計了閱讀測驗題，讓學生可以自我評估和回饋自己的學習成效。儘管本課程不屬於大學社會責任課程(USR)，我仍深信了解永續發展目標(SDGs)，並對周遭事物保有同理心的重要性，絕不亞於專業知識的提升。因此，我特別引入了SDGs桌遊活動，向同學介紹CSR、USR、ESG以及SDGs的基本概念。透過有趣的團體桌遊互動，我希望讓學生在輕鬆愉快的環境中自然地獲取這些重要的知識。</div></figure></div></div><h3 id="69120aa4-7a86-4ff8-8a37-63dd82ed30fd" class="block-color-yellow">【<strong>數位教材】</strong>及【形成性評量】<strong>：</strong></h3><p id="a1968302-976b-4ef0-aecd-cf7339b57075" class="">共計<mark class="highlight-yellow"> </mark><strong><mark class="highlight-yellow">18個</mark></strong><mark class="highlight-yellow"> </mark>教學/專業英文閱讀單元(視需求持續增加中)。</p><figure id="00998d43-2eec-4239-9e5b-96c82e1f0f65"><a  target="_blank" href="https://jy3736.github.io/stust2023spring-pub/digisys2023spring-lectures.html" class="bookmark source"><div class="bookmark-info"><div class="bookmark-text"><div class="bookmark-title">數位系統設計實務 (2023 Spring)</div></div><div class="bookmark-href">https://jy3736.github.io/stust2023spring-pub/digisys2023spring-lectures.html</div></div></a></figure><h3 id="0b9b72c7-8c99-45d2-8e20-4b7c3b42eea0" class=""><mark class="highlight-yellow"><strong>教學影片(Youtube)清單：</strong></mark></h3><p id="755e7d84-50f7-47b8-83fe-43845e6392e6" class="">自2021年累積至今錄製 <strong><mark class="highlight-yellow">60部</mark></strong>以上複習翻轉及補救教學影片(視需求持續增加中)。</p><figure id="8e83de03-a657-44bf-9b33-1ed7c25e9d94"><a  target="_blank" href="https://www.youtube.com/playlist?list=PLx2JssCji9QxdM_Tw8K7GiiBcfaCTp5f5" class="bookmark source"><div class="bookmark-info"><div class="bookmark-text"><div class="bookmark-title"></div></div><div class="bookmark-href">https://www.youtube.com/playlist?list=PLx2JssCji9QxdM_Tw8K7GiiBcfaCTp5f5</div></div></a></figure><h3 id="049f5c47-7b0c-4e7c-98b7-f1de89023cbe" class=""><mark class="highlight-yellow"><strong>教學音檔(Podcast)清單：</strong></mark></h3><p id="03d32314-ec4a-4df8-924e-4515c2726aa5" class="">目前共計 <strong><mark class="highlight-yellow">32部</mark></strong><mark class="highlight-yellow"> </mark>播客音檔(視需求持續增加中)。</p><figure id="bb846712-cbfc-4a65-b721-2d2c6c99ee03"><a  target="_blank" href="https://player.soundon.fm/p/d5f7b15f-de14-4424-aad1-07b8f3128116" class="bookmark source"><div class="bookmark-info"><div class="bookmark-text"><div class="bookmark-title">SoundOn Player</div></div><div class="bookmark-href"><img src="https://player.soundon.fm/assets/apple-touch-icon-1024x1024.png" class="icon bookmark-icon"/>https://player.soundon.fm/p/d5f7b15f-de14-4424-aad1-07b8f3128116</div></div></a></figure><h1 id="5f9b0f78-462a-4a38-9979-92138ef9e938" class=""><strong>作品摘要說明</strong></h1><h3 id="19f68adf-9280-4bb2-b045-97c65d5e4848" class="block-color-yellow_background">實際用於教學科目(課程代碼/課程名稱)</h3><p id="750fb867-74eb-4d08-a4c2-70cdd3711fe4" class=""><strong>課程代碼：30D1BF04</strong></p><p id="cb54b457-d10c-4876-8fbb-c0a0b1bb2e42" class=""><strong><strong>課程名稱：</strong></strong>數位系統設計實務</p><p id="f4bfbed2-3b6e-4e71-b670-a9fb6700f779" class=""><strong>上課班級：</strong>四技電子一丙</p><h3 id="33d61320-753f-4d60-9bc6-2f6cff85d5b4" class="block-color-yellow_background">申請類別： 編纂教材</h3><ul id="867b4998-c9af-4780-8544-a3a4a56a66ca" class="bulleted-list"><li style="list-style-type:disc">編纂教材：『原創』數位教材 <ul id="d9828b07-7ed4-4023-a29b-d9329536837d" class="bulleted-list"><li style="list-style-type:circle">線上數位教材(Github Page)：<a  target="_blank" href="https://jy3736.github.io/stust2023spring-pub/digisys2023spring-lectures.html">共計</a><a  target="_blank" href="https://jy3736.github.io/stust2023spring-pub/digisys2023spring-lectures.html"><mark class="highlight-yellow"> 18個 </mark></a><a  target="_blank" href="https://jy3736.github.io/stust2023spring-pub/digisys2023spring-lectures.html">教學/專業英文閱讀單元(視需求持續增加中)。</a></li></ul><ul id="23321932-aa64-494d-8ca9-c50f8e14f84a" class="bulleted-list"><li style="list-style-type:circle">影音教材(YouTube)：<a  target="_blank" href="https://www.youtube.com/playlist?list=PLx2JssCji9QxdM_Tw8K7GiiBcfaCTp5f5">自2021年累積至今錄製 </a><a  target="_blank" href="https://www.youtube.com/playlist?list=PLx2JssCji9QxdM_Tw8K7GiiBcfaCTp5f5"><strong><mark class="highlight-yellow">60部</mark></strong></a><a  target="_blank" href="https://www.youtube.com/playlist?list=PLx2JssCji9QxdM_Tw8K7GiiBcfaCTp5f5">以上複習翻轉及補救教學影片(視需求持續增加中)。</a></li></ul><ul id="193aabae-5cf4-41bd-88b6-ea50e7ba5474" class="bulleted-list"><li style="list-style-type:circle">音檔教材(Podcast)：<a  target="_blank" href="https://player.soundon.fm/p/d5f7b15f-de14-4424-aad1-07b8f3128116">目前共計 </a><a  target="_blank" href="https://player.soundon.fm/p/d5f7b15f-de14-4424-aad1-07b8f3128116"><strong><mark class="highlight-yellow">32部</mark></strong></a><a  target="_blank" href="https://player.soundon.fm/p/d5f7b15f-de14-4424-aad1-07b8f3128116"><mark class="highlight-yellow"> </mark></a><a  target="_blank" href="https://player.soundon.fm/p/d5f7b15f-de14-4424-aad1-07b8f3128116">播客(Podcast)音檔(視需求持續增加中)。</a></li></ul></li></ul><h3 id="ecdcc143-a4f2-48ca-9f50-56431b782c79" class="block-color-yellow_background">完整性 (教材內容與課程大綱內容結合情形)</h3><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="dff2bbfd-1916-4299-943f-cfef60a5a832"><div style="font-size:1.5em"><img class="icon" src="%E6%95%B8%E4%BD%8D%E6%95%99%E6%9D%90%E5%8F%8A%E5%B0%88%E6%A5%AD%E8%8B%B1%E6%96%87%E9%96%B1%E8%AE%80(%E6%95%B8%E4%BD%8D%E7%B3%BB%E7%B5%B1%E8%A8%AD%E8%A8%88%E5%AF%A6%E5%8B%99)%202d4cee088aa74ece95c112e32684f00e/yang02%201.png"/></div><div style="width:100%">這門課程的教材內容非常貼近課程大綱所列出的主題。教材中的理論內容與實際操作的部分相互結合，幫助學生更好地理解數位系統設計的基礎知識以及如何在 FPGA 上實現這些設計。例如，在教材中，首先介紹了基礎邏輯元件的構成以及它們在 FPGA 中的實現，這與課程大綱中的第一個主題一致。接下來，教材進一步討論了組合邏輯的設計和實現，其中包括使用多工器、編碼器和解碼器等元件。這部分也與課程大綱中的第二個主題相符。同樣地，教材中還介紹了算術運算元件和記憶體元件的設計和實現，這兩部分與課程大綱中列出的主題相對應。此外，教材中還涵蓋了序向邏輯和有限狀態機的設計和實現，這部分與課程大綱中的第五個主題相符。最後，教材中的微型專題要求學生實現一個 4 位元資料寬度的小型串列外設介面 (SPI) 元件，這也與課程大綱中的第六個主題相符。因此，從教材內容和課程大綱的內容結合情況來看，這門課程的完整性非常好，能夠幫助學生深入理解數位系統設計的基礎知識並掌握實用技能。
+本學期，除了使用數位系統設計實務專業教材，來學習數位電路設計的原理與應用外，還新增了一份專業英文閱讀理解評量教材，目的是要提升學生的專業英文能力。我們認為，學生不只要掌握數位電路設計的知識和技能，也要能夠用英文閱讀和溝通相關的資訊。這樣，他們才能夠在未來更有效地利用生成式AI來協助他們的學習。由於生成式AI目前還不能完全理解中文，有時會出現專有名詞的錯誤使用或翻譯上的差異，造成與AI工具之間的溝通障礙。如果學生能夠在與AI工具交流的過程中，適時地使用所學的專業英文詞彙，就能夠更快速和精準地獲得想要的回答。這也是我們設計這個專業英語閱讀理解輔助教材的目的之一，希望學生在完成這門課程後，能夠持續地利用生成式AI來強化該專業領域的深層學習，同時也能夠培養學生在其他領域利用AI自學的能力。</div></figure><h3 id="e92422fc-12b0-44a8-b942-da811ddc51d9" class="block-color-teal_background"><strong>數位線上教材</strong></h3><ul id="c8f1ce90-09e3-4f11-8794-a6dbd73c6b3d" class="bulleted-list"><li style="list-style-type:disc"><a  target="_blank" href="https://jy3736.github.io/stust2023spring-pub/%E6%95%B8%E4%BD%8D%E7%B3%BB%E7%B5%B1%E8%A8%AD%E8%A8%88%E5%AF%A6%E5%8B%99%20(2023%20Spring)%208e97c023db874d21a39743e0ebd488be/%E8%AA%B2%E7%A8%8B%E7%B0%A1%E4%BB%8B%20-%20%E6%95%B8%E4%BD%8D%E7%B3%BB%E7%B5%B1%E8%A8%AD%E8%A8%88%E5%AF%A6%E5%8B%99%20(2023%20Spring)%2099b0e4aae697421099048b7e70025a47.html"><strong>課程簡介 - 數位系統設計實務 (2023 Spring)</strong></a></li></ul><ul id="20712138-c418-47ab-8e75-a8b9bedd09d3" class="bulleted-list"><li style="list-style-type:disc"><a  target="_blank" href="https://jy3736.github.io/stust2023spring-pub/%E6%95%B8%E4%BD%8D%E7%B3%BB%E7%B5%B1%E8%A8%AD%E8%A8%88%E5%AF%A6%E5%8B%99%20(2023%20Spring)%208e97c023db874d21a39743e0ebd488be/%E6%95%B8%E4%BD%8D%E7%B3%BB%E7%B5%B1%E5%92%8C%20FPGA%20%E4%BB%8B%E7%B4%B9%2028287346a7a14d43ab5f5ec62c9798da.html"><strong>數位系統和 FPGA 介紹</strong></a></li></ul><ul id="8f1cf29c-b24a-4121-81e0-c9ef4852c634" class="bulleted-list"><li style="list-style-type:disc"><a  target="_blank" href="https://jy3736.github.io/stust2023spring-pub/%E6%95%B8%E4%BD%8D%E7%B3%BB%E7%B5%B1%E8%A8%AD%E8%A8%88%E5%AF%A6%E5%8B%99%20(2023%20Spring)%208e97c023db874d21a39743e0ebd488be/%E9%82%8F%E8%BC%AF%E6%96%B9%E7%A8%8B%E5%BC%8F%E8%88%87%E5%9F%BA%E6%9C%AC%E9%96%98%200e43700d65fb44238787a5b0a993cf6c.html"><strong>邏輯方程式與基本閘</strong></a></li></ul><ul id="b3c3d8c8-3a4a-4ff6-84f7-767ef66c6436" class="bulleted-list"><li style="list-style-type:disc"><a  target="_blank" href="https://jy3736.github.io/stust2023spring-pub/%E6%95%B8%E4%BD%8D%E7%B3%BB%E7%B5%B1%E8%A8%AD%E8%A8%88%E5%AF%A6%E5%8B%99%20(2023%20Spring)%208e97c023db874d21a39743e0ebd488be/%E7%B5%84%E5%90%88%E9%82%8F%E8%BC%AF%E9%9B%BB%E8%B7%AF%20-%20%E9%82%8F%E8%BC%AF%E9%81%8B%E7%AE%97%E5%AD%90%E8%88%87%E4%BD%8D%E5%85%83%E5%90%91%E9%87%8F%20efbe32bb6e6343a3b2992ba8912db61f.html"><strong>組合邏輯電路 - 邏輯運算子與位元向量</strong></a></li></ul><ul id="771dd5c4-ef41-4f8e-8a49-4b293693e496" class="bulleted-list"><li style="list-style-type:disc"><a  target="_blank" href="https://jy3736.github.io/stust2023spring-pub/%E6%95%B8%E4%BD%8D%E7%B3%BB%E7%B5%B1%E8%A8%AD%E8%A8%88%E5%AF%A6%E5%8B%99%20(2023%20Spring)%208e97c023db874d21a39743e0ebd488be/%E7%B5%84%E5%90%88%E9%82%8F%E8%BC%AF%E9%9B%BB%E8%B7%AF%20-%20%E5%A4%9A%E5%B7%A5%E5%99%A8%E8%88%87%E9%81%8B%E7%AE%97%E9%9B%BB%E8%B7%AF%207437810149fd4e59b7fe435c1f16baaf.html"><strong>組合邏輯電路 - 多工器與運算電路</strong></a></li></ul><ul id="d69fbc0f-6b84-410e-beb4-aff1db0cd8eb" class="bulleted-list"><li style="list-style-type:disc"><a  target="_blank" href="https://jy3736.github.io/stust2023spring-pub/%E6%95%B8%E4%BD%8D%E7%B3%BB%E7%B5%B1%E8%A8%AD%E8%A8%88%E5%AF%A6%E5%8B%99%20(2023%20Spring)%208e97c023db874d21a39743e0ebd488be/%E9%9A%8E%E5%B1%A4%E5%BC%8F%20Verilog%20%E8%A8%AD%E8%A8%88%20-%20%E6%A8%A1%E7%B5%84%E5%AF%A6%E4%BE%8B%E5%8C%96%20212e76096a0a47519883a17d29ff45cd.html"><strong>階層式 Verilog 設計 - 模組實例化</strong></a></li></ul><ul id="97ea3498-3944-4e35-9000-45e4b4e2e163" class="bulleted-list"><li style="list-style-type:disc"><a  target="_blank" href="https://jy3736.github.io/stust2023spring-pub/%E6%95%B8%E4%BD%8D%E7%B3%BB%E7%B5%B1%E8%A8%AD%E8%A8%88%E5%AF%A6%E5%8B%99%20(2023%20Spring)%208e97c023db874d21a39743e0ebd488be/%E6%9C%9F%E4%B8%AD%E6%B8%AC%E9%A9%97%20(Midterm%20Exam)%201602382d1fb54a5e91e6a7181fcd14b4.html"><strong>期中測驗 (Midterm Exam)</strong></a></li></ul><ul id="7d8e38fb-448e-4237-ac17-0a1247a4f280" class="bulleted-list"><li style="list-style-type:disc"><a  target="_blank" href="https://jy3736.github.io/stust2023spring-pub/%E6%95%B8%E4%BD%8D%E7%B3%BB%E7%B5%B1%E8%A8%AD%E8%A8%88%E5%AF%A6%E5%8B%99%20(2023%20Spring)%208e97c023db874d21a39743e0ebd488be/Verilog%20Testbench%20and%20FPGA%20Design%20Flow%20afa9d8300f33492f86b1c13e24eb15f1.html"><strong>Verilog Testbench and FPGA Design Flow</strong></a></li></ul><ul id="230ed43a-3eeb-43a6-b47f-1671424d5123" class="bulleted-list"><li style="list-style-type:disc"><a  target="_blank" href="https://jy3736.github.io/stust2023spring-pub/%E6%95%B8%E4%BD%8D%E7%B3%BB%E7%B5%B1%E8%A8%AD%E8%A8%88%E5%AF%A6%E5%8B%99%20(2023%20Spring)%208e97c023db874d21a39743e0ebd488be/Verilog%20%E8%A1%8C%E7%82%BA%E5%B1%A4%E6%AC%A1%E6%A8%A1%E7%B5%84%E8%A8%AD%E8%A8%88%201%20d64e0b0c1d6149e2be4ec8033fd6192e.html"><strong>Verilog 行為層次模組設計 1</strong></a></li></ul><ul id="69996cd5-46d7-4b58-961e-4e61681a219d" class="bulleted-list"><li style="list-style-type:disc"><a  target="_blank" href="https://jy3736.github.io/stust2023spring-pub/%E6%95%B8%E4%BD%8D%E7%B3%BB%E7%B5%B1%E8%A8%AD%E8%A8%88%E5%AF%A6%E5%8B%99%20(2023%20Spring)%208e97c023db874d21a39743e0ebd488be/Verilog%20%E8%A1%8C%E7%82%BA%E5%B1%A4%E6%AC%A1%E6%A8%A1%E7%B5%84%E8%A8%AD%E8%A8%88%202%208227a4bf21e14ca8815d20098d075355.html"><strong>Verilog 行為層次模組設計 2</strong></a></li></ul><ul id="e79eff13-da93-4af5-89e4-06d3dfd357c4" class="bulleted-list"><li style="list-style-type:disc"><a  target="_blank" href="https://jy3736.github.io/stust2023spring-pub/%E6%95%B8%E4%BD%8D%E7%B3%BB%E7%B5%B1%E8%A8%AD%E8%A8%88%E5%AF%A6%E5%8B%99%20(2023%20Spring)%208e97c023db874d21a39743e0ebd488be/Xilinx%20Vivado%20-%20Post-map%20Simulation%202d05cf96e422479da1593fbac1b5be57.html"><strong>Xilinx Vivado - Post-map Simulation</strong></a></li></ul><ul id="37c7dc1c-501e-4b17-8d19-2e9beb26470c" class="bulleted-list"><li style="list-style-type:disc"><a  target="_blank" href="https://jy3736.github.io/stust2023spring-pub/%E6%95%B8%E4%BD%8D%E7%B3%BB%E7%B5%B1%E8%A8%AD%E8%A8%88%E5%AF%A6%E5%8B%99%20(2023%20Spring)%208e97c023db874d21a39743e0ebd488be/Xilinx%20Vivado%20Tutorial%20+%20Zedboard%20c58369ed9b0442449450a66dcef4958a.html"><strong>Xilinx Vivado Tutorial + Zedboard</strong></a></li></ul><h3 id="4220afb8-31da-400d-b59f-1ccb7942cb7b" class="block-color-teal_background">專業英文閱讀 + 閱讀測驗<strong> 【題目與解答】</strong></h3><ul id="850ecc73-e5a1-4b99-9196-b149b435a20c" class="bulleted-list"><li style="list-style-type:disc"><a  target="_blank" href="https://jy3736.github.io/stust2023spring-pub/%E6%95%B8%E4%BD%8D%E7%B3%BB%E7%B5%B1%E8%A8%AD%E8%A8%88%E5%AF%A6%E5%8B%99%20(2023%20Spring)%208e97c023db874d21a39743e0ebd488be/English%20Learning%20-%20%E6%95%B8%E4%BD%8D%E7%B3%BB%E7%B5%B1%E5%92%8C%20FPGA%20%E4%BB%8B%E7%B4%B9%20c1c226dd9c0a4302993f750965fcee0a.html"><strong>English Learning - 數位系統和 FPGA 介紹</strong></a></li></ul><ul id="d8b6dffb-af8e-4bf1-ac21-e674e06205a0" class="bulleted-list"><li style="list-style-type:disc"><a  target="_blank" href="https://jy3736.github.io/stust2023spring-pub/%E6%95%B8%E4%BD%8D%E7%B3%BB%E7%B5%B1%E8%A8%AD%E8%A8%88%E5%AF%A6%E5%8B%99%20(2023%20Spring)%208e97c023db874d21a39743e0ebd488be/English%20Learning%20-%20%E9%82%8F%E8%BC%AF%E6%96%B9%E7%A8%8B%E5%BC%8F%E8%88%87%E5%9F%BA%E6%9C%AC%E9%96%98%20f466594c021049a69c78d33bfccae45b.html"><strong>English Learning - 邏輯方程式與基本閘</strong></a></li></ul><ul id="60f550f7-1498-433c-a1bd-e3c650752887" class="bulleted-list"><li style="list-style-type:disc"><a  target="_blank" href="https://jy3736.github.io/stust2023spring-pub/%E6%95%B8%E4%BD%8D%E7%B3%BB%E7%B5%B1%E8%A8%AD%E8%A8%88%E5%AF%A6%E5%8B%99%20(2023%20Spring)%208e97c023db874d21a39743e0ebd488be/English%20Learning%20-%20%E7%B5%84%E5%90%88%E9%82%8F%E8%BC%AF%E9%9B%BB%E8%B7%AF%20ff3866c965c6425ebad0d74e7940054f.html"><strong>English Learning - 組合邏輯電路</strong></a></li></ul><ul id="6912909b-5519-42f4-9b0f-5835ccbfe3c4" class="bulleted-list"><li style="list-style-type:disc"><a  target="_blank" href="https://jy3736.github.io/stust2023spring-pub/%E6%95%B8%E4%BD%8D%E7%B3%BB%E7%B5%B1%E8%A8%AD%E8%A8%88%E5%AF%A6%E5%8B%99%20(2023%20Spring)%208e97c023db874d21a39743e0ebd488be/English%20Learning%20-%20%E7%AE%97%E8%A1%93%20%E9%82%8F%E8%BC%AF%E9%81%8B%E7%AE%97%E5%85%83%E4%BB%B6%20d931c332cba341c1844f5cbff786b484.html"><strong>English Learning - 算術/邏輯運算元件</strong></a></li></ul><ul id="71b2d81c-9542-44cb-8a04-d87ac38143dc" class="bulleted-list"><li style="list-style-type:disc"><a  target="_blank" href="https://jy3736.github.io/stust2023spring-pub/%E6%95%B8%E4%BD%8D%E7%B3%BB%E7%B5%B1%E8%A8%AD%E8%A8%88%E5%AF%A6%E5%8B%99%20(2023%20Spring)%208e97c023db874d21a39743e0ebd488be/English%20Learning%20-%20%E5%A4%9A%E5%B7%A5%E5%99%A8%E8%88%87%E9%81%8B%E7%AE%97%E9%9B%BB%E8%B7%AF%20d695b1fd6d674e02b86c24e9c0334ffc.html"><strong>English Learning - 多工器與運算電路</strong></a></li></ul><ul id="d161070a-61af-4352-997c-8d67b4d83307" class="bulleted-list"><li style="list-style-type:disc"><a  target="_blank" href="https://jy3736.github.io/stust2023spring-pub/%E6%95%B8%E4%BD%8D%E7%B3%BB%E7%B5%B1%E8%A8%AD%E8%A8%88%E5%AF%A6%E5%8B%99%20(2023%20Spring)%208e97c023db874d21a39743e0ebd488be/English%20Learning%20-%20Reading%20Comprehension%20Problem%20S%20c0cbce3678924af5a084f6f81a25f512.html"><strong>English Learning - Reading Comprehension Problem Sets</strong></a></li></ul><h3 id="3fa80aad-582c-49c7-a494-6b41cde81fe6" class="block-color-yellow_background">創新性 (教材原創性及貢獻度，說明該作品與類似作品之差異或優於類似教材部分)</h3><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="040d53ee-58ce-4048-bf99-36aeae7d719f"><div style="font-size:1.5em"><img class="icon" src="%E6%95%B8%E4%BD%8D%E6%95%99%E6%9D%90%E5%8F%8A%E5%B0%88%E6%A5%AD%E8%8B%B1%E6%96%87%E9%96%B1%E8%AE%80(%E6%95%B8%E4%BD%8D%E7%B3%BB%E7%B5%B1%E8%A8%AD%E8%A8%88%E5%AF%A6%E5%8B%99)%202d4cee088aa74ece95c112e32684f00e/yang05.png"/></div><div style="width:100%">這份教材具有很高的創新性，因為所有範例程式及翻轉教室影音教材都是原創作品，並且沒有使用任何書商提供的教材。這與其他教材不同，因為所有內容都是作者自行搜尋國內外資料整理設計，同時也有明確表列引用到的外部參考資料來源網址。<p id="f8c8664d-bd11-4394-8f29-20e37b9cd498" class="">本教材適用的教學方法和媒體，也有很大的改變和優勢。我們利用學生熟悉和喜愛的 YouTube、Podcast、Notion 和 Github 等平台呈現和分享教材，方便學生隨時隨地學習，減少紙張浪費，並方便授課教師更新和修改教材，也可以和其他有興趣的教師共享和協作教材，讓更多人受益。</p><p id="bd03c3a3-aa26-4d0a-aa03-8a9f40868f81" class="">此外，教材的內容和設計也是根據學生的需求和程度而調整和改良的。作者採用了翻轉教室、做中學和適性化教學等技巧，讓學生可以在課前預習，在課堂上實作，在課後複習。作者也會根據學生的反饋和表現，不斷地修改教學內容、方式和難易度，以有效地學習。此外，作者也會在 Podcast 和筆記中分享與課程相關的最新資訊和趨勢，例如生成式 AI ChatGPT 和 New Being 等，讓學生跟上時代的脈動。</p><p id="b1faff1d-2c29-4d3f-88a7-faf61026c67e" class="">綜合以上優勢，本教材在創新性、教材原創性及貢獻度方面優於其他類似教材。</p></div></figure><p id="f4003230-286e-4454-9065-1c9d00432e36" class="">
+</p><h3 id="9c71cf94-c963-4b8c-bf3a-2dd5287eddd5" class="block-color-yellow_background">學習成效(教材/教具輔助教學之運用情形，說明該作品對學生學習或教師教學之貢獻)</h3><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="3b115812-ae4b-42b1-b53c-ea6a6de1f4ee"><div style="font-size:1.5em"><img class="icon" src="%E6%95%B8%E4%BD%8D%E6%95%99%E6%9D%90%E5%8F%8A%E5%B0%88%E6%A5%AD%E8%8B%B1%E6%96%87%E9%96%B1%E8%AE%80(%E6%95%B8%E4%BD%8D%E7%B3%BB%E7%B5%B1%E8%A8%AD%E8%A8%88%E5%AF%A6%E5%8B%99)%202d4cee088aa74ece95c112e32684f00e/800x800.png"/></div><div style="width:100%">本教材的對應課程是「數位系統設計實務」，其中重要的一部分是教授硬體描述語言Verilog。相較於傳統的教學方式，本教材採用了翻轉教室的方法，讓學生在課前透過影片學習基本概念及範例程式，並在課堂上進行實作，以強化學生的基礎設計能力。在課後，學生可以再次觀看影片、閱讀筆記及練習題，強化學習效果。此外，本教材特別強調Verilog語言的合成設計，除了提供範例程式外，也設有翻轉教室影片教學，詳細說明如何編寫可合成的Verilog程式，並將其模擬以及實作在FPGA上。這讓學生不僅能夠理解理論概念，也能夠真正掌握如何應用Verilog語言設計數位電路，培養實踐能力。在學生教材使用方面，本教材使用的是學生熟悉的平台，例如YouTube、Podcast、Notion、及Github等，學生可以隨時隨地使用學習，同時也減少了紙張浪費。此外，翻轉教室的教學方法也讓學生對教材有更高的使用率，因為他們可以在課前、課堂及課後多次學習和複習，不斷強化學習成效。<p id="64935779-5303-46a6-a52a-0b529618df52" class="">這學期我們採用了自行設計的專業英語閱讀理解教材，它受到了學生們的喜愛與廣泛使用。這套教材不僅能簡略測驗學生的英語閱讀能力，還能夠幫助學生學習和掌握，專業領域的相關詞彙和表達方式，從而提高他們在與同儕進行溝通和協作時的自信心和效率。此外，這套教材還旨在培養學生與生成式AI工具進行有效交流的能力，讓他們在未來的自主學習過程中，能夠更好地利用AI工具來優化學習效果和成果。</p><p id="d648e729-c023-486e-ac7b-e54817bfae0e" class="">本教材規劃了一週的時間，運用USR辦公室提供的SDGs桌遊來向同學介紹CSR、USR、ESG以及SDGs的基本常識，希望透過有趣的團體桌遊互動，讓學生在輕鬆愉快的環境中自然地獲取這些重要的知識。原本這個桌遊需要委託外師來帶團，但考慮到4個班級都請外師成本高昂，因此，我想到自學這個有趣且有效的SDGs推廣方式，如果我們可以學會如何自己帶團，就可以在所有的課程中使用這個工具，讓學生輕鬆有趣且高效地認識聯合國永續發展的17項目標，特別是與台灣在地相關的議題。因此，我和我的助教及研究生，利用課後時間研究如何玩這個團體桌遊，並自行創作了一套有趣的帶團方式。在這學期的課堂中，我使用這套帶團方式在4個班級實際操作，每個班級的學生都給予極高的評價及反饋，且在不知不覺中，學生已能脫口而出部分永續發展目標主題。這是這學期一個非常重大的收穫，我很慶幸沒有用「錢」來解決帶團的問題，反而讓我和我的助教獲得了一項帶團體桌遊的專長。</p></div></figure><h3 id="eaf294ae-6340-4014-b325-bd02f234dd1a" class="block-color-teal_background"><strong>【參考資料】</strong>110 學年教材/教具使用狀況</h3><h3 id="771fba5b-7bb7-4b9f-97ab-a2557d6cd771" class="block-color-yellow"><a  target="_blank" href="https://flipclass.stust.edu.tw/course/16581">數位系統設計實務_四技電子一丙</a> (FlipClass 數位學習)</h3><div id="0079c1b5-9f20-4a43-b337-003e1a3f1b3e" class="column-list"><div id="5e0c0878-dcb8-4d3b-8f1f-9d5833a00136" style="width:50%" class="column"><figure id="7d5f776e-8e29-47cf-9cb5-77b0a8e85a79" class="image"><a href="%E6%95%B8%E4%BD%8D%E6%95%99%E6%9D%90%E5%8F%8A%E5%B0%88%E6%A5%AD%E8%8B%B1%E6%96%87%E9%96%B1%E8%AE%80(%E6%95%B8%E4%BD%8D%E7%B3%BB%E7%B5%B1%E8%A8%AD%E8%A8%88%E5%AF%A6%E5%8B%99)%202d4cee088aa74ece95c112e32684f00e/Untitled.png"><img style="width:1063px" src="%E6%95%B8%E4%BD%8D%E6%95%99%E6%9D%90%E5%8F%8A%E5%B0%88%E6%A5%AD%E8%8B%B1%E6%96%87%E9%96%B1%E8%AE%80(%E6%95%B8%E4%BD%8D%E7%B3%BB%E7%B5%B1%E8%A8%AD%E8%A8%88%E5%AF%A6%E5%8B%99)%202d4cee088aa74ece95c112e32684f00e/Untitled.png"/></a></figure></div><div id="53f41f81-f036-45b2-9b1c-2f92c4291878" style="width:50%" class="column"><figure id="265dd80b-83c4-4bfd-8bf2-4b2816342b2b" class="image"><a href="%E6%95%B8%E4%BD%8D%E6%95%99%E6%9D%90%E5%8F%8A%E5%B0%88%E6%A5%AD%E8%8B%B1%E6%96%87%E9%96%B1%E8%AE%80(%E6%95%B8%E4%BD%8D%E7%B3%BB%E7%B5%B1%E8%A8%AD%E8%A8%88%E5%AF%A6%E5%8B%99)%202d4cee088aa74ece95c112e32684f00e/Untitled%201.png"><img style="width:1879px" src="%E6%95%B8%E4%BD%8D%E6%95%99%E6%9D%90%E5%8F%8A%E5%B0%88%E6%A5%AD%E8%8B%B1%E6%96%87%E9%96%B1%E8%AE%80(%E6%95%B8%E4%BD%8D%E7%B3%BB%E7%B5%B1%E8%A8%AD%E8%A8%88%E5%AF%A6%E5%8B%99)%202d4cee088aa74ece95c112e32684f00e/Untitled%201.png"/></a></figure></div></div><h3 id="eebd70bb-72f5-4946-a05d-77cf66c31bbd" class="block-color-teal_background"><strong>【參考資料】</strong>111 學年教材/教具使用狀況 (以下資料統計至第11週)</h3><h3 id="e39c061a-b96c-4781-a5b6-c6a0ef42a234" class="block-color-yellow"><a  target="_blank" href="https://flipclass.stust.edu.tw/course/24838">數位系統設計實務_四技電子一丙</a> (FlipClass 數位學習)</h3><div id="a2ab4eb3-bdff-42b4-81cf-d0261a57ba78" class="column-list"><div id="eca6837e-f299-421a-843c-caaeebab5207" style="width:50%" class="column"><figure id="ca15c832-58f4-4670-ae51-cf11e1d95bb6" class="image"><a href="%E6%95%B8%E4%BD%8D%E6%95%99%E6%9D%90%E5%8F%8A%E5%B0%88%E6%A5%AD%E8%8B%B1%E6%96%87%E9%96%B1%E8%AE%80(%E6%95%B8%E4%BD%8D%E7%B3%BB%E7%B5%B1%E8%A8%AD%E8%A8%88%E5%AF%A6%E5%8B%99)%202d4cee088aa74ece95c112e32684f00e/Untitled%202.png"><img style="width:1049px" src="%E6%95%B8%E4%BD%8D%E6%95%99%E6%9D%90%E5%8F%8A%E5%B0%88%E6%A5%AD%E8%8B%B1%E6%96%87%E9%96%B1%E8%AE%80(%E6%95%B8%E4%BD%8D%E7%B3%BB%E7%B5%B1%E8%A8%AD%E8%A8%88%E5%AF%A6%E5%8B%99)%202d4cee088aa74ece95c112e32684f00e/Untitled%202.png"/></a></figure><p id="130cc7b2-8103-453f-986e-73fcfcaead5c" class="">
+</p></div><div id="13e92f13-7e5b-40e7-bb19-a1fbc0c5d747" style="width:50%" class="column"><figure id="4535427d-4b5a-4671-ab7c-946a1ab55d1e" class="image"><a href="%E6%95%B8%E4%BD%8D%E6%95%99%E6%9D%90%E5%8F%8A%E5%B0%88%E6%A5%AD%E8%8B%B1%E6%96%87%E9%96%B1%E8%AE%80(%E6%95%B8%E4%BD%8D%E7%B3%BB%E7%B5%B1%E8%A8%AD%E8%A8%88%E5%AF%A6%E5%8B%99)%202d4cee088aa74ece95c112e32684f00e/Untitled%203.png"><img style="width:1885px" src="%E6%95%B8%E4%BD%8D%E6%95%99%E6%9D%90%E5%8F%8A%E5%B0%88%E6%A5%AD%E8%8B%B1%E6%96%87%E9%96%B1%E8%AE%80(%E6%95%B8%E4%BD%8D%E7%B3%BB%E7%B5%B1%E8%A8%AD%E8%A8%88%E5%AF%A6%E5%8B%99)%202d4cee088aa74ece95c112e32684f00e/Untitled%203.png"/></a></figure></div></div><figure id="7f2e04ba-28c3-49e2-b5fb-20d44712f75b" class="image"><a href="%E6%95%B8%E4%BD%8D%E6%95%99%E6%9D%90%E5%8F%8A%E5%B0%88%E6%A5%AD%E8%8B%B1%E6%96%87%E9%96%B1%E8%AE%80(%E6%95%B8%E4%BD%8D%E7%B3%BB%E7%B5%B1%E8%A8%AD%E8%A8%88%E5%AF%A6%E5%8B%99)%202d4cee088aa74ece95c112e32684f00e/Untitled%204.png"><img style="width:2000px" src="%E6%95%B8%E4%BD%8D%E6%95%99%E6%9D%90%E5%8F%8A%E5%B0%88%E6%A5%AD%E8%8B%B1%E6%96%87%E9%96%B1%E8%AE%80(%E6%95%B8%E4%BD%8D%E7%B3%BB%E7%B5%B1%E8%A8%AD%E8%A8%88%E5%AF%A6%E5%8B%99)%202d4cee088aa74ece95c112e32684f00e/Untitled%204.png"/></a></figure><figure id="9d77eaff-cdd3-41a8-85dd-90952bdf9a17" class="image"><a href="%E6%95%B8%E4%BD%8D%E6%95%99%E6%9D%90%E5%8F%8A%E5%B0%88%E6%A5%AD%E8%8B%B1%E6%96%87%E9%96%B1%E8%AE%80(%E6%95%B8%E4%BD%8D%E7%B3%BB%E7%B5%B1%E8%A8%AD%E8%A8%88%E5%AF%A6%E5%8B%99)%202d4cee088aa74ece95c112e32684f00e/Untitled%205.png"><img style="width:2000px" src="%E6%95%B8%E4%BD%8D%E6%95%99%E6%9D%90%E5%8F%8A%E5%B0%88%E6%A5%AD%E8%8B%B1%E6%96%87%E9%96%B1%E8%AE%80(%E6%95%B8%E4%BD%8D%E7%B3%BB%E7%B5%B1%E8%A8%AD%E8%A8%88%E5%AF%A6%E5%8B%99)%202d4cee088aa74ece95c112e32684f00e/Untitled%205.png"/></a></figure><p id="63378bd5-cb50-4fdb-a4c8-67a54c76cad0" class="block-color-yellow">全部內容過於冗長中間省略…</p><figure id="f2bf24b9-3004-4403-8eb9-a0afedc430db" class="image"><a href="%E6%95%B8%E4%BD%8D%E6%95%99%E6%9D%90%E5%8F%8A%E5%B0%88%E6%A5%AD%E8%8B%B1%E6%96%87%E9%96%B1%E8%AE%80(%E6%95%B8%E4%BD%8D%E7%B3%BB%E7%B5%B1%E8%A8%AD%E8%A8%88%E5%AF%A6%E5%8B%99)%202d4cee088aa74ece95c112e32684f00e/Untitled%206.png"><img style="width:2000px" src="%E6%95%B8%E4%BD%8D%E6%95%99%E6%9D%90%E5%8F%8A%E5%B0%88%E6%A5%AD%E8%8B%B1%E6%96%87%E9%96%B1%E8%AE%80(%E6%95%B8%E4%BD%8D%E7%B3%BB%E7%B5%B1%E8%A8%AD%E8%A8%88%E5%AF%A6%E5%8B%99)%202d4cee088aa74ece95c112e32684f00e/Untitled%206.png"/></a></figure><h3 id="dad6366a-b401-4604-837f-84f6f0dd1069" class=""><mark class="highlight-yellow"><a  target="_blank" href="https://flipclass.stust.edu.tw/course/24838">數位系統設計實務_四技電子一丙</a></mark><mark class="highlight-yellow"> (專業英語閱讀測驗 - Zuvio </mark><mark class="highlight-yellow"><strong>互動平台</strong></mark><mark class="highlight-yellow">)</mark></h3><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="04c4a4bc-cb7b-4f64-aa57-168c24813d0a"><div style="font-size:1.5em"><img class="icon" src="%E6%95%B8%E4%BD%8D%E6%95%99%E6%9D%90%E5%8F%8A%E5%B0%88%E6%A5%AD%E8%8B%B1%E6%96%87%E9%96%B1%E8%AE%80(%E6%95%B8%E4%BD%8D%E7%B3%BB%E7%B5%B1%E8%A8%AD%E8%A8%88%E5%AF%A6%E5%8B%99)%202d4cee088aa74ece95c112e32684f00e/yang02%202.png"/></div><div style="width:100%">本課程期中測驗分為兩部分：1. 上機實作Verilog電路設計(Xilinx Vivado)；2.閱讀理解選擇題。每部分的分數最高為100分 (共計200分)，學生可選擇作答任一個部分或全部，期中測驗成績將由兩部分得分加總，但是最終成績不會超過100分。期中成績計算範例，A同學在上機實作得了30分，閱讀測驗選擇題得了30分，那最終成績就是60分。如果B同學在上機實作得了60分，閱讀測驗選擇題得了50分，最終成績也只採計至100分。</div></figure><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="f446eafd-a5d1-4739-af93-aea091f45432"><div style="font-size:1.5em"><img class="icon" src="%E6%95%B8%E4%BD%8D%E6%95%99%E6%9D%90%E5%8F%8A%E5%B0%88%E6%A5%AD%E8%8B%B1%E6%96%87%E9%96%B1%E8%AE%80(%E6%95%B8%E4%BD%8D%E7%B3%BB%E7%B5%B1%E8%A8%AD%E8%A8%88%E5%AF%A6%E5%8B%99)%202d4cee088aa74ece95c112e32684f00e/yang02%202.png"/></div><div style="width:100%">這是一份閱讀理解評量教材，旨在檢測學生的專業英文閱讀能力。我們期望學生不僅具備數位電路設計的專業知識，也能夠掌握基本的專業英文閱讀和溝通技巧。這樣，他們才能夠在未來利用生成式AI來協助更深入的學習。雖然現在的生成式AI可以理解中文，但是由於翻譯上的差異，有時會出現專有名詞的錯誤使用，造成與AI工具之間的溝通障礙。如果學生能夠在與AI工具交流的過程中，適時地使用所學的專業英文詞彙，就能夠更快速和精準地獲得想要的回答。這也是我們設計這個專業英語閱讀理解輔助教材的目的之一，希望學生在完成這門課程後，能夠持續地利用生成式AI來強化該專業領域的深層學習，同時也能夠培養學生在其他領域利用AI自學的能力。</div></figure><figure id="785c19f1-71f0-4ae2-aad0-d987fa666dc7" class="image"><a href="%E6%95%B8%E4%BD%8D%E6%95%99%E6%9D%90%E5%8F%8A%E5%B0%88%E6%A5%AD%E8%8B%B1%E6%96%87%E9%96%B1%E8%AE%80(%E6%95%B8%E4%BD%8D%E7%B3%BB%E7%B5%B1%E8%A8%AD%E8%A8%88%E5%AF%A6%E5%8B%99)%202d4cee088aa74ece95c112e32684f00e/Untitled%207.png"><img style="width:1088px" src="%E6%95%B8%E4%BD%8D%E6%95%99%E6%9D%90%E5%8F%8A%E5%B0%88%E6%A5%AD%E8%8B%B1%E6%96%87%E9%96%B1%E8%AE%80(%E6%95%B8%E4%BD%8D%E7%B3%BB%E7%B5%B1%E8%A8%AD%E8%A8%88%E5%AF%A6%E5%8B%99)%202d4cee088aa74ece95c112e32684f00e/Untitled%207.png"/></a></figure><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="cbd881c8-e789-4c81-8344-dc7b11ba57b8"><div style="font-size:1.5em"><img class="icon" src="%E6%95%B8%E4%BD%8D%E6%95%99%E6%9D%90%E5%8F%8A%E5%B0%88%E6%A5%AD%E8%8B%B1%E6%96%87%E9%96%B1%E8%AE%80(%E6%95%B8%E4%BD%8D%E7%B3%BB%E7%B5%B1%E8%A8%AD%E8%A8%88%E5%AF%A6%E5%8B%99)%202d4cee088aa74ece95c112e32684f00e/yang02%202.png"/></div><div style="width:100%">第1份閱讀理解測驗的簡易分析：
+全班共有32位同學，參加了一份包含5道選擇題的評量。每一道題目的滿分為4分，因此，該份評量的滿分為20分。根據統計數據，全班的平均得分為13.88分，這表明學生的整體表現中等偏下。此外，最高分為20分，最低分為0分，顯示出學生在此次測驗中存在較大的分數差異。<p id="d651d2f6-572a-4ce4-baf8-def5ffd1b27a" class="">值得注意的是，眾數為20分，這表明有較多的學生得分為20分，可能反映出該測驗存在一些易於獲得高分的題目。然而，中位數為16分，相對於平均值來說較高，這可能意味著該分佈呈現出右偏的現象。此外，標準差為5.91分相對較大，表示學生的得分差異較大。而變異係數為0.43相對較小，表示學生的得分差異相對較小，但仍然表現出一定的差異性。</p><p id="01424e5a-e226-4f1f-8e8d-52a2e40f9765" class="">綜合以上分析，可以看出學生整體表現中等偏下，但是學生的得分差異相對較大。因此，為了幫助學生提高學習成效，我會針對學生的薄弱環節，進行有針對性的補救措施。這將有助於提高學生的學習動機和學習效果，以期達到更好的學習</p></div></figure><figure id="a7068dc3-3dbb-4700-ba4f-93c970b5410f" class="image"><a href="%E6%95%B8%E4%BD%8D%E6%95%99%E6%9D%90%E5%8F%8A%E5%B0%88%E6%A5%AD%E8%8B%B1%E6%96%87%E9%96%B1%E8%AE%80(%E6%95%B8%E4%BD%8D%E7%B3%BB%E7%B5%B1%E8%A8%AD%E8%A8%88%E5%AF%A6%E5%8B%99)%202d4cee088aa74ece95c112e32684f00e/Untitled%208.png"><img style="width:900px" src="%E6%95%B8%E4%BD%8D%E6%95%99%E6%9D%90%E5%8F%8A%E5%B0%88%E6%A5%AD%E8%8B%B1%E6%96%87%E9%96%B1%E8%AE%80(%E6%95%B8%E4%BD%8D%E7%B3%BB%E7%B5%B1%E8%A8%AD%E8%A8%88%E5%AF%A6%E5%8B%99)%202d4cee088aa74ece95c112e32684f00e/Untitled%208.png"/></a></figure><figure id="ec82f8b2-63ac-4ed8-9d17-c280236c123b" class="image"><a href="%E6%95%B8%E4%BD%8D%E6%95%99%E6%9D%90%E5%8F%8A%E5%B0%88%E6%A5%AD%E8%8B%B1%E6%96%87%E9%96%B1%E8%AE%80(%E6%95%B8%E4%BD%8D%E7%B3%BB%E7%B5%B1%E8%A8%AD%E8%A8%88%E5%AF%A6%E5%8B%99)%202d4cee088aa74ece95c112e32684f00e/Untitled%209.png"><img style="width:900px" src="%E6%95%B8%E4%BD%8D%E6%95%99%E6%9D%90%E5%8F%8A%E5%B0%88%E6%A5%AD%E8%8B%B1%E6%96%87%E9%96%B1%E8%AE%80(%E6%95%B8%E4%BD%8D%E7%B3%BB%E7%B5%B1%E8%A8%AD%E8%A8%88%E5%AF%A6%E5%8B%99)%202d4cee088aa74ece95c112e32684f00e/Untitled%209.png"/></a></figure><figure id="3277af54-f024-4ffa-8ef5-5d4d4b809289" class="image"><a href="%E6%95%B8%E4%BD%8D%E6%95%99%E6%9D%90%E5%8F%8A%E5%B0%88%E6%A5%AD%E8%8B%B1%E6%96%87%E9%96%B1%E8%AE%80(%E6%95%B8%E4%BD%8D%E7%B3%BB%E7%B5%B1%E8%A8%AD%E8%A8%88%E5%AF%A6%E5%8B%99)%202d4cee088aa74ece95c112e32684f00e/Untitled%2010.png"><img style="width:901px" src="%E6%95%B8%E4%BD%8D%E6%95%99%E6%9D%90%E5%8F%8A%E5%B0%88%E6%A5%AD%E8%8B%B1%E6%96%87%E9%96%B1%E8%AE%80(%E6%95%B8%E4%BD%8D%E7%B3%BB%E7%B5%B1%E8%A8%AD%E8%A8%88%E5%AF%A6%E5%8B%99)%202d4cee088aa74ece95c112e32684f00e/Untitled%2010.png"/></a></figure><figure id="3201058a-1b61-4a20-a72c-8d5d0e1d449f" class="image"><a href="%E6%95%B8%E4%BD%8D%E6%95%99%E6%9D%90%E5%8F%8A%E5%B0%88%E6%A5%AD%E8%8B%B1%E6%96%87%E9%96%B1%E8%AE%80(%E6%95%B8%E4%BD%8D%E7%B3%BB%E7%B5%B1%E8%A8%AD%E8%A8%88%E5%AF%A6%E5%8B%99)%202d4cee088aa74ece95c112e32684f00e/Untitled%2011.png"><img style="width:900px" src="%E6%95%B8%E4%BD%8D%E6%95%99%E6%9D%90%E5%8F%8A%E5%B0%88%E6%A5%AD%E8%8B%B1%E6%96%87%E9%96%B1%E8%AE%80(%E6%95%B8%E4%BD%8D%E7%B3%BB%E7%B5%B1%E8%A8%AD%E8%A8%88%E5%AF%A6%E5%8B%99)%202d4cee088aa74ece95c112e32684f00e/Untitled%2011.png"/></a></figure><p id="f2a59edc-8d9b-4c1f-993d-218e361dadfc" class="block-color-yellow">全部內容(5份共25題專業英文閱讀測驗)過於冗長，其餘4份資料在此省略…</p><h3 id="f574de50-6185-4b33-872e-d154dd552e02" class="block-color-teal_background"><strong>【參考資料】利用桌遊，讓同學了解聯合國永續發展的17項目標(SDGs)</strong></h3><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="e50309ba-2b47-44cf-8076-726ac8bb34c9"><div style="font-size:1.5em"><img class="icon" src="%E6%95%B8%E4%BD%8D%E6%95%99%E6%9D%90%E5%8F%8A%E5%B0%88%E6%A5%AD%E8%8B%B1%E6%96%87%E9%96%B1%E8%AE%80(%E6%95%B8%E4%BD%8D%E7%B3%BB%E7%B5%B1%E8%A8%AD%E8%A8%88%E5%AF%A6%E5%8B%99)%202d4cee088aa74ece95c112e32684f00e/800x800%201.png"/></div><div style="width:100%">本教材規劃了一週的時間，運用USR辦公室提供的SDGs桌遊來向同學介紹CSR、USR、ESG以及SDGs的基本常識，希望透過有趣的團體桌遊互動，讓學生在輕鬆愉快的環境中自然地獲取這些重要的知識。原本這個桌遊需要委託外師來帶團，但考慮到4個班級都請外師成本高昂，因此，我想到自學這個有趣且有效的SDGs推廣方式，如果我們可以學會如何自己帶團，就可以在所有的課程中使用這個工具，讓學生輕鬆有趣且高效地認識聯合國永續發展的17項目標，特別是與台灣在地相關的議題。因此，我和我的助教及研究生，利用課後時間研究如何玩這個團體桌遊，並自行創作了一套有趣的帶團方式。在這學期的課堂中，我使用這套帶團方式在4個班級實際操作，每個班級的學生都給予極高的評價及反饋，且在不知不覺中，學生已能脫口而出部分永續發展目標主題。這是這學期一個非常重大的收穫，我很慶幸沒有用「錢」來解決帶團的問題，反而讓我和我的助教獲得了一項帶團體桌遊的專長。</div></figure><h3 id="9e59f2e7-ec09-4792-a7fe-9358a843d40c" class="block-color-yellow">和助教團隊討論如何帶這個團體桌遊</h3><div id="347afd18-1d18-4dce-9f83-a5474376075d" class="column-list"><div id="4be39990-39fc-47fb-8a81-9719ecc9ce64" style="width:50%" class="column"><figure id="1d8c8ba5-5e4c-4841-85f9-dfd5503a7fe8" class="image"><a href="%E6%95%B8%E4%BD%8D%E6%95%99%E6%9D%90%E5%8F%8A%E5%B0%88%E6%A5%AD%E8%8B%B1%E6%96%87%E9%96%B1%E8%AE%80(%E6%95%B8%E4%BD%8D%E7%B3%BB%E7%B5%B1%E8%A8%AD%E8%A8%88%E5%AF%A6%E5%8B%99)%202d4cee088aa74ece95c112e32684f00e/IMG_20230323_121303_1.jpg"><img style="width:4000px" src="%E6%95%B8%E4%BD%8D%E6%95%99%E6%9D%90%E5%8F%8A%E5%B0%88%E6%A5%AD%E8%8B%B1%E6%96%87%E9%96%B1%E8%AE%80(%E6%95%B8%E4%BD%8D%E7%B3%BB%E7%B5%B1%E8%A8%AD%E8%A8%88%E5%AF%A6%E5%8B%99)%202d4cee088aa74ece95c112e32684f00e/IMG_20230323_121303_1.jpg"/></a></figure></div><div id="9d7f5f75-8105-4d7e-9f86-8ee33a4f73ef" style="width:50%" class="column"><figure id="92d85dc3-e7b2-4d18-a0a0-5530719ac480" class="image"><a href="%E6%95%B8%E4%BD%8D%E6%95%99%E6%9D%90%E5%8F%8A%E5%B0%88%E6%A5%AD%E8%8B%B1%E6%96%87%E9%96%B1%E8%AE%80(%E6%95%B8%E4%BD%8D%E7%B3%BB%E7%B5%B1%E8%A8%AD%E8%A8%88%E5%AF%A6%E5%8B%99)%202d4cee088aa74ece95c112e32684f00e/IMG_20230323_121308_1.jpg"><img style="width:4000px" src="%E6%95%B8%E4%BD%8D%E6%95%99%E6%9D%90%E5%8F%8A%E5%B0%88%E6%A5%AD%E8%8B%B1%E6%96%87%E9%96%B1%E8%AE%80(%E6%95%B8%E4%BD%8D%E7%B3%BB%E7%B5%B1%E8%A8%AD%E8%A8%88%E5%AF%A6%E5%8B%99)%202d4cee088aa74ece95c112e32684f00e/IMG_20230323_121308_1.jpg"/></a></figure></div></div><figure id="11a55554-04e7-43c9-bbf7-a73e694d060d" class="image"><a href="%E6%95%B8%E4%BD%8D%E6%95%99%E6%9D%90%E5%8F%8A%E5%B0%88%E6%A5%AD%E8%8B%B1%E6%96%87%E9%96%B1%E8%AE%80(%E6%95%B8%E4%BD%8D%E7%B3%BB%E7%B5%B1%E8%A8%AD%E8%A8%88%E5%AF%A6%E5%8B%99)%202d4cee088aa74ece95c112e32684f00e/IMG_20230323_121416_1.jpg"><img style="width:4000px" src="%E6%95%B8%E4%BD%8D%E6%95%99%E6%9D%90%E5%8F%8A%E5%B0%88%E6%A5%AD%E8%8B%B1%E6%96%87%E9%96%B1%E8%AE%80(%E6%95%B8%E4%BD%8D%E7%B3%BB%E7%B5%B1%E8%A8%AD%E8%A8%88%E5%AF%A6%E5%8B%99)%202d4cee088aa74ece95c112e32684f00e/IMG_20230323_121416_1.jpg"/></a></figure><h3 id="a623d7a7-49ef-4717-855d-556b38b3afe2" class="block-color-yellow">利用SDGs團體桌遊，讓學生認識CSR、USR、ESG以及SDGs的基本常識</h3><div id="aa4ef364-521b-4581-a2a0-b8640ec08f8f" class="column-list"><div id="6f9a5baa-6d1a-4e77-a34b-090019539bb7" style="width:50%" class="column"><figure id="febd65bd-49ae-45f7-8b61-280aafac9362" class="image"><a href="%E6%95%B8%E4%BD%8D%E6%95%99%E6%9D%90%E5%8F%8A%E5%B0%88%E6%A5%AD%E8%8B%B1%E6%96%87%E9%96%B1%E8%AE%80(%E6%95%B8%E4%BD%8D%E7%B3%BB%E7%B5%B1%E8%A8%AD%E8%A8%88%E5%AF%A6%E5%8B%99)%202d4cee088aa74ece95c112e32684f00e/IMG_0050.jpg"><img style="width:4032px" src="%E6%95%B8%E4%BD%8D%E6%95%99%E6%9D%90%E5%8F%8A%E5%B0%88%E6%A5%AD%E8%8B%B1%E6%96%87%E9%96%B1%E8%AE%80(%E6%95%B8%E4%BD%8D%E7%B3%BB%E7%B5%B1%E8%A8%AD%E8%A8%88%E5%AF%A6%E5%8B%99)%202d4cee088aa74ece95c112e32684f00e/IMG_0050.jpg"/></a></figure></div><div id="2a04337b-8b0f-4da2-9681-007c14127b81" style="width:50%" class="column"><figure id="195fa233-e021-4848-9cef-9a176819e94d" class="image"><a href="%E6%95%B8%E4%BD%8D%E6%95%99%E6%9D%90%E5%8F%8A%E5%B0%88%E6%A5%AD%E8%8B%B1%E6%96%87%E9%96%B1%E8%AE%80(%E6%95%B8%E4%BD%8D%E7%B3%BB%E7%B5%B1%E8%A8%AD%E8%A8%88%E5%AF%A6%E5%8B%99)%202d4cee088aa74ece95c112e32684f00e/IMG_0059.jpg"><img style="width:4032px" src="%E6%95%B8%E4%BD%8D%E6%95%99%E6%9D%90%E5%8F%8A%E5%B0%88%E6%A5%AD%E8%8B%B1%E6%96%87%E9%96%B1%E8%AE%80(%E6%95%B8%E4%BD%8D%E7%B3%BB%E7%B5%B1%E8%A8%AD%E8%A8%88%E5%AF%A6%E5%8B%99)%202d4cee088aa74ece95c112e32684f00e/IMG_0059.jpg"/></a></figure></div></div><div id="afce18c2-5dde-4bdb-a49a-9af9f8038d3f" class="column-list"><div id="32c5bf23-ff63-4ffa-8642-f691b40b9219" style="width:50%" class="column"><figure id="38c4ac35-67c5-44ad-ad0d-78dd5de8c62b" class="image"><a href="%E6%95%B8%E4%BD%8D%E6%95%99%E6%9D%90%E5%8F%8A%E5%B0%88%E6%A5%AD%E8%8B%B1%E6%96%87%E9%96%B1%E8%AE%80(%E6%95%B8%E4%BD%8D%E7%B3%BB%E7%B5%B1%E8%A8%AD%E8%A8%88%E5%AF%A6%E5%8B%99)%202d4cee088aa74ece95c112e32684f00e/IMG20230327102851.jpg"><img style="width:4000px" src="%E6%95%B8%E4%BD%8D%E6%95%99%E6%9D%90%E5%8F%8A%E5%B0%88%E6%A5%AD%E8%8B%B1%E6%96%87%E9%96%B1%E8%AE%80(%E6%95%B8%E4%BD%8D%E7%B3%BB%E7%B5%B1%E8%A8%AD%E8%A8%88%E5%AF%A6%E5%8B%99)%202d4cee088aa74ece95c112e32684f00e/IMG20230327102851.jpg"/></a></figure></div><div id="cff2dbeb-7a22-4154-8630-095b3c98ea31" style="width:50%" class="column"><figure id="58008603-3cc7-4916-a003-7a8b47bb2235" class="image"><a href="%E6%95%B8%E4%BD%8D%E6%95%99%E6%9D%90%E5%8F%8A%E5%B0%88%E6%A5%AD%E8%8B%B1%E6%96%87%E9%96%B1%E8%AE%80(%E6%95%B8%E4%BD%8D%E7%B3%BB%E7%B5%B1%E8%A8%AD%E8%A8%88%E5%AF%A6%E5%8B%99)%202d4cee088aa74ece95c112e32684f00e/IMG20230327103148.jpg"><img style="width:4000px" src="%E6%95%B8%E4%BD%8D%E6%95%99%E6%9D%90%E5%8F%8A%E5%B0%88%E6%A5%AD%E8%8B%B1%E6%96%87%E9%96%B1%E8%AE%80(%E6%95%B8%E4%BD%8D%E7%B3%BB%E7%B5%B1%E8%A8%AD%E8%A8%88%E5%AF%A6%E5%8B%99)%202d4cee088aa74ece95c112e32684f00e/IMG20230327103148.jpg"/></a></figure></div></div><h3 id="0d07cf66-13c1-4112-ae25-26ff6b958a92" class="block-color-yellow">從沒看過學生這麼「認真、專注」的在討論…</h3><div id="f72f9ebf-6d07-44e7-87a3-b8fbe2fe4dd9" class="column-list"><div id="4fdf160e-3437-4bd4-b10a-154efce79c4d" style="width:50%" class="column"><figure id="7f6dfefd-9375-4ca1-b9d7-8b4a1fb02c37" class="image"><a href="%E6%95%B8%E4%BD%8D%E6%95%99%E6%9D%90%E5%8F%8A%E5%B0%88%E6%A5%AD%E8%8B%B1%E6%96%87%E9%96%B1%E8%AE%80(%E6%95%B8%E4%BD%8D%E7%B3%BB%E7%B5%B1%E8%A8%AD%E8%A8%88%E5%AF%A6%E5%8B%99)%202d4cee088aa74ece95c112e32684f00e/IMG_0073.jpg"><img style="width:4032px" src="%E6%95%B8%E4%BD%8D%E6%95%99%E6%9D%90%E5%8F%8A%E5%B0%88%E6%A5%AD%E8%8B%B1%E6%96%87%E9%96%B1%E8%AE%80(%E6%95%B8%E4%BD%8D%E7%B3%BB%E7%B5%B1%E8%A8%AD%E8%A8%88%E5%AF%A6%E5%8B%99)%202d4cee088aa74ece95c112e32684f00e/IMG_0073.jpg"/></a></figure><figure id="74a6813c-f0a2-496b-aaec-0931de09e8c9" class="image"><a href="%E6%95%B8%E4%BD%8D%E6%95%99%E6%9D%90%E5%8F%8A%E5%B0%88%E6%A5%AD%E8%8B%B1%E6%96%87%E9%96%B1%E8%AE%80(%E6%95%B8%E4%BD%8D%E7%B3%BB%E7%B5%B1%E8%A8%AD%E8%A8%88%E5%AF%A6%E5%8B%99)%202d4cee088aa74ece95c112e32684f00e/IMG_0083.jpg"><img style="width:4032px" src="%E6%95%B8%E4%BD%8D%E6%95%99%E6%9D%90%E5%8F%8A%E5%B0%88%E6%A5%AD%E8%8B%B1%E6%96%87%E9%96%B1%E8%AE%80(%E6%95%B8%E4%BD%8D%E7%B3%BB%E7%B5%B1%E8%A8%AD%E8%A8%88%E5%AF%A6%E5%8B%99)%202d4cee088aa74ece95c112e32684f00e/IMG_0083.jpg"/></a></figure><figure id="a74b7393-1754-4d2a-93fa-738e906d5fb5" class="image"><a href="%E6%95%B8%E4%BD%8D%E6%95%99%E6%9D%90%E5%8F%8A%E5%B0%88%E6%A5%AD%E8%8B%B1%E6%96%87%E9%96%B1%E8%AE%80(%E6%95%B8%E4%BD%8D%E7%B3%BB%E7%B5%B1%E8%A8%AD%E8%A8%88%E5%AF%A6%E5%8B%99)%202d4cee088aa74ece95c112e32684f00e/IMG_0095.jpg"><img style="width:4032px" src="%E6%95%B8%E4%BD%8D%E6%95%99%E6%9D%90%E5%8F%8A%E5%B0%88%E6%A5%AD%E8%8B%B1%E6%96%87%E9%96%B1%E8%AE%80(%E6%95%B8%E4%BD%8D%E7%B3%BB%E7%B5%B1%E8%A8%AD%E8%A8%88%E5%AF%A6%E5%8B%99)%202d4cee088aa74ece95c112e32684f00e/IMG_0095.jpg"/></a></figure><figure id="401a5e42-2b08-4f7b-94ff-d2853e736ec0" class="image"><a href="%E6%95%B8%E4%BD%8D%E6%95%99%E6%9D%90%E5%8F%8A%E5%B0%88%E6%A5%AD%E8%8B%B1%E6%96%87%E9%96%B1%E8%AE%80(%E6%95%B8%E4%BD%8D%E7%B3%BB%E7%B5%B1%E8%A8%AD%E8%A8%88%E5%AF%A6%E5%8B%99)%202d4cee088aa74ece95c112e32684f00e/IMG_0107.jpg"><img style="width:4032px" src="%E6%95%B8%E4%BD%8D%E6%95%99%E6%9D%90%E5%8F%8A%E5%B0%88%E6%A5%AD%E8%8B%B1%E6%96%87%E9%96%B1%E8%AE%80(%E6%95%B8%E4%BD%8D%E7%B3%BB%E7%B5%B1%E8%A8%AD%E8%A8%88%E5%AF%A6%E5%8B%99)%202d4cee088aa74ece95c112e32684f00e/IMG_0107.jpg"/></a></figure></div><div id="93788e08-a7ae-4bdf-b7e9-730664d3f991" style="width:50%" class="column"><figure id="44230eb1-bf5c-44cf-93bf-754efe0e5eaa" class="image"><a href="%E6%95%B8%E4%BD%8D%E6%95%99%E6%9D%90%E5%8F%8A%E5%B0%88%E6%A5%AD%E8%8B%B1%E6%96%87%E9%96%B1%E8%AE%80(%E6%95%B8%E4%BD%8D%E7%B3%BB%E7%B5%B1%E8%A8%AD%E8%A8%88%E5%AF%A6%E5%8B%99)%202d4cee088aa74ece95c112e32684f00e/IMG_0081.jpg"><img style="width:4032px" src="%E6%95%B8%E4%BD%8D%E6%95%99%E6%9D%90%E5%8F%8A%E5%B0%88%E6%A5%AD%E8%8B%B1%E6%96%87%E9%96%B1%E8%AE%80(%E6%95%B8%E4%BD%8D%E7%B3%BB%E7%B5%B1%E8%A8%AD%E8%A8%88%E5%AF%A6%E5%8B%99)%202d4cee088aa74ece95c112e32684f00e/IMG_0081.jpg"/></a></figure><figure id="4ff0ba7b-38d6-4fc8-996d-1ba70511489a" class="image"><a href="%E6%95%B8%E4%BD%8D%E6%95%99%E6%9D%90%E5%8F%8A%E5%B0%88%E6%A5%AD%E8%8B%B1%E6%96%87%E9%96%B1%E8%AE%80(%E6%95%B8%E4%BD%8D%E7%B3%BB%E7%B5%B1%E8%A8%AD%E8%A8%88%E5%AF%A6%E5%8B%99)%202d4cee088aa74ece95c112e32684f00e/IMG_0087.jpg"><img style="width:4032px" src="%E6%95%B8%E4%BD%8D%E6%95%99%E6%9D%90%E5%8F%8A%E5%B0%88%E6%A5%AD%E8%8B%B1%E6%96%87%E9%96%B1%E8%AE%80(%E6%95%B8%E4%BD%8D%E7%B3%BB%E7%B5%B1%E8%A8%AD%E8%A8%88%E5%AF%A6%E5%8B%99)%202d4cee088aa74ece95c112e32684f00e/IMG_0087.jpg"/></a></figure><figure id="4a2cf40f-ab02-4b3a-a9b4-8df7e066899e" class="image"><a href="%E6%95%B8%E4%BD%8D%E6%95%99%E6%9D%90%E5%8F%8A%E5%B0%88%E6%A5%AD%E8%8B%B1%E6%96%87%E9%96%B1%E8%AE%80(%E6%95%B8%E4%BD%8D%E7%B3%BB%E7%B5%B1%E8%A8%AD%E8%A8%88%E5%AF%A6%E5%8B%99)%202d4cee088aa74ece95c112e32684f00e/IMG_0100.jpg"><img style="width:4032px" src="%E6%95%B8%E4%BD%8D%E6%95%99%E6%9D%90%E5%8F%8A%E5%B0%88%E6%A5%AD%E8%8B%B1%E6%96%87%E9%96%B1%E8%AE%80(%E6%95%B8%E4%BD%8D%E7%B3%BB%E7%B5%B1%E8%A8%AD%E8%A8%88%E5%AF%A6%E5%8B%99)%202d4cee088aa74ece95c112e32684f00e/IMG_0100.jpg"/></a></figure><figure id="3dae453b-9637-4ed5-9935-9a7a5ea9ed7f" class="image"><a href="%E6%95%B8%E4%BD%8D%E6%95%99%E6%9D%90%E5%8F%8A%E5%B0%88%E6%A5%AD%E8%8B%B1%E6%96%87%E9%96%B1%E8%AE%80(%E6%95%B8%E4%BD%8D%E7%B3%BB%E7%B5%B1%E8%A8%AD%E8%A8%88%E5%AF%A6%E5%8B%99)%202d4cee088aa74ece95c112e32684f00e/IMG20230327114730.jpg"><img style="width:4000px" src="%E6%95%B8%E4%BD%8D%E6%95%99%E6%9D%90%E5%8F%8A%E5%B0%88%E6%A5%AD%E8%8B%B1%E6%96%87%E9%96%B1%E8%AE%80(%E6%95%B8%E4%BD%8D%E7%B3%BB%E7%B5%B1%E8%A8%AD%E8%A8%88%E5%AF%A6%E5%8B%99)%202d4cee088aa74ece95c112e32684f00e/IMG20230327114730.jpg"/></a></figure></div></div><p id="b364cd61-0034-431a-8448-9d5ca914d360" class="">
+</p><figure id="4e07c04f-e566-4f7d-9a04-61a34fc9800a" class="image"><a href="%E6%95%B8%E4%BD%8D%E6%95%99%E6%9D%90%E5%8F%8A%E5%B0%88%E6%A5%AD%E8%8B%B1%E6%96%87%E9%96%B1%E8%AE%80(%E6%95%B8%E4%BD%8D%E7%B3%BB%E7%B5%B1%E8%A8%AD%E8%A8%88%E5%AF%A6%E5%8B%99)%202d4cee088aa74ece95c112e32684f00e/edu5.png"><img style="width:1920px" src="%E6%95%B8%E4%BD%8D%E6%95%99%E6%9D%90%E5%8F%8A%E5%B0%88%E6%A5%AD%E8%8B%B1%E6%96%87%E9%96%B1%E8%AE%80(%E6%95%B8%E4%BD%8D%E7%B3%BB%E7%B5%B1%E8%A8%AD%E8%A8%88%E5%AF%A6%E5%8B%99)%202d4cee088aa74ece95c112e32684f00e/edu5.png"/></a></figure><p id="769dda78-5a03-436e-be97-3cea659bf21d" class="">
+</p></div></article>
+<script>hljs.highlightAll();</script>
+</body></html>
