@@ -1,4 +1,4 @@
-<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Xilinx Vivado - Post-map Simulation</title><style>
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>數位系統設計實務 【Take-Home Final Exam】</title><style>
 /* cspell:disable-file */
 /* webkit printing magic: print all background colors */
 html {
@@ -671,157 +671,17 @@ blockquote {
 	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
 }
 	
-</style><link rel="stylesheet" href="dark-theme.css"><link rel="stylesheet"  target="_blank" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.0/styles/github-dark-dimmed.min.css"><script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.0/highlight.min.js"></script></head><body><article id="2d05cf96-e422-479d-a159-3fbac1b5be57" class="page sans"><header><img class="page-cover-image" src="https://images.unsplash.com/photo-1515630278258-407f66498911?ixlib=rb-4.0.3&amp;q=85&amp;fm=jpg&amp;crop=entropy&amp;cs=srgb" style="object-position:center 50%"/><div class="page-header-icon page-header-icon-with-cover"><img class="icon" src="%E8%AA%B2%E7%A8%8B%E7%B0%A1%E4%BB%8B%20-%20%E6%95%B8%E4%BD%8D%E7%B3%BB%E7%B5%B1%E8%A8%AD%E8%A8%88%E5%AF%A6%E5%8B%99%20(2023%20Spring)%2099b0e4aae697421099048b7e70025a47/yang01.png"/></div><h1 class="page-title">Xilinx Vivado - Post-map Simulation</h1><p class="page-description"></p><link rel="stylesheet" href="dark-theme.css"><link rel="stylesheet"  target="_blank" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.0/styles/github-dark-dimmed.min.css"><script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.0/highlight.min.js"></script></header><div class="page-body"><p id="8cd92bb3-1aeb-48a5-bba6-794f5993ebc9" class="">This class will introduce you to the Xilinx Vivado FPGA design flow, which is a comprehensive and integrated toolset for creating and implementing FPGA designs. You will learn how to use behavioral Verilog to describe the functionality and structure of your design, and how to simulate and verify its behavior using the Vivado simulator. You will also learn how to synthesize your design into a netlist that can be mapped to an FPGA device, and how to simulate and verify the synthesized design using the Vivado logic analyzer.</p><h2 id="858116d0-bfa5-4041-b003-8ef9748429bf" class="block-color-yellow_background">Problem 1: Measuring the Delay of a 4-bit Adder</h2><p id="f72b6d70-d657-46fd-95f1-47e9e1fd7672" class="">When Verilog code is synthesized, it is turned into a netlist of hardware components and their connections. Timing information is also extracted, which tells us about the timing constraints of the design. You should check if the synthesized design works correctly and pay attention to any timing differences between the original Verilog code and the synthesized design. This means making sure that the timing requirements of the design are still met after synthesis.</p><h3 id="0f6765fc-7c8b-4f1e-9377-661c001ac839" class="block-color-yellow"><code>adder4</code> Module</h3><pre id="ab7ea379-7c55-4e1d-8d24-e536d04bebc8" class="code"><code>module adder4(
-    input [3:0] a,
-    input [3:0] b,
-    input ci,
-    output [3:0] s,
-    output co
-    );
-    
-    assign {co,s} = a + b + ci;
-    
-endmodule</code></pre><h3 id="e035c6b5-0347-42ac-aefd-96ab4ecd26ec" class="block-color-yellow"><code>addr4_tb</code> Testbench</h3><pre id="f77cdcdf-55e2-4e9b-ab6c-d36ecc34d5f3" class="code"><code>`timescale 1ns / 1ps
+</style><link rel="stylesheet" href="dark-theme.css"><link rel="stylesheet"  target="_blank" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.0/styles/github-dark-dimmed.min.css"><script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.0/highlight.min.js"></script></head><body><article id="191aed33-d0d7-4eb5-9f29-8f72e863de1a" class="page sans"><header><img class="page-cover-image" src="https://images.unsplash.com/photo-1515630278258-407f66498911?ixlib=rb-4.0.3&amp;q=85&amp;fm=jpg&amp;crop=entropy&amp;cs=srgb" style="object-position:center 50%"/><div class="page-header-icon page-header-icon-with-cover"><img class="icon" src="%E8%AA%B2%E7%A8%8B%E7%B0%A1%E4%BB%8B%20-%20%E6%95%B8%E4%BD%8D%E7%B3%BB%E7%B5%B1%E8%A8%AD%E8%A8%88%E5%AF%A6%E5%8B%99%20(2023%20Spring)%2099b0e4aae697421099048b7e70025a47/yang01.png"/></div><h1 class="page-title">數位系統設計實務 【Take-Home Final Exam】</h1><p class="page-description"></p><link rel="stylesheet" href="dark-theme.css"><link rel="stylesheet"  target="_blank" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.0/styles/github-dark-dimmed.min.css"><script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.0/highlight.min.js"></script></header><div class="page-body"><div><iframe src="https://player.soundon.fm/embed/?podcast=d5f7b15f-de14-4424-aad1-07b8f3128116&episode=b63a234f-e41b-427d-a9f7-b2edfde02693" id="soundon"></iframe></div><div><iframe src="https://player.soundon.fm/embed/?podcast=d5f7b15f-de14-4424-aad1-07b8f3128116&episode=1a060a09-fa9a-4d99-aadd-470c0d1edb70" id="soundon"></iframe></div><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="f05bb614-17ea-4a44-97c2-11a601cef905"><div style="font-size:1.5em"><img class="icon" src="%E6%95%B8%E4%BD%8D%E7%B3%BB%E7%B5%B1%E8%A8%AD%E8%A8%88%E5%AF%A6%E5%8B%99%20%E3%80%90Take-Home%20Final%20Exam%E3%80%91%20191aed33d0d74eb59f298f72e863de1a/800x800.png"/></div><div style="width:100%">In this exam, you can use AI tools like ChatGPT or New Bing to help you solve the problems. You can also solve the problems on your own. Your score will be the same regardless of your choice. If you use AI tools, you must include the prompts or suggestions that helped you find the solution. This is so that we can understand your process and the assistance you received. The main purpose of this exam is to test your understanding and use of knowledge. Whether you use AI tools or rely on your own abilities, what matters is your ability to find correct solutions and show that you understand digital system design.</div></figure><h2 id="f4016b61-8b95-40ba-8d12-f4b0d7057c92" class="block-color-yellow_background">Zedboard 實驗版 I/O 接腳設定</h2><figure id="15ffaa70-338f-42b9-a965-df0a48ef9d47" class="image"><a href="Xilinx%20Vivado%20Tutorial%20+%20Zedboard%20c58369ed9b0442449450a66dcef4958a/Untitled.png"><img style="width:2854px" src="Xilinx%20Vivado%20Tutorial%20+%20Zedboard%20c58369ed9b0442449450a66dcef4958a/Untitled.png"/></a></figure><p id="43358640-71bd-45a5-aa73-d0c828d6c56a" class="">
+</p><h2 id="7fc0535b-83d3-4c70-ba5e-810299d21c44" class="block-color-yellow_background">Problem 1: Implementing Variable Frequency Clock Signals with Verilog on Zedboard</h2><div><iframe src="https://player.soundon.fm/embed/?podcast=d5f7b15f-de14-4424-aad1-07b8f3128116&episode=483d5f72-547e-40be-935c-55c5520ec9c8" id="soundon"></iframe></div><div><iframe src="https://player.soundon.fm/embed/?podcast=d5f7b15f-de14-4424-aad1-07b8f3128116&episode=69fc90d5-5970-4778-9c83-869d2ea3a5c4" id="soundon"></iframe></div><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="46dff793-02ae-4a91-896c-deb46699cb84"><div style="font-size:1.5em"><img class="icon" src="%E6%95%B8%E4%BD%8D%E7%B3%BB%E7%B5%B1%E8%A8%AD%E8%A8%88%E5%AF%A6%E5%8B%99%20%E3%80%90Take-Home%20Final%20Exam%E3%80%91%20191aed33d0d74eb59f298f72e863de1a/800x800%201.png"/></div><div style="width:100%">Design a Verilog module that generates four clock signals with frequencies of 1Hz, 2Hz, 3Hz, and 4Hz. The module takes a 100 MHz clock signal as input. In addition to the clock signals, four control signals are also needed. These control signals will be controlled by DIP switches. Each control signal corresponds to a slowed-down clock signal and is used to enable or disable the generation of the respective clock signal.<p id="9c21156b-0199-433e-b6f8-61cd011e3059" class="">The entire design needs to be downloaded onto the Zedboard development board for testing. Connect the four clock signals to four LED lights on the board, and connect the four control signals to the DIP switches.</p><p id="3005ea34-020d-432b-a8a9-66f2eef6d8d8" class="">
+</p><p id="1a8d4a8f-6c61-4472-ba3a-cbbe0fe9b601" class="block-color-yellow">Here are some additional details about the problem:</p><ul id="f5b6f4d3-7f33-4032-bdcd-6e868d471646" class="bulleted-list"><li style="list-style-type:disc">The Verilog module should be written in a modular way, with each clock signal generated by a separate module. This will make the code easier to understand and maintain.</li></ul><ul id="9bb3d336-e19d-4b67-a970-2fd14b3d458d" class="bulleted-list"><li style="list-style-type:disc">The DIP switches should be configured so that they can be used to turn on and off the generation of each clock signal. This will allow you to test the different clock signals and see how they affect the LED lights.</li></ul></div></figure><div id="a275ec12-c92e-46e4-946c-215004f55501" class="column-list"><div id="a7c62a8e-39ee-4c4c-9c46-91959f6416b8" style="width:50%" class="column"><figure id="ec0fd562-1035-447e-80d1-b80d8f944d69" class="image"><a href="%E6%95%B8%E4%BD%8D%E7%B3%BB%E7%B5%B1%E8%A8%AD%E8%A8%88%E5%AF%A6%E5%8B%99%20%E3%80%90Take-Home%20Final%20Exam%E3%80%91%20191aed33d0d74eb59f298f72e863de1a/350234315_204184955854342_8350800903892370920_n.png"><img style="width:620px" src="%E6%95%B8%E4%BD%8D%E7%B3%BB%E7%B5%B1%E8%A8%AD%E8%A8%88%E5%AF%A6%E5%8B%99%20%E3%80%90Take-Home%20Final%20Exam%E3%80%91%20191aed33d0d74eb59f298f72e863de1a/350234315_204184955854342_8350800903892370920_n.png"/></a></figure></div><div id="7f700782-d79e-41f0-ac96-0e0c3661d0a6" style="width:50%" class="column"><figure id="59f482de-a935-48c8-b604-f5b82722593a" class="image"><a href="%E6%95%B8%E4%BD%8D%E7%B3%BB%E7%B5%B1%E8%A8%AD%E8%A8%88%E5%AF%A6%E5%8B%99%20%E3%80%90Take-Home%20Final%20Exam%E3%80%91%20191aed33d0d74eb59f298f72e863de1a/348894537_1493366197867540_2764635162899495815_n.png"><img style="width:535px" src="%E6%95%B8%E4%BD%8D%E7%B3%BB%E7%B5%B1%E8%A8%AD%E8%A8%88%E5%AF%A6%E5%8B%99%20%E3%80%90Take-Home%20Final%20Exam%E3%80%91%20191aed33d0d74eb59f298f72e863de1a/348894537_1493366197867540_2764635162899495815_n.png"/></a></figure></div></div><figure id="cf7e5d77-0dc0-4407-96f8-8153a9f01686" class="image"><a href="%E6%95%B8%E4%BD%8D%E7%B3%BB%E7%B5%B1%E8%A8%AD%E8%A8%88%E5%AF%A6%E5%8B%99%20%E3%80%90Take-Home%20Final%20Exam%E3%80%91%20191aed33d0d74eb59f298f72e863de1a/Untitled.png"><img style="width:336px" src="%E6%95%B8%E4%BD%8D%E7%B3%BB%E7%B5%B1%E8%A8%AD%E8%A8%88%E5%AF%A6%E5%8B%99%20%E3%80%90Take-Home%20Final%20Exam%E3%80%91%20191aed33d0d74eb59f298f72e863de1a/Untitled.png"/></a></figure><p id="e338bdb3-02da-404b-87d8-59dcbfd55edc" class="">
+</p><h2 id="0a2ee901-21f1-4b56-ab61-bd9df699620d" class="block-color-yellow_background">Problem 2: Designing and Building an SPI Master Clock Generator</h2><div><iframe src="https://player.soundon.fm/embed/?podcast=d5f7b15f-de14-4424-aad1-07b8f3128116&episode=c361d10e-e408-4625-8896-5be6f8dc0c32" id="soundon"></iframe></div><div><iframe src="https://player.soundon.fm/embed/?podcast=d5f7b15f-de14-4424-aad1-07b8f3128116&episode=9d1c058c-238b-41ca-a47f-f8632e0674e2" id="soundon"></iframe></div><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="35ae0e69-9ab3-4b3a-b74d-27b21f4c56ac"><div style="font-size:1.5em"><img class="icon" src="%E6%95%B8%E4%BD%8D%E7%B3%BB%E7%B5%B1%E8%A8%AD%E8%A8%88%E5%AF%A6%E5%8B%99%20%E3%80%90Take-Home%20Final%20Exam%E3%80%91%20191aed33d0d74eb59f298f72e863de1a/800x800%202.png"/></div><div style="width:100%">The module will generate four clock pulses for each &quot;start-transmit&quot; request. The clock pulses are synchronized to the global clock, which can be 1Hz, 2Hz, 3Hz, or 4Hz. When the &quot;start-transmit&quot; signal (trig) goes high, the module will generate four clock pulses and then go low. The controlling module must wait until trig goes low before sending another &quot;start-transmit&quot; request.
 
-module adder4_tb;
+It is important to note that the controlling module must wait until trig goes low before sending another &quot;start-transmit&quot; request. This is because the module needs to ensure that the entire data transmission is complete before sending another request.
 
-    reg [3:0] a, b;
-    reg ci;
-    wire [3:0] s;
-    wire co;
-    
-    adder4 U0 (.a(a),.b(b),.ci(ci),.s(s),.co(co));
-   
-    initial begin
-				
-        
-        $finish;
-    end
-
-endmodule</code></pre><h2 id="f57e2272-fbc7-4d01-8eb3-7b472c43c59f" class="block-color-yellow_background">Problem 3: Structural-level 4-to-1 Multiplexer (MUX)</h2><p id="d3fd2d50-f3e8-4218-975e-d573857ecea4" class="">You have to create a device called a 4-to-1 multiplexer (<code>mux4</code>) by using another module called the <code>mux2</code>, which can only handle 2 inputs. Look at the picture to figure out how to connect multiple <code>mux2</code> modules together, and write a Verilog design using this setup. Make sure the name and inputs in your code match those in the original question. Do not modify the testbench code, as it is used to check if your design is correct.</p><h3 id="cd36775b-8aa7-4e2c-80b7-04a80f9e022f" class="block-color-yellow"><code>mux2</code> Module</h3><pre id="68a1813a-f97d-4e36-b5ec-3cd3423bb657" class="code"><code>module mux2(
-    input a,
-    input b,
-    input s,
-    output x
-    );
-    
-    assign x = (s)?b:a;
-    
-endmodule</code></pre><h3 id="685fed32-c40b-484b-9e11-47235022de5d" class="block-color-yellow"><code>mux4</code> Module Declaration</h3><figure id="be2109dc-6f7c-4539-a522-5e0f3acbeef6" class="image"><a href="Verilog%20Testbench%20and%20FPGA%20Design%20Flow%20afa9d8300f33492f86b1c13e24eb15f1/Untitled%202.png"><img style="width:1429px" src="Verilog%20Testbench%20and%20FPGA%20Design%20Flow%20afa9d8300f33492f86b1c13e24eb15f1/Untitled%202.png"/></a></figure><h3 id="69aa8d6c-f2a7-4ab3-89f9-003080ec3e89" class="block-color-yellow"><code>mux4_tb</code> Testbench</h3><pre id="27acd3b9-cea0-48a9-8268-c83c1c3133f5" class="code"><code>`timescale 1ns / 1ps
-
-`timescale 1ns / 1ps
-
-module mux4_tb;
-
-    
-    reg [3:0] d;
-    reg [1:0] s;
-    
-    wire out;
-    reg fail;
-   
-    mux4 uut (
-        .d(d),
-        .s(s),
-        .out(out)
-    );
-
-    initial begin
-        
-        d = 4&#x27;b0000;
-        s = 2&#x27;b00;       
-        fail = 0;
-        #10;
-
-        repeat (10) begin       
-            d = {$random};
-            s = {$random};
-            fail = 0;
-            #5;
-            
-            if (s == 2&#x27;b00) begin
-                if (out != d[0]) fail = 1;
-            end else if (s == 2&#x27;b01) begin
-                if (out != d[1]) fail = 1;
-            end else if (s == 2&#x27;b10) begin
-                if (out != d[2]) fail = 1;
-            end else if (s == 2&#x27;b11) begin
-                if (out != d[3]) fail = 1;
-            end
-            #5;
-        end
-      
-        $finish;
-    end
-
-endmodule</code></pre><h3 id="e4b05a33-1867-4c73-b884-2b33799c8163" class="block-color-yellow"><code>mux4</code> RTL Schematic </h3><figure id="288bcf19-199c-469e-8995-89f8737d9b5f" class="image"><a href="%E6%9C%9F%E4%B8%AD%E6%B8%AC%E9%A9%97%20(Midterm%20Exam)%201602382d1fb54a5e91e6a7181fcd14b4/Untitled%202.png"><img style="width:3201px" src="%E6%9C%9F%E4%B8%AD%E6%B8%AC%E9%A9%97%20(Midterm%20Exam)%201602382d1fb54a5e91e6a7181fcd14b4/Untitled%202.png"/></a></figure><h2 id="59e6f15f-738c-4c3d-a9a0-a04faf9efae4" class="block-color-yellow_background">Problem 4: Structural-level 2-bit Binary Comparator</h2><p id="1813450e-9b35-4cb2-9ea5-a2dee6dc2d3f" class="">You need to design a Verilog module (<code>cmp2</code>) that can compare two 2-bit numbers. You can use a smaller module (<code>cmp1</code>) that can compare two 1-bit numbers. Look at the picture to see how to connect two 1-bit comparators with some <code>AND</code> and <code>OR</code> gates. Write a Verilog code that follows this picture, and use the same name and inputs as the question. Do not change the testbench code because it will test your code.</p><h3 id="ba1ad344-409a-4187-8d1b-489f2c7f734b" class="block-color-yellow"><code>cmp1</code> Module</h3><pre id="5ec46fa7-13e3-49c8-84b1-858101d5dd70" class="code"><code>module cmp1(
-    input a,
-    input b,
-    output lt,
-    output eq,
-    output gt
-    );
-    
-    assign lt = a &lt; b;
-    assign eq = a == b;
-    assign gt = a &gt; b;
-    
-endmodule</code></pre><h3 id="81d9b560-88d0-444a-b749-e7df2b7951b2" class="block-color-yellow"><code>cmp2</code> Module Declaration</h3><figure id="cc8f271a-542e-49d3-a3e1-4fb33fbb0179" class="image"><a href="Verilog%20Testbench%20and%20FPGA%20Design%20Flow%20afa9d8300f33492f86b1c13e24eb15f1/Untitled%203.png"><img style="width:1674px" src="Verilog%20Testbench%20and%20FPGA%20Design%20Flow%20afa9d8300f33492f86b1c13e24eb15f1/Untitled%203.png"/></a></figure><h3 id="92e6eec5-78ea-421e-a335-de8f870a0403" class="block-color-yellow"><code>cmp2_tb</code> Testbench</h3><pre id="65d9868c-32a9-4d8b-b16b-43e4363bf6e3" class="code"><code>`timescale 1ns / 1ps
-
-module cmp2_tb;
-    
-    reg [1:0] a;
-    reg [1:0] b;
-    
-    wire lt;
-    wire eq;
-    wire gt;
-    reg fail;
-        
-    cmp2 dut(
-        .a(a),
-        .b(b),
-        .lt(lt),
-        .eq(eq),
-        .gt(gt)
-        );
-        
-    
-    initial begin
-        {a,b,fail} = 0;
-        #10
-        
-        repeat (10) begin
-            a = {$random};
-            b = {$random};
-            fail = 0;
-            #5;
-            if (a &lt; b) begin
-                fail = ~(lt==1 &amp;&amp; eq==0 &amp;&amp; gt==0);
-            end else if (a == b) begin
-                fail = ~(lt==0 &amp;&amp; eq==1 &amp;&amp; gt==0);
-            end else begin
-                fail = ~(lt==0 &amp;&amp; eq==0 &amp;&amp; gt==1);
-            end
-            
-            #5;
-        end
-        
-        $display(&quot;Testbench finished&quot;);
-        $finish;
-    end
-    
-endmodule</code></pre><h3 id="8f167df0-537f-4799-aaa3-f1c1c74dae61" class="block-color-yellow"><code>cmp2</code> RTL Schematic </h3><figure id="1271c5f4-f732-4a8a-b151-94bbfe1ce5ad" class="image"><a href="%E6%9C%9F%E4%B8%AD%E6%B8%AC%E9%A9%97%20(Midterm%20Exam)%201602382d1fb54a5e91e6a7181fcd14b4/Untitled%203.png"><img style="width:2978px" src="%E6%9C%9F%E4%B8%AD%E6%B8%AC%E9%A9%97%20(Midterm%20Exam)%201602382d1fb54a5e91e6a7181fcd14b4/Untitled%203.png"/></a></figure><h2 id="89307d7a-065e-4dfe-a3f6-18627b3d18b2" class="block-color-yellow_background">Problem 5: Designing an 1-bit ALU Module</h2><p id="094ddac7-9d0e-453a-90ec-29fdf063624b" class="">Write a Verilog module for an Arithmetic Logic Unit (ALU) that can perform eight different operations based on the input opcode <code><strong>op</strong></code>. The module should have two input operands <code><strong>a</strong></code> and <code><strong>b</strong></code> and a 3-bit input <code><strong>op</strong></code> that represents the operation to be performed. The output <code><strong>out</strong></code> should be the result of the selected operation. The possible operations and their corresponding opcodes are as follows:</p><table id="0e5c1f06-c3a3-4a49-a6f3-31a2f9133fca" class="simple-table"><tbody><tr id="3e3f91a7-1c57-4254-ae60-5b7e5f81a358"><td id="WGSq" class=""><strong>Opcode</strong></td><td id="pudr" class=""><strong>Operation</strong></td></tr><tr id="73099ae6-c2ca-4654-ba2d-f2920aaea696"><td id="WGSq" class="">000</td><td id="pudr" class="">Bitwise AND (<code><strong>a &amp; b</strong></code>)</td></tr><tr id="b24ff8f5-15f4-43c2-a09f-d162bc6ac714"><td id="WGSq" class="">001</td><td id="pudr" class="">Bitwise OR (<code><strong>a | b</strong></code>)</td></tr><tr id="f99f40fe-41e3-4c34-a618-1aca50fd4624"><td id="WGSq" class="">010</td><td id="pudr" class="">Bitwise XOR (<code><strong>a ^ b</strong></code>)</td></tr><tr id="7d9379aa-0800-49f6-a31d-dbda886c97f7"><td id="WGSq" class="">011</td><td id="pudr" class="">Addition (<code><strong>a + b</strong></code>)</td></tr><tr id="5291b693-2c35-4637-93cb-0699cb12db96"><td id="WGSq" class="">100</td><td id="pudr" class="">Subtraction (<code><strong>a - b</strong></code>)</td></tr><tr id="7084a625-454e-4970-ad57-b642932192a6"><td id="WGSq" class="">101</td><td id="pudr" class="">Less than (<code><strong>a &lt; b</strong></code>)</td></tr><tr id="a132db06-05f4-486b-825e-7e4ea6c3028a"><td id="WGSq" class="">110</td><td id="pudr" class="">Equality (<code><strong>a == b</strong></code>)</td></tr><tr id="5c98f985-1843-49f9-97c0-efb30024f1ab"><td id="WGSq" class="">111</td><td id="pudr" class="">Greater than (<code><strong>a &gt; b</strong></code>)</td></tr></tbody></table><p id="79b577b6-72f5-4592-ab56-79c8d7d7d086" class="">The Verilog module should be named <code><strong>alu1</strong></code> and should have the following port declarations:</p><pre id="557dd044-1e48-4de4-a80f-50b000b5dd4b" class="code code-wrap"><code>module alu1(
-    input a,
-    input b,
-    input [2:0] op,
-    output out
-		);
-
-		// write your code here
-
-endmodule</code></pre><p id="ae1645cc-0f09-4754-9195-e410f4f5f8f8" class="">The <code><strong>out</strong></code> output port should be assigned the result of the selected operation using a conditional operator. If the opcode <code><strong>op</strong></code> is not recognized, the output should be set to 0.</p><h3 id="97ed1924-5230-4e5d-89c8-4fd678179202" class="block-color-yellow"><code>cmp2</code> Module Declaration</h3><figure id="70bb26cd-8c94-483e-a10b-5e6966e1485b" class="image"><a href="Verilog%20Testbench%20and%20FPGA%20Design%20Flow%20afa9d8300f33492f86b1c13e24eb15f1/Untitled%204.png"><img style="width:384px" src="Verilog%20Testbench%20and%20FPGA%20Design%20Flow%20afa9d8300f33492f86b1c13e24eb15f1/Untitled%204.png"/></a></figure><h3 id="a3ccdce5-9b17-45ae-b550-bbda0b1e3b79" class="block-color-yellow">Automated Testing of 1-bit ALU using Verilog Testbench</h3><figure id="f10e6fb1-497d-4ffd-9dcb-4f7d6abc6272" class="image"><a href="%E6%9C%9F%E4%B8%AD%E6%B8%AC%E9%A9%97%20(Midterm%20Exam)%201602382d1fb54a5e91e6a7181fcd14b4/Untitled%204.png"><img style="width:528px" src="%E6%9C%9F%E4%B8%AD%E6%B8%AC%E9%A9%97%20(Midterm%20Exam)%201602382d1fb54a5e91e6a7181fcd14b4/Untitled%204.png"/></a></figure><p id="531a6637-f663-457d-bf25-bf794327c6bd" class="">
-</p><figure id="cc742701-fc14-4a45-a1f6-593cc451b285" class="image"><a href="%E7%B5%84%E5%90%88%E9%82%8F%E8%BC%AF%E9%9B%BB%E8%B7%AF%20-%20%E5%A4%9A%E5%B7%A5%E5%99%A8%E8%88%87%E9%81%8B%E7%AE%97%E9%9B%BB%E8%B7%AF%207437810149fd4e59b7fe435c1f16baaf/end1.png"><img style="width:4538px" src="%E7%B5%84%E5%90%88%E9%82%8F%E8%BC%AF%E9%9B%BB%E8%B7%AF%20-%20%E5%A4%9A%E5%B7%A5%E5%99%A8%E8%88%87%E9%81%8B%E7%AE%97%E9%9B%BB%E8%B7%AF%207437810149fd4e59b7fe435c1f16baaf/end1.png"/></a></figure><p id="e41bc67f-ad34-4d3a-891f-d58d6594385c" class="">
+Your design must be downloaded to the Zedboard and run tests. The system should use the on-board 100 MHz (Y9) signal as global clock (clk). A push-button should be used for the trig signal and a LED should be used to observe the sclk output.</div></figure><figure id="4dee2936-71b0-4568-904a-c939b3a9fcd9" class="image"><a href="%E6%95%B8%E4%BD%8D%E7%B3%BB%E7%B5%B1%E8%A8%AD%E8%A8%88%E5%AF%A6%E5%8B%99%20%E3%80%90Take-Home%20Final%20Exam%E3%80%91%20191aed33d0d74eb59f298f72e863de1a/Untitled%201.png"><img style="width:384px" src="%E6%95%B8%E4%BD%8D%E7%B3%BB%E7%B5%B1%E8%A8%AD%E8%A8%88%E5%AF%A6%E5%8B%99%20%E3%80%90Take-Home%20Final%20Exam%E3%80%91%20191aed33d0d74eb59f298f72e863de1a/Untitled%201.png"/></a></figure><p id="c4774088-dd35-4e27-958f-343f78bcd6bf" class="">
+</p><h2 id="7b026b28-6963-47bc-939d-c4a54bacf45d" class="block-color-yellow_background">Problem 3: Parallel Data Access Enabled Slave-Mode SPI Module</h2><div><iframe src="https://player.soundon.fm/embed/?podcast=d5f7b15f-de14-4424-aad1-07b8f3128116&episode=ebe9f94f-035f-4ea0-af80-427ef41b1347" id="soundon"></iframe></div><div><iframe src="https://player.soundon.fm/embed/?podcast=d5f7b15f-de14-4424-aad1-07b8f3128116&episode=e8e710f1-78e2-4160-af7b-0d9cc5fc6238" id="soundon"></iframe></div><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="7712ce34-42ad-4337-a091-78098bae1edb"><div style="font-size:1.5em"><img class="icon" src="%E6%95%B8%E4%BD%8D%E7%B3%BB%E7%B5%B1%E8%A8%AD%E8%A8%88%E5%AF%A6%E5%8B%99%20%E3%80%90Take-Home%20Final%20Exam%E3%80%91%20191aed33d0d74eb59f298f72e863de1a/800x800_1.png"/></div><div style="width:100%">The objective of this problem is to develop a Verilog module that implements an SPI (Serial Peripheral Interface) slave mode functionality. The module should be designed to receive input signals, including <code>rst</code> (reset), <code>sclk</code> (clock), <code>mosi</code> (Master Out Slave In), <code>load</code> (load input data), and <code>din[7:0]</code> (input data bus). It should also provide output signals, including <code>miso</code> (Master In Slave Out) and <code>dout[7:0]</code> (output data bus).<p id="d7f09af7-1769-4a81-8caf-c2a9b1311ba3" class="">Within the module, an internal register <code>R[7:0]</code> will be utilized to store the shifted data, with the most significant bit <code>R[7]</code> being mapped to the <code>miso</code> output. The shifting operation will occur on the rising edge of the <code>sclk</code> signal. The contents of register <code>R</code> will be shifted to the left, and the new value of <code>R</code> will be determined by concatenating <code>R[6:0]</code> with the value of <code>mosi</code>.</p><p id="34f2670a-53f8-4e4f-9ac9-ef41562b6a7e" class="">After 8 shifts, the module should update the output <code>dout</code> with the current value of <code>R</code>. In addition, when the rising edge of the <code>load</code> signal is detected, the value of <code>R</code> should be updated with the value of <code>din</code>.</p><p id="781ac0b2-a847-44b8-b062-e3aa3331d4ee" class="">The problem at hand involves designing and implementing a Verilog module that fulfills these specifications, enabling the desired SPI slave mode functionality with the specified input and output signals.</p></div></figure><p id="7000db39-b213-484d-826a-fd59ecc4f37a" class="">
+</p><p id="49749197-d4c1-417e-8b80-4df3e6fa6a2d" class="">
+</p><figure id="76b8b6cf-a6ec-45e5-be90-12579803f403" class="image"><a href="%E7%B5%84%E5%90%88%E9%82%8F%E8%BC%AF%E9%9B%BB%E8%B7%AF%20-%20%E5%A4%9A%E5%B7%A5%E5%99%A8%E8%88%87%E9%81%8B%E7%AE%97%E9%9B%BB%E8%B7%AF%207437810149fd4e59b7fe435c1f16baaf/end1.png"><img style="width:4538px" src="%E7%B5%84%E5%90%88%E9%82%8F%E8%BC%AF%E9%9B%BB%E8%B7%AF%20-%20%E5%A4%9A%E5%B7%A5%E5%99%A8%E8%88%87%E9%81%8B%E7%AE%97%E9%9B%BB%E8%B7%AF%207437810149fd4e59b7fe435c1f16baaf/end1.png"/></a></figure><p id="d8ee3549-63d4-4fc3-9722-daf50df9b61a" class="">
 </p></div></article>
 <script>hljs.highlightAll();</script>
 </body></html>

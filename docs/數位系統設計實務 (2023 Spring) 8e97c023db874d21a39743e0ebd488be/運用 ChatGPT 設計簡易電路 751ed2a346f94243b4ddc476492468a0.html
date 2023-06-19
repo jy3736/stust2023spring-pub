@@ -1,4 +1,4 @@
-<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Xilinx Vivado - Post-map Simulation</title><style>
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>運用 ChatGPT 設計簡易電路</title><style>
 /* cspell:disable-file */
 /* webkit printing magic: print all background colors */
 html {
@@ -671,157 +671,211 @@ blockquote {
 	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
 }
 	
-</style><link rel="stylesheet" href="dark-theme.css"><link rel="stylesheet"  target="_blank" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.0/styles/github-dark-dimmed.min.css"><script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.0/highlight.min.js"></script></head><body><article id="2d05cf96-e422-479d-a159-3fbac1b5be57" class="page sans"><header><img class="page-cover-image" src="https://images.unsplash.com/photo-1515630278258-407f66498911?ixlib=rb-4.0.3&amp;q=85&amp;fm=jpg&amp;crop=entropy&amp;cs=srgb" style="object-position:center 50%"/><div class="page-header-icon page-header-icon-with-cover"><img class="icon" src="%E8%AA%B2%E7%A8%8B%E7%B0%A1%E4%BB%8B%20-%20%E6%95%B8%E4%BD%8D%E7%B3%BB%E7%B5%B1%E8%A8%AD%E8%A8%88%E5%AF%A6%E5%8B%99%20(2023%20Spring)%2099b0e4aae697421099048b7e70025a47/yang01.png"/></div><h1 class="page-title">Xilinx Vivado - Post-map Simulation</h1><p class="page-description"></p><link rel="stylesheet" href="dark-theme.css"><link rel="stylesheet"  target="_blank" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.0/styles/github-dark-dimmed.min.css"><script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.0/highlight.min.js"></script></header><div class="page-body"><p id="8cd92bb3-1aeb-48a5-bba6-794f5993ebc9" class="">This class will introduce you to the Xilinx Vivado FPGA design flow, which is a comprehensive and integrated toolset for creating and implementing FPGA designs. You will learn how to use behavioral Verilog to describe the functionality and structure of your design, and how to simulate and verify its behavior using the Vivado simulator. You will also learn how to synthesize your design into a netlist that can be mapped to an FPGA device, and how to simulate and verify the synthesized design using the Vivado logic analyzer.</p><h2 id="858116d0-bfa5-4041-b003-8ef9748429bf" class="block-color-yellow_background">Problem 1: Measuring the Delay of a 4-bit Adder</h2><p id="f72b6d70-d657-46fd-95f1-47e9e1fd7672" class="">When Verilog code is synthesized, it is turned into a netlist of hardware components and their connections. Timing information is also extracted, which tells us about the timing constraints of the design. You should check if the synthesized design works correctly and pay attention to any timing differences between the original Verilog code and the synthesized design. This means making sure that the timing requirements of the design are still met after synthesis.</p><h3 id="0f6765fc-7c8b-4f1e-9377-661c001ac839" class="block-color-yellow"><code>adder4</code> Module</h3><pre id="ab7ea379-7c55-4e1d-8d24-e536d04bebc8" class="code"><code>module adder4(
-    input [3:0] a,
-    input [3:0] b,
-    input ci,
-    output [3:0] s,
-    output co
-    );
-    
-    assign {co,s} = a + b + ci;
-    
-endmodule</code></pre><h3 id="e035c6b5-0347-42ac-aefd-96ab4ecd26ec" class="block-color-yellow"><code>addr4_tb</code> Testbench</h3><pre id="f77cdcdf-55e2-4e9b-ab6c-d36ecc34d5f3" class="code"><code>`timescale 1ns / 1ps
-
-module adder4_tb;
-
-    reg [3:0] a, b;
-    reg ci;
-    wire [3:0] s;
-    wire co;
-    
-    adder4 U0 (.a(a),.b(b),.ci(ci),.s(s),.co(co));
-   
-    initial begin
-				
-        
-        $finish;
+</style><link rel="stylesheet" href="dark-theme.css"><link rel="stylesheet"  target="_blank" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.0/styles/github-dark-dimmed.min.css"><script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.0/highlight.min.js"></script></head><body><article id="751ed2a3-46f9-4243-b4dd-c476492468a0" class="page sans"><header><img class="page-cover-image" src="https://images.unsplash.com/photo-1676299081847-824916de030a?ixlib=rb-4.0.3&amp;q=85&amp;fm=jpg&amp;crop=entropy&amp;cs=srgb" style="object-position:center 50%"/><div class="page-header-icon page-header-icon-with-cover"><img class="icon" src="%E9%81%8B%E7%94%A8%20ChatGPT%20%E8%A8%AD%E8%A8%88%E7%B0%A1%E6%98%93%E9%9B%BB%E8%B7%AF%20751ed2a346f94243b4ddc476492468a0/yang01.png"/></div><h1 class="page-title">運用 ChatGPT 設計簡易電路</h1><p class="page-description"></p><link rel="stylesheet" href="dark-theme.css"><link rel="stylesheet"  target="_blank" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.0/styles/github-dark-dimmed.min.css"><script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.0/highlight.min.js"></script></header><div class="page-body"><h3 id="c5db3cfc-54b6-42cd-9e4d-7d513022ab18" class="block-color-blue_background">與 ChatGPT 對話的所有過程</h3><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="58dafa15-49bf-445f-b75e-4e53ca870c83"><div style="font-size:1.5em"><img class="icon" src="%E9%81%8B%E7%94%A8%20ChatGPT%20%E8%A8%AD%E8%A8%88%E7%B0%A1%E6%98%93%E9%9B%BB%E8%B7%AF%20751ed2a346f94243b4ddc476492468a0/800x800.png"/></div><div style="width:100%">請幫我設計一個 verilog 方波產生器，當觸發訊號(tri) rising edge 出現，從輸出端 (sclk)送出4個連續的方波，整個系統必須與系統時脈訊號(clk)同步</div></figure><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="9c9daa55-21cc-46a6-b767-95a587d199b5"><div style="font-size:1.5em"><img class="icon" src="%E9%81%8B%E7%94%A8%20ChatGPT%20%E8%A8%AD%E8%A8%88%E7%B0%A1%E6%98%93%E9%9B%BB%E8%B7%AF%20751ed2a346f94243b4ddc476492468a0/icons8-chatgpt-480.png"/></div><div style="width:100%">以下是一個基本的Verilog方波產生器，可以在觸發訊號的上升沿時，從輸出端產生4個連續的方波，並與系統時脈訊號同步。
+<pre id="0d173b0e-a3ef-45ce-9dca-4f54b756e32e" class="code"><code>module SquareWaveGenerator(
+    input wire tri, // 觸發訊號
+    input wire clk, // 系統時脈訊號
+    output wire sclk // 方波輸出
+);
+  
+  reg [2:0] counter; // 計數器，用於產生4個連續方波
+  reg sclk_reg; // 方波輸出寄存器，用於保存方波狀態
+  
+  always @(posedge clk) begin
+    if (tri) begin
+      counter &lt;= 3&#x27;b000; // 觸發訊號上升沿時，重置計數器
+      sclk_reg &lt;= 1&#x27;b0; // 觸發訊號上升沿時，將方波輸出設為低電平
+    end else if (counter &lt; 3&#x27;b100) begin
+      counter &lt;= counter + 1; // 計數器增加
+      sclk_reg &lt;= ~sclk_reg; // 方波輸出翻轉
     end
+  end
+  
+  assign sclk = sclk_reg; // 方波輸出
+  
+endmodule</code></pre><p id="b5475f19-9e4d-4d1f-abac-07acc001e66f" class="">在這個設計中，當觸發訊號 <code><strong>tri</strong></code> 的上升沿出現時，計數器 <code><strong>counter</strong></code> 被重置為0，方波輸出寄存器 <code><strong>sclk_reg</strong></code> 被設置為低電平。然後，在每個系統時脈的上升沿，如果計數器的值小於4（3&#x27;b100），則計數器會遞增，同時方波輸出寄存器會翻轉。這樣就可以產生連續的4個方波。</p><p id="fef97365-6b2e-4881-a84b-c0c295802bdd" class="">請注意，這只是一個基本的設計示例，還可以根據實際需求進行修改和擴展。</p></div></figure><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="ba47046d-5941-4256-9acf-4ef143c79af8"><div style="font-size:1.5em"><img class="icon" src="%E9%81%8B%E7%94%A8%20ChatGPT%20%E8%A8%AD%E8%A8%88%E7%B0%A1%E6%98%93%E9%9B%BB%E8%B7%AF%20751ed2a346f94243b4ddc476492468a0/800x800.png"/></div><div style="width:100%">這個設計，只要tri訊號保持在1，方波就會一直送出，這並不是我想要的設計。每次 tri 0到1的轉變，只會觸動送出一組連續的4個方波，如果tri訊號沒有回到0，是無法觸動下一組方波送出。</div></figure><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="14c00c6a-3cae-4301-85e8-bd744aaaaed1"><div style="font-size:1.5em"><img class="icon" src="%E9%81%8B%E7%94%A8%20ChatGPT%20%E8%A8%AD%E8%A8%88%E7%B0%A1%E6%98%93%E9%9B%BB%E8%B7%AF%20751ed2a346f94243b4ddc476492468a0/icons8-chatgpt-480.png"/></div><div style="width:100%">非常抱歉之前的回答有誤解您的需求。以下是更新後的Verilog方波產生器設計，每次tri訊號的上升沿只會觸發一組連續的4個方波，並在tri訊號回到低電平時停止輸出方波。<pre id="ee6c9e7b-1eca-48cb-a206-89c0397884a0" class="code"><code>module SquareWaveGenerator(
+    input wire tri, // 觸發訊號
+    input wire clk, // 系統時脈訊號
+    output wire sclk // 方波輸出
+);
 
-endmodule</code></pre><h2 id="f57e2272-fbc7-4d01-8eb3-7b472c43c59f" class="block-color-yellow_background">Problem 3: Structural-level 4-to-1 Multiplexer (MUX)</h2><p id="d3fd2d50-f3e8-4218-975e-d573857ecea4" class="">You have to create a device called a 4-to-1 multiplexer (<code>mux4</code>) by using another module called the <code>mux2</code>, which can only handle 2 inputs. Look at the picture to figure out how to connect multiple <code>mux2</code> modules together, and write a Verilog design using this setup. Make sure the name and inputs in your code match those in the original question. Do not modify the testbench code, as it is used to check if your design is correct.</p><h3 id="cd36775b-8aa7-4e2c-80b7-04a80f9e022f" class="block-color-yellow"><code>mux2</code> Module</h3><pre id="68a1813a-f97d-4e36-b5ec-3cd3423bb657" class="code"><code>module mux2(
-    input a,
-    input b,
-    input s,
-    output x
-    );
-    
-    assign x = (s)?b:a;
-    
-endmodule</code></pre><h3 id="685fed32-c40b-484b-9e11-47235022de5d" class="block-color-yellow"><code>mux4</code> Module Declaration</h3><figure id="be2109dc-6f7c-4539-a522-5e0f3acbeef6" class="image"><a href="Verilog%20Testbench%20and%20FPGA%20Design%20Flow%20afa9d8300f33492f86b1c13e24eb15f1/Untitled%202.png"><img style="width:1429px" src="Verilog%20Testbench%20and%20FPGA%20Design%20Flow%20afa9d8300f33492f86b1c13e24eb15f1/Untitled%202.png"/></a></figure><h3 id="69aa8d6c-f2a7-4ab3-89f9-003080ec3e89" class="block-color-yellow"><code>mux4_tb</code> Testbench</h3><pre id="27acd3b9-cea0-48a9-8268-c83c1c3133f5" class="code"><code>`timescale 1ns / 1ps
+  reg [1:0] state; // 狀態機狀態寄存器
+  reg sclk_reg; // 方波輸出寄存器
+  
+  localparam IDLE = 2&#x27;b00; // 空閒狀態
+  localparam OUTPUT = 2&#x27;b01; // 輸出方波狀態
+  localparam STOP = 2&#x27;b10; // 停止狀態
 
-`timescale 1ns / 1ps
-
-module mux4_tb;
-
-    
-    reg [3:0] d;
-    reg [1:0] s;
-    
-    wire out;
-    reg fail;
-   
-    mux4 uut (
-        .d(d),
-        .s(s),
-        .out(out)
-    );
-
-    initial begin
-        
-        d = 4&#x27;b0000;
-        s = 2&#x27;b00;       
-        fail = 0;
-        #10;
-
-        repeat (10) begin       
-            d = {$random};
-            s = {$random};
-            fail = 0;
-            #5;
-            
-            if (s == 2&#x27;b00) begin
-                if (out != d[0]) fail = 1;
-            end else if (s == 2&#x27;b01) begin
-                if (out != d[1]) fail = 1;
-            end else if (s == 2&#x27;b10) begin
-                if (out != d[2]) fail = 1;
-            end else if (s == 2&#x27;b11) begin
-                if (out != d[3]) fail = 1;
-            end
-            #5;
+  always @(posedge clk) begin
+    case (state)
+      IDLE: begin
+        if (tri) begin
+          state &lt;= OUTPUT; // 觸發訊號上升沿，切換到輸出方波狀態
+          sclk_reg &lt;= 1&#x27;b0; // 將方波輸出設為低電平
         end
+      end
       
-        $finish;
-    end
-
-endmodule</code></pre><h3 id="e4b05a33-1867-4c73-b884-2b33799c8163" class="block-color-yellow"><code>mux4</code> RTL Schematic </h3><figure id="288bcf19-199c-469e-8995-89f8737d9b5f" class="image"><a href="%E6%9C%9F%E4%B8%AD%E6%B8%AC%E9%A9%97%20(Midterm%20Exam)%201602382d1fb54a5e91e6a7181fcd14b4/Untitled%202.png"><img style="width:3201px" src="%E6%9C%9F%E4%B8%AD%E6%B8%AC%E9%A9%97%20(Midterm%20Exam)%201602382d1fb54a5e91e6a7181fcd14b4/Untitled%202.png"/></a></figure><h2 id="59e6f15f-738c-4c3d-a9a0-a04faf9efae4" class="block-color-yellow_background">Problem 4: Structural-level 2-bit Binary Comparator</h2><p id="1813450e-9b35-4cb2-9ea5-a2dee6dc2d3f" class="">You need to design a Verilog module (<code>cmp2</code>) that can compare two 2-bit numbers. You can use a smaller module (<code>cmp1</code>) that can compare two 1-bit numbers. Look at the picture to see how to connect two 1-bit comparators with some <code>AND</code> and <code>OR</code> gates. Write a Verilog code that follows this picture, and use the same name and inputs as the question. Do not change the testbench code because it will test your code.</p><h3 id="ba1ad344-409a-4187-8d1b-489f2c7f734b" class="block-color-yellow"><code>cmp1</code> Module</h3><pre id="5ec46fa7-13e3-49c8-84b1-858101d5dd70" class="code"><code>module cmp1(
-    input a,
-    input b,
-    output lt,
-    output eq,
-    output gt
-    );
-    
-    assign lt = a &lt; b;
-    assign eq = a == b;
-    assign gt = a &gt; b;
-    
-endmodule</code></pre><h3 id="81d9b560-88d0-444a-b749-e7df2b7951b2" class="block-color-yellow"><code>cmp2</code> Module Declaration</h3><figure id="cc8f271a-542e-49d3-a3e1-4fb33fbb0179" class="image"><a href="Verilog%20Testbench%20and%20FPGA%20Design%20Flow%20afa9d8300f33492f86b1c13e24eb15f1/Untitled%203.png"><img style="width:1674px" src="Verilog%20Testbench%20and%20FPGA%20Design%20Flow%20afa9d8300f33492f86b1c13e24eb15f1/Untitled%203.png"/></a></figure><h3 id="92e6eec5-78ea-421e-a335-de8f870a0403" class="block-color-yellow"><code>cmp2_tb</code> Testbench</h3><pre id="65d9868c-32a9-4d8b-b16b-43e4363bf6e3" class="code"><code>`timescale 1ns / 1ps
-
-module cmp2_tb;
-    
-    reg [1:0] a;
-    reg [1:0] b;
-    
-    wire lt;
-    wire eq;
-    wire gt;
-    reg fail;
-        
-    cmp2 dut(
-        .a(a),
-        .b(b),
-        .lt(lt),
-        .eq(eq),
-        .gt(gt)
-        );
-        
-    
-    initial begin
-        {a,b,fail} = 0;
-        #10
-        
-        repeat (10) begin
-            a = {$random};
-            b = {$random};
-            fail = 0;
-            #5;
-            if (a &lt; b) begin
-                fail = ~(lt==1 &amp;&amp; eq==0 &amp;&amp; gt==0);
-            end else if (a == b) begin
-                fail = ~(lt==0 &amp;&amp; eq==1 &amp;&amp; gt==0);
-            end else begin
-                fail = ~(lt==0 &amp;&amp; eq==0 &amp;&amp; gt==1);
-            end
-            
-            #5;
+      OUTPUT: begin
+        if (sclk_reg == 1&#x27;b0) begin
+          sclk_reg &lt;= 1&#x27;b1; // 方波輸出翻轉
+        end else begin
+          sclk_reg &lt;= 1&#x27;b0;
+          counter &lt;= counter + 1; // 計數器增加
         end
         
-        $display(&quot;Testbench finished&quot;);
-        $finish;
+        if (counter == 3&#x27;b100) begin
+          counter &lt;= 3&#x27;b000; // 4個方波輸出完成，重置計數器
+          state &lt;= STOP; // 切換到停止狀態
+        end
+      end
+      
+      STOP: begin
+        if (!tri) begin
+          state &lt;= IDLE; // tri訊號回到低電平，切換到空閒狀態
+        end
+      end
+    endcase
+  end
+  
+  assign sclk = sclk_reg; // 方波輸出
+  
+endmodule</code></pre><p id="c644a85c-27db-4ca5-9c76-83c01e26c113" class="">在這個更新的設計中，使用了一個狀態機 (<code><strong>state</strong></code>)，並根據不同的狀態來控制方波輸出的行為。當狀態為 <code><strong>IDLE</strong></code> 時，如果觸發訊號 <code><strong>tri</strong></code> 上升沿觸發，則切換到 <code><strong>OUTPUT</strong></code> 狀態並開始輸出方波。在 <code><strong>OUTPUT</strong></code> 狀態下，方波輸出會在每個系</p></div></figure><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="0f653836-7449-4d85-a989-1b62103a6843"><div style="font-size:1.5em"><img class="icon" src="%E9%81%8B%E7%94%A8%20ChatGPT%20%E8%A8%AD%E8%A8%88%E7%B0%A1%E6%98%93%E9%9B%BB%E8%B7%AF%20751ed2a346f94243b4ddc476492468a0/800x800.png"/></div><div style="width:100%">請把產生這個方波產生器的Prompt，用英文重新陳述一遍</div></figure><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="7324bf49-778e-411e-8c3e-bccac033f077"><div style="font-size:1.5em"><img class="icon" src="%E9%81%8B%E7%94%A8%20ChatGPT%20%E8%A8%AD%E8%A8%88%E7%B0%A1%E6%98%93%E9%9B%BB%E8%B7%AF%20751ed2a346f94243b4ddc476492468a0/icons8-chatgpt-480%201.png"/></div><div style="width:100%">Sure! Here&#x27;s the restated prompt for designing a Verilog square wave generator:<p id="dd117f4a-4a1f-4abb-8975-531fc7cf8779" class="">Design a Verilog square wave generator that generates four consecutive square waves on the output (sclk) synchronized with the system clock signal (clk) when a trigger signal (tri) experiences a rising edge. The system should only generate one set of four consecutive square waves per transition from tri being low to high. The generation of subsequent square waves should be triggered only when tri returns to low.</p></div></figure><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="0418a6a5-3330-4a55-bdf5-914dca258383"><div style="font-size:1.5em"><img class="icon" src="%E9%81%8B%E7%94%A8%20ChatGPT%20%E8%A8%AD%E8%A8%88%E7%B0%A1%E6%98%93%E9%9B%BB%E8%B7%AF%20751ed2a346f94243b4ddc476492468a0/800x800.png"/></div><div style="width:100%">Design a Verilog square wave generator (sclkGen) that generates four consecutive square waves on the output (sclk) synchronized with the system clock signal (clk) when a trigger signal (tri) experiences a rising edge. The system should only generate one set of four consecutive square waves per transition from tri being low to high. The generation of subsequent square waves should be triggered only when tri returns to low.</div></figure><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="265da4d8-b823-49d8-b786-731ce8e7e9a7"><div style="font-size:1.5em"><img class="icon" src="%E9%81%8B%E7%94%A8%20ChatGPT%20%E8%A8%AD%E8%A8%88%E7%B0%A1%E6%98%93%E9%9B%BB%E8%B7%AF%20751ed2a346f94243b4ddc476492468a0/icons8-chatgpt-480%201.png"/></div><div style="width:100%">Sure! Here&#x27;s the design for the Verilog square wave generator that meets your requirements:<pre id="cbde0f2e-d507-4b06-908d-311834f92d12" class="code code-wrap"><code>module sclkGen (
+    input wire tri,  // Trigger signal
+    input wire clk,  // System clock signal
+    output wire sclk // Square wave output
+);
+
+    reg [1:0] state; // State register for the state machine
+    reg sclk_reg;   // Square wave output register
+
+    localparam IDLE = 2&#x27;b00;    // Idle state
+    localparam OUTPUT = 2&#x27;b01;  // Square wave output state
+    localparam STOP = 2&#x27;b10;    // Stop state
+
+    always @(posedge clk) begin
+        case (state)
+            IDLE: begin
+                if (tri) begin
+                    state &lt;= OUTPUT;  // Transition to the square wave output state on rising edge of tri
+                    sclk_reg &lt;= 1&#x27;b0; // Set square wave output to low
+                end
+            end
+
+            OUTPUT: begin
+                if (sclk_reg == 1&#x27;b0) begin
+                    sclk_reg &lt;= 1&#x27;b1; // Toggle the square wave output
+                end else begin
+                    sclk_reg &lt;= 1&#x27;b0;
+                end
+
+                if (counter == 3&#x27;b100) begin
+                    counter &lt;= 3&#x27;b000; // Reset the counter after generating four square waves
+                    state &lt;= STOP;    // Transition to the stop state
+                end else begin
+                    counter &lt;= counter + 1; // Increment the counter
+                end
+            end
+
+            STOP: begin
+                if (!tri) begin
+                    state &lt;= IDLE; // Transition to the idle state when tri returns to low
+                end
+            end
+        endcase
     end
+
+    assign sclk = sclk_reg; // Assign the square wave output
+
+endmodule
+</code></pre><p id="b3fd16f2-1075-4756-9330-e6f653dbe384" class="">This design utilizes a state machine (<code>state</code>) to control the generation of the square waves based on the trigger signal (<code>tri</code>) and the system clock signal (<code>clk</code>). The state machine transitions from the idle state (<code>IDLE</code>) to the square wave output state (<code>OUTPUT</code>) when <code>tri</code> experiences a rising edge. In the output state, the square wave output toggles its value, and a counter (<code>counter</code>) keeps track of the number of generated square waves. After generating four square waves, the state machine transitions to the stop state (<code>STOP</code>). The subsequent generation of square waves is triggered only when <code>tri</code> returns to low.</p></div></figure><p id="e7187156-2d0b-43b1-87a2-867f2e944bd0" class="">
+</p><h3 id="caf7f8c2-d95c-4fe5-b7ca-9d0c31a51ae2" class="block-color-blue_background">使用 ChatGPT 建議的程式碼修改後的最終設計</h3><h3 id="0e141d73-b313-4b42-87b8-e9443bb57cf3" class="block-color-yellow">參考 ChatGPT的設計手動修改的最終設計</h3><pre id="fd0f2329-730f-4634-969d-4afb9a6c4145" class="code"><code>module sclkGen(
+    input trig, 
+    input clk, 
+    input rst,
+    output sclk 
+);
+
+  reg [1:0] state; 
+  reg [3:0] counter;
+  reg sclk_reg; 
+  
+  localparam IDLE = 0; 
+  localparam OUTPUT = 1; 
+  localparam STOP = 2; 
+
+  always @(posedge clk) begin
+
+    if (rst)
+        state &lt;= IDLE;
+
+    case (state)
     
-endmodule</code></pre><h3 id="8f167df0-537f-4799-aaa3-f1c1c74dae61" class="block-color-yellow"><code>cmp2</code> RTL Schematic </h3><figure id="1271c5f4-f732-4a8a-b151-94bbfe1ce5ad" class="image"><a href="%E6%9C%9F%E4%B8%AD%E6%B8%AC%E9%A9%97%20(Midterm%20Exam)%201602382d1fb54a5e91e6a7181fcd14b4/Untitled%203.png"><img style="width:2978px" src="%E6%9C%9F%E4%B8%AD%E6%B8%AC%E9%A9%97%20(Midterm%20Exam)%201602382d1fb54a5e91e6a7181fcd14b4/Untitled%203.png"/></a></figure><h2 id="89307d7a-065e-4dfe-a3f6-18627b3d18b2" class="block-color-yellow_background">Problem 5: Designing an 1-bit ALU Module</h2><p id="094ddac7-9d0e-453a-90ec-29fdf063624b" class="">Write a Verilog module for an Arithmetic Logic Unit (ALU) that can perform eight different operations based on the input opcode <code><strong>op</strong></code>. The module should have two input operands <code><strong>a</strong></code> and <code><strong>b</strong></code> and a 3-bit input <code><strong>op</strong></code> that represents the operation to be performed. The output <code><strong>out</strong></code> should be the result of the selected operation. The possible operations and their corresponding opcodes are as follows:</p><table id="0e5c1f06-c3a3-4a49-a6f3-31a2f9133fca" class="simple-table"><tbody><tr id="3e3f91a7-1c57-4254-ae60-5b7e5f81a358"><td id="WGSq" class=""><strong>Opcode</strong></td><td id="pudr" class=""><strong>Operation</strong></td></tr><tr id="73099ae6-c2ca-4654-ba2d-f2920aaea696"><td id="WGSq" class="">000</td><td id="pudr" class="">Bitwise AND (<code><strong>a &amp; b</strong></code>)</td></tr><tr id="b24ff8f5-15f4-43c2-a09f-d162bc6ac714"><td id="WGSq" class="">001</td><td id="pudr" class="">Bitwise OR (<code><strong>a | b</strong></code>)</td></tr><tr id="f99f40fe-41e3-4c34-a618-1aca50fd4624"><td id="WGSq" class="">010</td><td id="pudr" class="">Bitwise XOR (<code><strong>a ^ b</strong></code>)</td></tr><tr id="7d9379aa-0800-49f6-a31d-dbda886c97f7"><td id="WGSq" class="">011</td><td id="pudr" class="">Addition (<code><strong>a + b</strong></code>)</td></tr><tr id="5291b693-2c35-4637-93cb-0699cb12db96"><td id="WGSq" class="">100</td><td id="pudr" class="">Subtraction (<code><strong>a - b</strong></code>)</td></tr><tr id="7084a625-454e-4970-ad57-b642932192a6"><td id="WGSq" class="">101</td><td id="pudr" class="">Less than (<code><strong>a &lt; b</strong></code>)</td></tr><tr id="a132db06-05f4-486b-825e-7e4ea6c3028a"><td id="WGSq" class="">110</td><td id="pudr" class="">Equality (<code><strong>a == b</strong></code>)</td></tr><tr id="5c98f985-1843-49f9-97c0-efb30024f1ab"><td id="WGSq" class="">111</td><td id="pudr" class="">Greater than (<code><strong>a &gt; b</strong></code>)</td></tr></tbody></table><p id="79b577b6-72f5-4592-ab56-79c8d7d7d086" class="">The Verilog module should be named <code><strong>alu1</strong></code> and should have the following port declarations:</p><pre id="557dd044-1e48-4de4-a80f-50b000b5dd4b" class="code code-wrap"><code>module alu1(
-    input a,
-    input b,
-    input [2:0] op,
-    output out
-		);
-
-		// write your code here
-
-endmodule</code></pre><p id="ae1645cc-0f09-4754-9195-e410f4f5f8f8" class="">The <code><strong>out</strong></code> output port should be assigned the result of the selected operation using a conditional operator. If the opcode <code><strong>op</strong></code> is not recognized, the output should be set to 0.</p><h3 id="97ed1924-5230-4e5d-89c8-4fd678179202" class="block-color-yellow"><code>cmp2</code> Module Declaration</h3><figure id="70bb26cd-8c94-483e-a10b-5e6966e1485b" class="image"><a href="Verilog%20Testbench%20and%20FPGA%20Design%20Flow%20afa9d8300f33492f86b1c13e24eb15f1/Untitled%204.png"><img style="width:384px" src="Verilog%20Testbench%20and%20FPGA%20Design%20Flow%20afa9d8300f33492f86b1c13e24eb15f1/Untitled%204.png"/></a></figure><h3 id="a3ccdce5-9b17-45ae-b550-bbda0b1e3b79" class="block-color-yellow">Automated Testing of 1-bit ALU using Verilog Testbench</h3><figure id="f10e6fb1-497d-4ffd-9dcb-4f7d6abc6272" class="image"><a href="%E6%9C%9F%E4%B8%AD%E6%B8%AC%E9%A9%97%20(Midterm%20Exam)%201602382d1fb54a5e91e6a7181fcd14b4/Untitled%204.png"><img style="width:528px" src="%E6%9C%9F%E4%B8%AD%E6%B8%AC%E9%A9%97%20(Midterm%20Exam)%201602382d1fb54a5e91e6a7181fcd14b4/Untitled%204.png"/></a></figure><p id="531a6637-f663-457d-bf25-bf794327c6bd" class="">
-</p><figure id="cc742701-fc14-4a45-a1f6-593cc451b285" class="image"><a href="%E7%B5%84%E5%90%88%E9%82%8F%E8%BC%AF%E9%9B%BB%E8%B7%AF%20-%20%E5%A4%9A%E5%B7%A5%E5%99%A8%E8%88%87%E9%81%8B%E7%AE%97%E9%9B%BB%E8%B7%AF%207437810149fd4e59b7fe435c1f16baaf/end1.png"><img style="width:4538px" src="%E7%B5%84%E5%90%88%E9%82%8F%E8%BC%AF%E9%9B%BB%E8%B7%AF%20-%20%E5%A4%9A%E5%B7%A5%E5%99%A8%E8%88%87%E9%81%8B%E7%AE%97%E9%9B%BB%E8%B7%AF%207437810149fd4e59b7fe435c1f16baaf/end1.png"/></a></figure><p id="e41bc67f-ad34-4d3a-891f-d58d6594385c" class="">
+      IDLE: begin
+        sclk_reg &lt;= 0; 
+        counter &lt;= 0;
+        if (trig)
+          state &lt;= OUTPUT; 
+      end
+      
+      OUTPUT: begin
+        sclk_reg = ~sclk_reg;
+        counter &lt;= counter + 1; 
+        if (counter == 8) begin
+          counter &lt;= 0; 
+          sclk_reg &lt;= 0;
+          state &lt;= STOP;
+        end
+      end
+      
+      STOP: if (trig==0)                
+                state &lt;= IDLE;
+                
+      default: state &lt;= IDLE;
+      
+    endcase
+  end  
+  
+  assign sclk = sclk_reg; 
+  
+endmodule</code></pre><p id="55af2b21-9d46-40a5-843b-05feb136f912" class="">
+</p><h3 id="a573d8f4-8f94-4543-ac05-332c77f96ab5" class="block-color-yellow">sclkGen Testbench</h3><pre id="50ead6b0-6550-4cf4-bb5b-fdc22086e51d" class="code"><code>module sclkGen_tb;
+  
+  reg trig;
+  reg clk;
+  reg rst;
+  wire sclk;
+  
+  sclkGen dut (
+    .trig(trig),
+    .clk(clk),
+    .rst(rst),
+    .sclk(sclk)
+  );
+  
+  always #50 clk = ~clk;
+  
+  initial begin   
+    trig = 0;
+    clk = 0;
+    rst = 0;
+    #50;
+    rst = 1;
+    #60;
+    rst = 0;
+    
+    repeat(3) begin
+        trig=1;
+        #({$random}%500+1000);
+        trig=0;
+        #({$random}%500+200);
+    end   
+    #1000;
+    
+    $finish;
+  end
+  
+endmodule</code></pre><p id="6fbfef3f-107f-4e73-8428-d95baf9486b0" class="">
+</p><h3 id="2b93e431-a0d8-49e6-878f-f3b53d255a4c" class="block-color-yellow">模擬結果</h3><figure id="b6140b71-402c-48a8-91ea-90194dda4d7c" class="image"><a href="%E9%81%8B%E7%94%A8%20ChatGPT%20%E8%A8%AD%E8%A8%88%E7%B0%A1%E6%98%93%E9%9B%BB%E8%B7%AF%20751ed2a346f94243b4ddc476492468a0/Untitled.png"><img style="width:2828px" src="%E9%81%8B%E7%94%A8%20ChatGPT%20%E8%A8%AD%E8%A8%88%E7%B0%A1%E6%98%93%E9%9B%BB%E8%B7%AF%20751ed2a346f94243b4ddc476492468a0/Untitled.png"/></a></figure><p id="42f6ef29-dbbe-4b19-a96e-76be47b39215" class="">
 </p></div></article>
 <script>hljs.highlightAll();</script>
 </body></html>
